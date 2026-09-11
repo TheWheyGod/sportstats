@@ -363,6 +363,9 @@ def nom_competition(code: str) -> str:
         return LEAGUES[code]
     if code in EXTRA_LEAGUES:
         return EXTRA_LEAGUES[code][2]
+    from .wikipedia import WIKI_LEAGUES
+    if code in WIKI_LEAGUES:
+        return WIKI_LEAGUES[code][3]
     return code
 
 
@@ -378,9 +381,13 @@ def load_any(codes, seasons=None, depuis: int = 2022, verbose: bool = True) -> p
     Permet d'ecrire --leagues E0,F1,BRA1,JPN1 sans se soucier de la source.
     """
     seasons = list(seasons) if seasons else season_codes(depuis, depuis + 4)
+    from .wikipedia import WIKI_LEAGUES, load_wiki_league
+
     principaux = [c for c in codes if c.upper() in LEAGUES]
     extras = [c for c in codes if c.upper() in EXTRA_LEAGUES]
-    inconnus = [c for c in codes if c.upper() not in LEAGUES and c.upper() not in EXTRA_LEAGUES]
+    wikis = [c for c in codes if c.upper() in WIKI_LEAGUES]
+    inconnus = [c for c in codes if c.upper() not in LEAGUES
+                and c.upper() not in EXTRA_LEAGUES and c.upper() not in WIKI_LEAGUES]
     if inconnus and verbose:
         print(f"  [!] codes inconnus ignores : {inconnus}")
 
@@ -391,6 +398,10 @@ def load_any(codes, seasons=None, depuis: int = 2022, verbose: bool = True) -> p
             frames.append(d)
     for c in extras:
         d = load_extra_league(c.upper(), depuis, verbose)
+        if not d.empty:
+            frames.append(d)
+    for c in wikis:
+        d = load_wiki_league(c.upper(), max(depuis, 2023), verbose=verbose)
         if not d.empty:
             frames.append(d)
     if not frames:

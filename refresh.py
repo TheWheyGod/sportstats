@@ -36,7 +36,7 @@ ROOT = Path(__file__).resolve().parent
 HTML = ROOT / "journee.html"
 SLATE = ROOT / "journee.slate"
 FRAGMENT = ROOT / "artifact.html"
-TITRE = "20 championnats + rugby"
+TITRE = "Football mondial + rugby"
 
 # Les cles viennent EXCLUSIVEMENT de l'environnement. Jamais en dur ici :
 # ce fichier est versionne, et un depot -- meme prive -- n'est pas un
@@ -168,7 +168,7 @@ def complet() -> None:
         run("journee", "--sport", sport, "--html", str(HTML), "--ajouter",
             "--titre", TITRE)
     # Football sur 48 h via API-Football : 0 credit Odds API.
-    run("journee", "--sport", "football", "--leagues", "top15,d2",
+    run("journee", "--sport", "football", "--leagues", "tout",
         "--source", "apifootball", "--buteurs", "--absences",
         "--html", str(HTML), "--ajouter", "--titre", TITRE)
     fragment()

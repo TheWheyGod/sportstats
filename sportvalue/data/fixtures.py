@@ -139,6 +139,9 @@ ODDSAPI_TO_CODE = {
     "soccer_sweden_allsvenskan": "SWE1",
     "soccer_switzerland_superleague": "SWZ1",
     "soccer_usa_mls": "USA1",
+    "soccer_saudi_arabia_pro_league": "SAU1",
+    "soccer_korea_kleague1": "KOR1",
+    "soccer_australia_aleague": "AUS1",
 }
 
 # Presélections, pour ne pas avoir a taper quinze codes.
@@ -151,7 +154,15 @@ PRESETS = {
     "d2": ["E1", "SP2", "I2", "D2", "F2"],
     "europe": ["E0", "SP1", "I1", "D1", "F1", "P1", "N1", "T1", "B1",
                "SC0", "G1", "AUT1", "DNK1", "NOR1", "SWE1", "POL1", "SWZ1"],
-    "monde": ["BRA1", "ARG1", "MEX1", "USA1", "JPN1", "CHN1"],
+    "monde": ["BRA1", "ARG1", "MEX1", "USA1", "JPN1", "CHN1", "SAU1", "KOR1", "AUS1", "COL1"],
+    # Tout ce qui est couvrable : ~40 championnats. Le calendrier 48 h via
+    # API-Football coute le meme prix quel que soit leur nombre.
+    "tout": ["E0", "SP1", "I1", "D1", "F1", "P1", "N1", "T1", "B1", "SC0", "G1",
+             "E1", "SP2", "I2", "D2", "F2",
+             "AUT1", "DNK1", "NOR1", "SWE1", "POL1", "SWZ1", "ROU1", "RUS1", "CZE1",
+             "CRO1", "SRB1", "UKR1",
+             "BRA1", "ARG1", "MEX1", "USA1", "JPN1", "CHN1", "SAU1", "KOR1", "AUS1",
+             "COL1", "EGY1", "MAR1"],
 }
 
 

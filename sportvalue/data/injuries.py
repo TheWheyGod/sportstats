@@ -56,6 +56,10 @@ LEAGUE_IDS = {
     "BRA1": 71, "ARG1": 128, "MEX1": 262, "USA1": 253, "JPN1": 98,
     "AUT1": 218, "DNK1": 119, "NOR1": 103, "SWE1": 113, "POL1": 106,
     "SWZ1": 207, "CHN1": 169,
+    "ROU1": 283, "FIN1": 244, "IRL1": 357, "RUS1": 235,
+    # Championnats via Wikipedia
+    "SAU1": 307, "KOR1": 292, "AUS1": 188, "EGY1": 233, "MAR1": 200,
+    "CZE1": 345, "CRO1": 210, "SRB1": 286, "UKR1": 333, "COL1": 239,
 }
 ID_TO_CODE = {v: k for k, v in LEAGUE_IDS.items()}
 
