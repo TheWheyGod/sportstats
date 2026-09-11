@@ -6,9 +6,11 @@
 #   - "live"    : toutes les heures en journee, scores des matchs en cours.
 #                 0 credit quand rien ne se joue ; s'arrete seul sous 25 credits.
 #
-# Les heures sont en UTC (GitHub ne connait pas Europe/Paris) : 05:30 UTC =
-# 07:30 a Paris en ete, 06:30 en hiver. Decalage d'une heure au changement
-# d'heure, sans consequence.
+# Les heures du cron sont en UTC (GitHub ne connait pas Europe/Paris) :
+# 05:30 UTC = 07:30 a Paris en ete, 06:30 en hiver. Decalage d'une heure au
+# changement d'heure, sans consequence. En revanche le code, lui, tourne en
+# heure de Paris (TZ ci-dessous) : les dates "aujourd'hui / demain" et
+# l'horodatage "genere le" sont les memes que sur le PC.
 #
 # La page produite est commitee dans docs/ et servie par GitHub Pages.
 name: refresh
@@ -22,6 +24,9 @@ on:
       mode:
         description: "complet ou live"
         default: "complet"
+
+env:
+  TZ: Europe/Paris
 
 # Un seul run a la fois : le job live ne doit pas ecrire pendant que la
 # journee du matin regenere tout.
@@ -47,14 +52,27 @@ jobs:
       - name: Dependances
         run: pip install -r requirements.txt
 
+      - name: Mode et date
+        id: ctx
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then
+            echo "mode=complet" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=live" >> "$GITHUB_OUTPUT"
+          fi
+          echo "jour=$(date +%F)" >> "$GITHUB_OUTPUT"
+
       # Les CSV de resultats (football-data, Wikipedia, NRL) sont gratuits
-      # mais volumineux : on les garde d'un run a l'autre pour eviter de
-      # tout retelecharger chaque heure.
+      # mais volumineux (~100 Mo) : on les garde d'un jour a l'autre pour ne
+      # pas tout retelecharger. Cle par jour : un seul enregistrement
+      # quotidien, les runs "live" de la journee ne font que le relire.
       - name: Cache des donnees
         uses: actions/cache@v4
         with:
           path: data_cache
-          key: data-${{ github.run_id }}
+          key: data-${{ steps.ctx.outputs.jour }}
           restore-keys: data-
 
       # La journee calculee le matin doit etre retrouvee par les runs "live"
@@ -68,23 +86,12 @@ jobs:
           key: slate-${{ github.run_id }}
           restore-keys: slate-
 
-      - name: Choisir le mode
-        id: mode
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then
-            echo "mode=complet" >> "$GITHUB_OUTPUT"
-          else
-            echo "mode=live" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Rafraichir
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           PYTHONIOENCODING: utf-8
-        run: python refresh.py ${{ steps.mode.outputs.mode }}
+        run: python refresh.py ${{ steps.ctx.outputs.mode }}
 
       - name: Sauvegarder la journee
         if: always()
@@ -93,12 +100,19 @@ jobs:
           path: journee.slate
           key: slate-${{ github.run_id }}
 
+      # La page est reposee sur l'etat COURANT de main : si un commit est
+      # arrive pendant le run (une correction poussee depuis le PC), le push
+      # reste en avance rapide au lieu d'echouer.
       - name: Publier
         run: |
           git config user.name "sportvalue-bot"
           git config user.email "bot@users.noreply.github.com"
+          cp docs/index.html /tmp/index.html
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/index.html docs/index.html
           git add docs/index.html
           # Rien a commiter = rien n'a change (typiquement : aucun match en cours).
           git diff --cached --quiet && echo "page inchangee" && exit 0
-          git commit -m "refresh: ${{ steps.mode.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+          git commit -m "refresh: ${{ steps.ctx.outputs.mode }} $(date +'%Y-%m-%d %H:%M Paris')"
+          git push origin HEAD:main

@@ -20,7 +20,7 @@ Deux choix de fond :
 from __future__ import annotations
 
 import html
-from datetime import datetime
+from datetime import datetime, timezone
 
 import numpy as np
 
@@ -444,7 +444,7 @@ def build_report(
   {bars}
   <div class="grid">{''.join(panels)}</div>
   <div class="foot">
-    <span class="tag">généré le {datetime.now():%d/%m/%Y à %H:%M}</span>
+    <span class="tag">généré le {_paris(datetime.now(timezone.utc)):%d/%m/%Y à %H:%M}</span>
     <span>Probabilités issues des données — aucune cote n'entre dans le calcul.</span>
     <span>« Cote éq. » = 1/probabilité, à comparer directement à une ligne de bookmaker.</span>
   </div>
@@ -812,7 +812,7 @@ def build_slate_report(
   <div class="slate">{''.join(cartes)}</div>
   <div class="empty" id="vide" hidden>Aucun match ne correspond à ce filtre.</div>
   <div class="foot">
-    <span class="tag">généré le {datetime.now():%d/%m/%Y à %H:%M}</span>
+    <span class="tag">généré le {_paris(datetime.now(timezone.utc)):%d/%m/%Y à %H:%M}</span>
     <span>{len(matchs)} match(s) — probabilités issues des données, aucune cote n'entre dans le calcul.</span>
     <span>« Cote éq. » = 1/probabilité.</span>
   </div>
