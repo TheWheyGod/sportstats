@@ -9,10 +9,10 @@ Tout est prêt localement. Il reste cinq étapes, et seules elles demandent ton 
 
 ## 1. Créer le dépôt
 
-Sur [github.com/new](https://github.com/new) : nom `sportvalue`, **public** de préférence
-(minutes GitHub Actions illimitées ; un dépôt privé fonctionne aussi, plafonné à
-2 000 min/mois — le cycle en consomme ~1 500). Ne coche **rien** (pas de README, pas de
-.gitignore : ils existent déjà).
+Fait : `TheWheyGod/sportstats`. Il est **privé**, et c'est un problème : **GitHub Pages
+n'est pas disponible sur un dépôt privé avec un compte gratuit.** Il faut le passer en public —
+**Settings → General → Danger Zone → Change repository visibility → Make public**.
+Le dépôt ne contient aucune clé ni donnée personnelle : c'est sans risque.
 
 ## 2. Pousser le code
 
@@ -20,13 +20,7 @@ Sur [github.com/new](https://github.com/new) : nom `sportvalue`, **public** de p
 cd C:\Users\trand\sportvalue
 ```
 
-```bash
-git remote add origin https://github.com/TON_IDENTIFIANT/sportvalue.git
-```
-
-```bash
-git branch -M main
-```
+Le remote et la branche `main` sont déjà configurés. Il ne reste que le push :
 
 ```bash
 git push -u origin main
@@ -52,7 +46,7 @@ C'est le seul endroit où elles doivent vivre côté GitHub.
 **Settings → Pages → Build and deployment** : Source « Deploy from a branch »,
 Branch `main`, dossier `/docs`, puis **Save**.
 
-L'adresse sera `https://TON_IDENTIFIANT.github.io/sportvalue/` — c'est celle à mettre en
+L'adresse sera `https://thewheygod.github.io/sportstats/` — c'est celle à mettre en
 favori sur ton téléphone.
 
 ## 5. Premier lancement
