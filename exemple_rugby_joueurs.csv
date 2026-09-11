@@ -1,0 +1,225 @@
+joueur,equipe,poste,minutes,essais
+Toul_ailie0,Toulouse,ailier,1199.0,5
+Toul_arrie1,Toulouse,arriere,829.0,2
+Toul_centr2,Toulouse,centre,967.0,1
+Toul_trois3,Toulouse,troisieme_ligne,522.0,0
+Toul_demi_4,Toulouse,demi_de_melee,479.0,0
+Toul_ouver5,Toulouse,ouverture,326.0,0
+Toul_deuxi6,Toulouse,deuxieme_ligne,545.0,1
+Toul_premi7,Toulouse,premiere_ligne,646.0,0
+Toul_ailie8,Toulouse,ailier,484.0,1
+Toul_arrie9,Toulouse,arriere,941.0,3
+Toul_centr10,Toulouse,centre,829.0,0
+Toul_trois11,Toulouse,troisieme_ligne,1040.0,2
+Toul_demi_12,Toulouse,demi_de_melee,779.0,1
+Toul_ouver13,Toulouse,ouverture,1178.0,2
+Toul_deuxi14,Toulouse,deuxieme_ligne,924.0,0
+Toul_premi15,Toulouse,premiere_ligne,649.0,3
+Bord_ailie0,Bordeaux,ailier,922.0,5
+Bord_arrie1,Bordeaux,arriere,668.0,0
+Bord_centr2,Bordeaux,centre,471.0,3
+Bord_trois3,Bordeaux,troisieme_ligne,301.0,0
+Bord_demi_4,Bordeaux,demi_de_melee,759.0,4
+Bord_ouver5,Bordeaux,ouverture,770.0,0
+Bord_deuxi6,Bordeaux,deuxieme_ligne,1071.0,1
+Bord_premi7,Bordeaux,premiere_ligne,1140.0,1
+Bord_ailie8,Bordeaux,ailier,894.0,4
+Bord_arrie9,Bordeaux,arriere,1348.0,8
+Bord_centr10,Bordeaux,centre,610.0,4
+Bord_trois11,Bordeaux,troisieme_ligne,668.0,1
+Bord_demi_12,Bordeaux,demi_de_melee,1252.0,0
+Bord_ouver13,Bordeaux,ouverture,1170.0,1
+Bord_deuxi14,Bordeaux,deuxieme_ligne,797.0,1
+Bord_premi15,Bordeaux,premiere_ligne,329.0,0
+La R_ailie0,La Rochelle,ailier,1232.0,6
+La R_arrie1,La Rochelle,arriere,620.0,4
+La R_centr2,La Rochelle,centre,965.0,4
+La R_trois3,La Rochelle,troisieme_ligne,1207.0,3
+La R_demi_4,La Rochelle,demi_de_melee,1179.0,3
+La R_ouver5,La Rochelle,ouverture,970.0,2
+La R_deuxi6,La Rochelle,deuxieme_ligne,383.0,0
+La R_premi7,La Rochelle,premiere_ligne,347.0,0
+La R_ailie8,La Rochelle,ailier,1145.0,8
+La R_arrie9,La Rochelle,arriere,1235.0,2
+La R_centr10,La Rochelle,centre,730.0,1
+La R_trois11,La Rochelle,troisieme_ligne,865.0,3
+La R_demi_12,La Rochelle,demi_de_melee,998.0,1
+La R_ouver13,La Rochelle,ouverture,510.0,0
+La R_deuxi14,La Rochelle,deuxieme_ligne,760.0,0
+La R_premi15,La Rochelle,premiere_ligne,1086.0,2
+Toul_ailie0,Toulon,ailier,414.0,2
+Toul_arrie1,Toulon,arriere,459.0,0
+Toul_centr2,Toulon,centre,818.0,3
+Toul_trois3,Toulon,troisieme_ligne,993.0,2
+Toul_demi_4,Toulon,demi_de_melee,1179.0,3
+Toul_ouver5,Toulon,ouverture,337.0,0
+Toul_deuxi6,Toulon,deuxieme_ligne,1301.0,2
+Toul_premi7,Toulon,premiere_ligne,571.0,0
+Toul_ailie8,Toulon,ailier,934.0,4
+Toul_arrie9,Toulon,arriere,1188.0,4
+Toul_centr10,Toulon,centre,826.0,1
+Toul_trois11,Toulon,troisieme_ligne,449.0,0
+Toul_demi_12,Toulon,demi_de_melee,956.0,1
+Toul_ouver13,Toulon,ouverture,1175.0,0
+Toul_deuxi14,Toulon,deuxieme_ligne,796.0,1
+Toul_premi15,Toulon,premiere_ligne,492.0,0
+Raci_ailie0,Racing 92,ailier,970.0,7
+Raci_arrie1,Racing 92,arriere,464.0,1
+Raci_centr2,Racing 92,centre,400.0,1
+Raci_trois3,Racing 92,troisieme_ligne,696.0,0
+Raci_demi_4,Racing 92,demi_de_melee,642.0,1
+Raci_ouver5,Racing 92,ouverture,673.0,2
+Raci_deuxi6,Racing 92,deuxieme_ligne,868.0,1
+Raci_premi7,Racing 92,premiere_ligne,331.0,0
+Raci_ailie8,Racing 92,ailier,399.0,2
+Raci_arrie9,Racing 92,arriere,398.0,1
+Raci_centr10,Racing 92,centre,436.0,2
+Raci_trois11,Racing 92,troisieme_ligne,451.0,2
+Raci_demi_12,Racing 92,demi_de_melee,891.0,1
+Raci_ouver13,Racing 92,ouverture,781.0,1
+Raci_deuxi14,Racing 92,deuxieme_ligne,1166.0,0
+Raci_premi15,Racing 92,premiere_ligne,923.0,1
+Cler_ailie0,Clermont,ailier,1012.0,5
+Cler_arrie1,Clermont,arriere,656.0,3
+Cler_centr2,Clermont,centre,732.0,6
+Cler_trois3,Clermont,troisieme_ligne,1385.0,5
+Cler_demi_4,Clermont,demi_de_melee,464.0,2
+Cler_ouver5,Clermont,ouverture,795.0,3
+Cler_deuxi6,Clermont,deuxieme_ligne,657.0,0
+Cler_premi7,Clermont,premiere_ligne,1093.0,3
+Cler_ailie8,Clermont,ailier,574.0,4
+Cler_arrie9,Clermont,arriere,755.0,2
+Cler_centr10,Clermont,centre,349.0,1
+Cler_trois11,Clermont,troisieme_ligne,1308.0,1
+Cler_demi_12,Clermont,demi_de_melee,1123.0,3
+Cler_ouver13,Clermont,ouverture,1077.0,2
+Cler_deuxi14,Clermont,deuxieme_ligne,1115.0,0
+Cler_premi15,Clermont,premiere_ligne,331.0,0
+Lyon_ailie0,Lyon,ailier,1250.0,4
+Lyon_arrie1,Lyon,arriere,1290.0,4
+Lyon_centr2,Lyon,centre,1106.0,5
+Lyon_trois3,Lyon,troisieme_ligne,1386.0,2
+Lyon_demi_4,Lyon,demi_de_melee,836.0,3
+Lyon_ouver5,Lyon,ouverture,758.0,2
+Lyon_deuxi6,Lyon,deuxieme_ligne,759.0,0
+Lyon_premi7,Lyon,premiere_ligne,1303.0,2
+Lyon_ailie8,Lyon,ailier,638.0,5
+Lyon_arrie9,Lyon,arriere,980.0,6
+Lyon_centr10,Lyon,centre,1300.0,7
+Lyon_trois11,Lyon,troisieme_ligne,442.0,0
+Lyon_demi_12,Lyon,demi_de_melee,1146.0,0
+Lyon_ouver13,Lyon,ouverture,715.0,0
+Lyon_deuxi14,Lyon,deuxieme_ligne,433.0,0
+Lyon_premi15,Lyon,premiere_ligne,1378.0,0
+Cast_ailie0,Castres,ailier,663.0,5
+Cast_arrie1,Castres,arriere,945.0,3
+Cast_centr2,Castres,centre,1234.0,4
+Cast_trois3,Castres,troisieme_ligne,731.0,4
+Cast_demi_4,Castres,demi_de_melee,1133.0,0
+Cast_ouver5,Castres,ouverture,1323.0,2
+Cast_deuxi6,Castres,deuxieme_ligne,939.0,2
+Cast_premi7,Castres,premiere_ligne,1382.0,2
+Cast_ailie8,Castres,ailier,744.0,4
+Cast_arrie9,Castres,arriere,498.0,2
+Cast_centr10,Castres,centre,932.0,4
+Cast_trois11,Castres,troisieme_ligne,1171.0,2
+Cast_demi_12,Castres,demi_de_melee,350.0,0
+Cast_ouver13,Castres,ouverture,680.0,0
+Cast_deuxi14,Castres,deuxieme_ligne,677.0,1
+Cast_premi15,Castres,premiere_ligne,1105.0,0
+Pau_ailie0,Pau,ailier,445.0,5
+Pau_arrie1,Pau,arriere,764.0,2
+Pau_centr2,Pau,centre,1196.0,2
+Pau_trois3,Pau,troisieme_ligne,1201.0,3
+Pau_demi_4,Pau,demi_de_melee,588.0,3
+Pau_ouver5,Pau,ouverture,1178.0,3
+Pau_deuxi6,Pau,deuxieme_ligne,561.0,0
+Pau_premi7,Pau,premiere_ligne,1085.0,1
+Pau_ailie8,Pau,ailier,992.0,3
+Pau_arrie9,Pau,arriere,591.0,3
+Pau_centr10,Pau,centre,363.0,0
+Pau_trois11,Pau,troisieme_ligne,418.0,0
+Pau_demi_12,Pau,demi_de_melee,1331.0,2
+Pau_ouver13,Pau,ouverture,998.0,3
+Pau_deuxi14,Pau,deuxieme_ligne,615.0,1
+Pau_premi15,Pau,premiere_ligne,750.0,1
+Perp_ailie0,Perpignan,ailier,1020.0,4
+Perp_arrie1,Perpignan,arriere,483.0,3
+Perp_centr2,Perpignan,centre,1176.0,6
+Perp_trois3,Perpignan,troisieme_ligne,980.0,4
+Perp_demi_4,Perpignan,demi_de_melee,509.0,1
+Perp_ouver5,Perpignan,ouverture,999.0,1
+Perp_deuxi6,Perpignan,deuxieme_ligne,1376.0,0
+Perp_premi7,Perpignan,premiere_ligne,589.0,0
+Perp_ailie8,Perpignan,ailier,616.0,3
+Perp_arrie9,Perpignan,arriere,904.0,6
+Perp_centr10,Perpignan,centre,656.0,4
+Perp_trois11,Perpignan,troisieme_ligne,916.0,3
+Perp_demi_12,Perpignan,demi_de_melee,821.0,2
+Perp_ouver13,Perpignan,ouverture,777.0,2
+Perp_deuxi14,Perpignan,deuxieme_ligne,364.0,1
+Perp_premi15,Perpignan,premiere_ligne,479.0,4
+Bayo_ailie0,Bayonne,ailier,1162.0,3
+Bayo_arrie1,Bayonne,arriere,640.0,1
+Bayo_centr2,Bayonne,centre,561.0,1
+Bayo_trois3,Bayonne,troisieme_ligne,1330.0,6
+Bayo_demi_4,Bayonne,demi_de_melee,1178.0,2
+Bayo_ouver5,Bayonne,ouverture,847.0,1
+Bayo_deuxi6,Bayonne,deuxieme_ligne,1267.0,2
+Bayo_premi7,Bayonne,premiere_ligne,523.0,0
+Bayo_ailie8,Bayonne,ailier,1274.0,5
+Bayo_arrie9,Bayonne,arriere,874.0,3
+Bayo_centr10,Bayonne,centre,733.0,2
+Bayo_trois11,Bayonne,troisieme_ligne,762.0,2
+Bayo_demi_12,Bayonne,demi_de_melee,1121.0,1
+Bayo_ouver13,Bayonne,ouverture,351.0,0
+Bayo_deuxi14,Bayonne,deuxieme_ligne,962.0,2
+Bayo_premi15,Bayonne,premiere_ligne,851.0,0
+Mont_ailie0,Montpellier,ailier,955.0,7
+Mont_arrie1,Montpellier,arriere,660.0,3
+Mont_centr2,Montpellier,centre,1147.0,6
+Mont_trois3,Montpellier,troisieme_ligne,361.0,1
+Mont_demi_4,Montpellier,demi_de_melee,1394.0,5
+Mont_ouver5,Montpellier,ouverture,1024.0,3
+Mont_deuxi6,Montpellier,deuxieme_ligne,1190.0,3
+Mont_premi7,Montpellier,premiere_ligne,597.0,0
+Mont_ailie8,Montpellier,ailier,896.0,5
+Mont_arrie9,Montpellier,arriere,1399.0,4
+Mont_centr10,Montpellier,centre,809.0,1
+Mont_trois11,Montpellier,troisieme_ligne,1153.0,3
+Mont_demi_12,Montpellier,demi_de_melee,504.0,0
+Mont_ouver13,Montpellier,ouverture,834.0,1
+Mont_deuxi14,Montpellier,deuxieme_ligne,844.0,2
+Mont_premi15,Montpellier,premiere_ligne,730.0,0
+Vann_ailie0,Vannes,ailier,1380.0,7
+Vann_arrie1,Vannes,arriere,1128.0,2
+Vann_centr2,Vannes,centre,779.0,1
+Vann_trois3,Vannes,troisieme_ligne,1272.0,4
+Vann_demi_4,Vannes,demi_de_melee,994.0,1
+Vann_ouver5,Vannes,ouverture,647.0,2
+Vann_deuxi6,Vannes,deuxieme_ligne,482.0,1
+Vann_premi7,Vannes,premiere_ligne,344.0,0
+Vann_ailie8,Vannes,ailier,1363.0,6
+Vann_arrie9,Vannes,arriere,1391.0,5
+Vann_centr10,Vannes,centre,457.0,0
+Vann_trois11,Vannes,troisieme_ligne,1246.0,2
+Vann_demi_12,Vannes,demi_de_melee,520.0,1
+Vann_ouver13,Vannes,ouverture,436.0,2
+Vann_deuxi14,Vannes,deuxieme_ligne,331.0,1
+Vann_premi15,Vannes,premiere_ligne,777.0,2
+Stad_ailie0,Stade Francais,ailier,1041.0,8
+Stad_arrie1,Stade Francais,arriere,768.0,1
+Stad_centr2,Stade Francais,centre,392.0,0
+Stad_trois3,Stade Francais,troisieme_ligne,1375.0,4
+Stad_demi_4,Stade Francais,demi_de_melee,790.0,4
+Stad_ouver5,Stade Francais,ouverture,1301.0,0
+Stad_deuxi6,Stade Francais,deuxieme_ligne,1357.0,2
+Stad_premi7,Stade Francais,premiere_ligne,1380.0,3
+Stad_ailie8,Stade Francais,ailier,822.0,2
+Stad_arrie9,Stade Francais,arriere,488.0,0
+Stad_centr10,Stade Francais,centre,1116.0,4
+Stad_trois11,Stade Francais,troisieme_ligne,923.0,2
+Stad_demi_12,Stade Francais,demi_de_melee,1259.0,3
+Stad_ouver13,Stade Francais,ouverture,1229.0,3
+Stad_deuxi14,Stade Francais,deuxieme_ligne,946.0,0
+Stad_premi15,Stade Francais,premiere_ligne,514.0,0

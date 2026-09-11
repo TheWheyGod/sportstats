@@ -1,0 +1,241 @@
+date,home,away,home_score,away_score,neutral
+2025-10-20,Phoenix,Milwaukee,129,118,false
+2025-10-20,Denver,Sacramento,126,91,false
+2025-10-20,LA Lakers,Dallas,100,100,false
+2025-10-20,Cleveland,Memphis,115,102,false
+2025-10-20,Philadelphie,Golden State,104,110,false
+2025-10-20,Miami,Boston,119,115,false
+2025-10-22,Sacramento,Denver,107,119,false
+2025-10-22,Cleveland,LA Lakers,101,115,false
+2025-10-22,Miami,Golden State,112,124,false
+2025-10-22,Milwaukee,Phoenix,127,99,false
+2025-10-22,Philadelphie,Boston,114,117,false
+2025-10-22,Dallas,Memphis,124,106,false
+2025-10-24,Milwaukee,Cleveland,121,112,false
+2025-10-24,Boston,Dallas,140,102,false
+2025-10-24,Phoenix,Miami,133,125,false
+2025-10-24,Memphis,Golden State,107,100,false
+2025-10-24,LA Lakers,Denver,120,126,false
+2025-10-24,Philadelphie,Sacramento,145,126,false
+2025-10-26,Boston,Dallas,90,121,false
+2025-10-26,Golden State,Cleveland,112,117,false
+2025-10-26,LA Lakers,Phoenix,108,120,false
+2025-10-26,Sacramento,Miami,116,123,false
+2025-10-26,Denver,Philadelphie,114,121,false
+2025-10-26,Milwaukee,Memphis,128,106,false
+2025-10-28,Denver,Boston,105,102,false
+2025-10-28,Dallas,LA Lakers,118,119,false
+2025-10-28,Miami,Phoenix,130,120,false
+2025-10-28,Cleveland,Milwaukee,96,128,false
+2025-10-28,Sacramento,Golden State,119,131,false
+2025-10-28,Philadelphie,Memphis,121,99,false
+2025-10-30,Phoenix,Denver,126,135,false
+2025-10-30,Cleveland,Sacramento,130,100,false
+2025-10-30,Memphis,Philadelphie,105,105,false
+2025-10-30,Golden State,LA Lakers,125,116,false
+2025-10-30,Miami,Milwaukee,116,119,false
+2025-10-30,Dallas,Boston,115,128,false
+2025-11-01,Memphis,Golden State,115,129,false
+2025-11-01,Dallas,LA Lakers,111,109,false
+2025-11-01,Milwaukee,Boston,109,117,false
+2025-11-01,Miami,Sacramento,118,111,false
+2025-11-01,Cleveland,Phoenix,112,125,false
+2025-11-01,Philadelphie,Denver,117,122,false
+2025-11-03,Sacramento,Cleveland,110,106,false
+2025-11-03,Philadelphie,Memphis,118,106,false
+2025-11-03,Dallas,Golden State,109,129,false
+2025-11-03,Denver,Miami,118,123,false
+2025-11-03,LA Lakers,Milwaukee,115,127,false
+2025-11-03,Phoenix,Boston,106,118,false
+2025-11-05,Golden State,Cleveland,112,113,false
+2025-11-05,Phoenix,Boston,122,112,false
+2025-11-05,Denver,Philadelphie,122,102,false
+2025-11-05,LA Lakers,Memphis,117,97,false
+2025-11-05,Dallas,Milwaukee,95,118,false
+2025-11-05,Miami,Sacramento,105,95,false
+2025-11-07,Memphis,Sacramento,125,115,false
+2025-11-07,Denver,Miami,114,114,false
+2025-11-07,Dallas,Boston,110,123,false
+2025-11-07,Philadelphie,Milwaukee,127,115,false
+2025-11-07,Cleveland,Golden State,115,123,false
+2025-11-07,Phoenix,LA Lakers,117,97,false
+2025-11-09,Sacramento,Dallas,92,117,false
+2025-11-09,Golden State,Cleveland,105,104,false
+2025-11-09,Philadelphie,Milwaukee,117,117,false
+2025-11-09,LA Lakers,Boston,104,125,false
+2025-11-09,Memphis,Denver,104,117,false
+2025-11-09,Phoenix,Miami,113,128,false
+2025-11-11,Sacramento,Denver,86,137,false
+2025-11-11,Miami,Dallas,128,90,false
+2025-11-11,Philadelphie,Memphis,114,128,false
+2025-11-11,Cleveland,Golden State,123,100,false
+2025-11-11,LA Lakers,Boston,103,106,false
+2025-11-11,Phoenix,Milwaukee,103,107,false
+2025-11-13,Dallas,Cleveland,135,98,false
+2025-11-13,Boston,Golden State,118,112,false
+2025-11-13,Sacramento,Miami,127,117,false
+2025-11-13,Milwaukee,Phoenix,120,126,false
+2025-11-13,Denver,Memphis,131,116,false
+2025-11-13,LA Lakers,Philadelphie,129,113,false
+2025-11-15,Memphis,Denver,112,114,false
+2025-11-15,Phoenix,Golden State,122,123,false
+2025-11-15,Dallas,Cleveland,113,118,false
+2025-11-15,Philadelphie,Sacramento,118,108,false
+2025-11-15,LA Lakers,Milwaukee,110,129,false
+2025-11-15,Boston,Miami,108,104,false
+2025-11-17,Golden State,Dallas,119,100,false
+2025-11-17,Denver,Memphis,156,93,false
+2025-11-17,Phoenix,Philadelphie,116,92,false
+2025-11-17,Cleveland,Sacramento,112,129,false
+2025-11-17,LA Lakers,Milwaukee,111,124,false
+2025-11-17,Miami,Boston,106,137,false
+2025-11-19,Miami,Memphis,124,109,false
+2025-11-19,Boston,Dallas,113,89,false
+2025-11-19,Golden State,Denver,122,116,false
+2025-11-19,Cleveland,Phoenix,111,115,false
+2025-11-19,LA Lakers,Milwaukee,89,103,false
+2025-11-19,Philadelphie,Sacramento,134,101,false
+2025-11-21,Miami,LA Lakers,111,110,false
+2025-11-21,Cleveland,Milwaukee,110,120,false
+2025-11-21,Denver,Boston,134,116,false
+2025-11-21,Sacramento,Phoenix,109,114,false
+2025-11-21,Memphis,Philadelphie,126,103,false
+2025-11-21,Dallas,Golden State,96,104,false
+2025-11-23,Memphis,Dallas,104,100,false
+2025-11-23,Cleveland,Miami,115,134,false
+2025-11-23,Phoenix,Golden State,129,107,false
+2025-11-23,Boston,Philadelphie,126,108,false
+2025-11-23,Milwaukee,Denver,127,137,false
+2025-11-23,Sacramento,LA Lakers,109,132,false
+2025-11-25,Memphis,LA Lakers,122,110,false
+2025-11-25,Denver,Cleveland,126,102,false
+2025-11-25,Sacramento,Phoenix,103,123,false
+2025-11-25,Milwaukee,Boston,125,149,false
+2025-11-25,Dallas,Miami,99,119,false
+2025-11-25,Philadelphie,Golden State,110,106,false
+2025-11-27,Memphis,LA Lakers,118,120,false
+2025-11-27,Denver,Sacramento,123,115,false
+2025-11-27,Boston,Milwaukee,103,118,false
+2025-11-27,Phoenix,Dallas,117,97,false
+2025-11-27,Philadelphie,Miami,109,113,false
+2025-11-27,Golden State,Cleveland,130,91,false
+2025-11-29,Cleveland,Milwaukee,111,120,false
+2025-11-29,Memphis,Miami,114,110,false
+2025-11-29,Denver,Boston,93,97,false
+2025-11-29,Dallas,Golden State,128,117,false
+2025-11-29,LA Lakers,Philadelphie,108,120,false
+2025-11-29,Phoenix,Sacramento,116,96,false
+2025-12-01,Miami,Cleveland,95,108,false
+2025-12-01,Phoenix,Sacramento,131,88,false
+2025-12-01,Boston,Philadelphie,129,106,false
+2025-12-01,Milwaukee,Memphis,131,98,false
+2025-12-01,Golden State,LA Lakers,121,105,false
+2025-12-01,Denver,Dallas,128,108,false
+2025-12-03,Dallas,Philadelphie,112,130,false
+2025-12-03,LA Lakers,Sacramento,129,98,false
+2025-12-03,Memphis,Milwaukee,108,122,false
+2025-12-03,Cleveland,Boston,102,113,false
+2025-12-03,Phoenix,Golden State,131,117,false
+2025-12-03,Denver,Miami,116,92,false
+2025-12-05,Sacramento,LA Lakers,79,105,false
+2025-12-05,Cleveland,Boston,88,122,false
+2025-12-05,Memphis,Milwaukee,111,136,false
+2025-12-05,Denver,Miami,119,97,false
+2025-12-05,Dallas,Golden State,139,118,false
+2025-12-05,Philadelphie,Phoenix,107,115,false
+2025-12-07,Denver,Sacramento,113,100,false
+2025-12-07,Philadelphie,Dallas,111,121,false
+2025-12-07,LA Lakers,Golden State,114,93,false
+2025-12-07,Miami,Cleveland,123,122,false
+2025-12-07,Phoenix,Memphis,102,98,false
+2025-12-07,Milwaukee,Boston,114,100,false
+2025-12-09,Denver,Golden State,118,113,false
+2025-12-09,Philadelphie,Miami,118,115,false
+2025-12-09,Dallas,Memphis,129,115,false
+2025-12-09,Boston,Milwaukee,107,117,false
+2025-12-09,LA Lakers,Sacramento,131,116,false
+2025-12-09,Cleveland,Phoenix,101,126,false
+2025-12-11,Denver,Golden State,117,121,false
+2025-12-11,Cleveland,Miami,108,114,false
+2025-12-11,Philadelphie,LA Lakers,114,115,false
+2025-12-11,Memphis,Phoenix,114,125,false
+2025-12-11,Milwaukee,Boston,101,108,false
+2025-12-11,Sacramento,Dallas,116,123,false
+2025-12-13,Milwaukee,Golden State,123,91,false
+2025-12-13,Miami,Boston,113,118,false
+2025-12-13,Philadelphie,Sacramento,143,90,false
+2025-12-13,Phoenix,Denver,131,114,false
+2025-12-13,Memphis,Cleveland,128,109,false
+2025-12-13,LA Lakers,Dallas,119,125,false
+2025-12-15,Philadelphie,LA Lakers,129,103,false
+2025-12-15,Denver,Sacramento,109,103,false
+2025-12-15,Dallas,Miami,132,128,false
+2025-12-15,Golden State,Cleveland,136,122,false
+2025-12-15,Phoenix,Memphis,115,108,false
+2025-12-15,Boston,Milwaukee,89,105,false
+2025-12-17,Cleveland,Sacramento,133,96,false
+2025-12-17,LA Lakers,Phoenix,88,119,false
+2025-12-17,Memphis,Milwaukee,121,104,false
+2025-12-17,Golden State,Denver,107,113,false
+2025-12-17,Dallas,Miami,114,115,false
+2025-12-17,Boston,Philadelphie,131,117,false
+2025-12-19,Denver,Milwaukee,120,125,false
+2025-12-19,Dallas,Miami,110,128,false
+2025-12-19,Sacramento,Boston,98,134,false
+2025-12-19,LA Lakers,Philadelphie,124,116,false
+2025-12-19,Cleveland,Memphis,131,127,false
+2025-12-19,Phoenix,Golden State,113,122,false
+2025-12-21,Phoenix,Cleveland,122,102,false
+2025-12-21,Sacramento,Boston,107,126,false
+2025-12-21,Milwaukee,Memphis,106,130,false
+2025-12-21,Miami,Denver,116,99,false
+2025-12-21,Dallas,Philadelphie,131,113,false
+2025-12-21,LA Lakers,Golden State,119,124,false
+2025-12-23,Boston,Golden State,120,112,false
+2025-12-23,LA Lakers,Milwaukee,102,137,false
+2025-12-23,Miami,Phoenix,106,116,false
+2025-12-23,Philadelphie,Cleveland,116,105,false
+2025-12-23,Memphis,Dallas,121,128,false
+2025-12-23,Sacramento,Denver,123,132,false
+2025-12-25,Milwaukee,Cleveland,110,124,false
+2025-12-25,Golden State,Boston,106,102,false
+2025-12-25,LA Lakers,Denver,98,120,false
+2025-12-25,Sacramento,Memphis,128,117,false
+2025-12-25,Dallas,Philadelphie,132,116,false
+2025-12-25,Phoenix,Miami,124,124,false
+2025-12-27,Miami,LA Lakers,114,124,false
+2025-12-27,Philadelphie,Memphis,119,114,false
+2025-12-27,Sacramento,Denver,124,93,false
+2025-12-27,Milwaukee,Cleveland,114,75,false
+2025-12-27,Golden State,Dallas,119,117,false
+2025-12-27,Boston,Phoenix,127,114,false
+2025-12-29,Golden State,Philadelphie,115,106,false
+2025-12-29,Milwaukee,Phoenix,120,115,false
+2025-12-29,Boston,Sacramento,120,116,false
+2025-12-29,LA Lakers,Denver,100,107,false
+2025-12-29,Dallas,Miami,117,118,false
+2025-12-29,Cleveland,Memphis,116,110,false
+2025-12-31,Philadelphie,Milwaukee,118,121,false
+2025-12-31,Miami,Memphis,152,93,false
+2025-12-31,Denver,Boston,107,116,false
+2025-12-31,Phoenix,LA Lakers,135,108,false
+2025-12-31,Golden State,Dallas,103,124,false
+2025-12-31,Cleveland,Sacramento,107,110,false
+2026-01-02,Milwaukee,Memphis,143,111,false
+2026-01-02,Denver,Cleveland,136,93,false
+2026-01-02,Golden State,Phoenix,114,113,false
+2026-01-02,Philadelphie,Boston,92,128,false
+2026-01-02,Dallas,LA Lakers,107,112,false
+2026-01-02,Sacramento,Miami,92,132,false
+2026-01-04,Milwaukee,Sacramento,128,91,false
+2026-01-04,Miami,LA Lakers,135,90,false
+2026-01-04,Golden State,Boston,113,118,false
+2026-01-04,Cleveland,Dallas,95,120,false
+2026-01-04,Memphis,Phoenix,116,121,false
+2026-01-04,Philadelphie,Denver,100,126,false
+2026-01-06,Cleveland,Denver,99,118,false
+2026-01-06,Boston,Milwaukee,124,117,false
+2026-01-06,Miami,Phoenix,132,127,false
+2026-01-06,LA Lakers,Philadelphie,120,114,false
+2026-01-06,Dallas,Sacramento,118,105,false
+2026-01-06,Memphis,Golden State,107,128,false

@@ -1,0 +1,22 @@
+# Cles API : jamais versionnees. Utiliser les Secrets GitHub / un .env local.
+.env
+
+# Donnees telechargees et etats de travail : regenerables, volumineux.
+data_cache/
+*.slate
+journee*.html
+artifact.html
+rapport_*.html
+europe.html
+test.html
+cotes.csv
+exemple_cotes.csv
+matchs_*.csv
+paris.csv
+
+# docs/ EST versionne : c'est la page servie par GitHub Pages.
+!docs/
+
+__pycache__/
+*.pyc
+.pytest_cache/

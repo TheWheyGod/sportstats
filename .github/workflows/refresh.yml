@@ -1,0 +1,104 @@
+# Rafraichissement automatique de la page, sans PC ni Claude dans la boucle.
+#
+# Deux jobs, deux cadences, un seul budget d'API a respecter :
+#   - "journee" : chaque matin, calendrier 48 h + modeles + absences.
+#                 1 credit The Odds API (NRL) + 4 requetes API-Football.
+#   - "live"    : toutes les heures en journee, scores des matchs en cours.
+#                 0 credit quand rien ne se joue ; s'arrete seul sous 25 credits.
+#
+# Les heures sont en UTC (GitHub ne connait pas Europe/Paris) : 05:30 UTC =
+# 07:30 a Paris en ete, 06:30 en hiver. Decalage d'une heure au changement
+# d'heure, sans consequence.
+#
+# La page produite est commitee dans docs/ et servie par GitHub Pages.
+name: refresh
+
+on:
+  schedule:
+    - cron: "30 5 * * *"          # journee complete, 07:30 Paris (ete)
+    - cron: "5 9-21 * * *"         # live, toutes les heures 11h-23h Paris (ete)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "complet ou live"
+        default: "complet"
+
+# Un seul run a la fois : le job live ne doit pas ecrire pendant que la
+# journee du matin regenere tout.
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Dependances
+        run: pip install -r requirements.txt
+
+      # Les CSV de resultats (football-data, Wikipedia, NRL) sont gratuits
+      # mais volumineux : on les garde d'un run a l'autre pour eviter de
+      # tout retelecharger chaque heure.
+      - name: Cache des donnees
+        uses: actions/cache@v4
+        with:
+          path: data_cache
+          key: data-${{ github.run_id }}
+          restore-keys: data-
+
+      # La journee calculee le matin doit etre retrouvee par les runs "live"
+      # de la journee. Elle est trop lourde pour git : elle transite par le
+      # cache, sauvegardee sous une cle unique a chaque run et restauree par
+      # prefixe (donc toujours la plus recente).
+      - name: Restaurer la journee
+        uses: actions/cache/restore@v4
+        with:
+          path: journee.slate
+          key: slate-${{ github.run_id }}
+          restore-keys: slate-
+
+      - name: Choisir le mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then
+            echo "mode=complet" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=live" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rafraichir
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          PYTHONIOENCODING: utf-8
+        run: python refresh.py ${{ steps.mode.outputs.mode }}
+
+      - name: Sauvegarder la journee
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: journee.slate
+          key: slate-${{ github.run_id }}
+
+      - name: Publier
+        run: |
+          git config user.name "sportvalue-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add docs/index.html
+          # Rien a commiter = rien n'a change (typiquement : aucun match en cours).
+          git diff --cached --quiet && echo "page inchangee" && exit 0
+          git commit -m "refresh: ${{ steps.mode.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

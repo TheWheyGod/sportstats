@@ -1,0 +1,701 @@
+date,home,away,home_score,away_score,surface,neutral
+2025-01-10,De Minaur,Tsitsipas,0,2,Hard,true
+2025-01-10,Alcaraz,De Minaur,2,0,Hard,true
+2025-01-10,Alcaraz,Tsitsipas,2,1,Hard,true
+2025-01-11,Rune,Ruud,2,1,Clay,true
+2025-01-11,Djokovic,Tsitsipas,2,0,Hard,true
+2025-01-11,Alcaraz,Medvedev,2,1,Clay,true
+2025-01-12,Zverev,Alcaraz,0,2,Hard,true
+2025-01-12,Zverev,Alcaraz,1,2,Clay,true
+2025-01-12,Tsitsipas,Medvedev,0,2,Clay,true
+2025-01-13,Alcaraz,Rune,2,0,Hard,true
+2025-01-13,De Minaur,Sinner,1,2,Hard,true
+2025-01-13,Alcaraz,Rune,2,0,Hard,true
+2025-01-14,Ruud,De Minaur,0,2,Clay,true
+2025-01-14,Tsitsipas,Ruud,1,2,Grass,true
+2025-01-14,Zverev,Ruud,2,0,Clay,true
+2025-01-15,Fritz,De Minaur,2,0,Grass,true
+2025-01-15,Tsitsipas,Medvedev,0,2,Hard,true
+2025-01-15,Medvedev,Djokovic,0,2,Clay,true
+2025-01-16,Sinner,Tsitsipas,2,1,Grass,true
+2025-01-16,Medvedev,Ruud,1,2,Hard,true
+2025-01-16,De Minaur,Medvedev,1,2,Grass,true
+2025-01-17,Ruud,Zverev,1,2,Hard,true
+2025-01-17,Medvedev,Tsitsipas,2,1,Clay,true
+2025-01-17,Djokovic,Sinner,0,2,Hard,true
+2025-01-18,Tsitsipas,Alcaraz,0,2,Grass,true
+2025-01-18,Zverev,Sinner,0,2,Clay,true
+2025-01-18,Fritz,Rune,0,2,Clay,true
+2025-01-19,Sinner,Zverev,1,2,Hard,true
+2025-01-19,Djokovic,Tsitsipas,2,0,Clay,true
+2025-01-19,Sinner,Alcaraz,2,0,Grass,true
+2025-01-20,Ruud,Medvedev,0,2,Hard,true
+2025-01-20,Djokovic,Ruud,2,1,Hard,true
+2025-01-20,Djokovic,Fritz,2,1,Clay,true
+2025-01-21,Ruud,Sinner,0,2,Hard,true
+2025-01-21,Fritz,Rune,2,1,Hard,true
+2025-01-21,Sinner,Tsitsipas,2,1,Clay,true
+2025-01-22,Ruud,Fritz,2,0,Clay,true
+2025-01-22,Ruud,Alcaraz,0,2,Hard,true
+2025-01-22,De Minaur,Djokovic,0,2,Clay,true
+2025-01-23,Ruud,Fritz,0,2,Hard,true
+2025-01-23,Ruud,De Minaur,2,0,Hard,true
+2025-01-23,Ruud,Fritz,2,1,Hard,true
+2025-01-24,Ruud,Djokovic,1,2,Hard,true
+2025-01-24,Fritz,Medvedev,0,2,Hard,true
+2025-01-24,Tsitsipas,Fritz,2,0,Hard,true
+2025-01-25,Fritz,Medvedev,1,2,Clay,true
+2025-01-25,Alcaraz,Tsitsipas,2,1,Grass,true
+2025-01-25,Medvedev,Sinner,0,2,Hard,true
+2025-01-26,Fritz,Tsitsipas,0,2,Hard,true
+2025-01-26,Djokovic,Rune,2,1,Clay,true
+2025-01-26,Djokovic,Ruud,2,1,Hard,true
+2025-01-27,Ruud,De Minaur,2,1,Hard,true
+2025-01-27,Tsitsipas,Alcaraz,0,2,Grass,true
+2025-01-27,Ruud,Alcaraz,1,2,Clay,true
+2025-01-28,Fritz,De Minaur,1,2,Clay,true
+2025-01-28,De Minaur,Rune,0,2,Hard,true
+2025-01-28,Alcaraz,De Minaur,2,1,Hard,true
+2025-01-29,Rune,Alcaraz,1,2,Clay,true
+2025-01-29,Fritz,Ruud,0,2,Clay,true
+2025-01-29,Fritz,Tsitsipas,2,0,Hard,true
+2025-01-30,Fritz,Alcaraz,1,2,Hard,true
+2025-01-30,Sinner,De Minaur,2,1,Hard,true
+2025-01-30,Sinner,Zverev,2,1,Hard,true
+2025-01-31,Fritz,Sinner,1,2,Hard,true
+2025-01-31,Tsitsipas,Zverev,0,2,Clay,true
+2025-01-31,De Minaur,Tsitsipas,2,1,Hard,true
+2025-02-01,De Minaur,Rune,0,2,Clay,true
+2025-02-01,Ruud,Medvedev,0,2,Hard,true
+2025-02-01,De Minaur,Zverev,0,2,Hard,true
+2025-02-02,De Minaur,Rune,1,2,Hard,true
+2025-02-02,Ruud,Zverev,2,1,Hard,true
+2025-02-02,Sinner,Zverev,1,2,Clay,true
+2025-02-03,Fritz,Djokovic,1,2,Hard,true
+2025-02-03,Alcaraz,Ruud,2,1,Clay,true
+2025-02-03,Ruud,Alcaraz,1,2,Hard,true
+2025-02-04,Ruud,De Minaur,2,0,Clay,true
+2025-02-04,Zverev,Rune,2,0,Hard,true
+2025-02-04,Alcaraz,Sinner,0,2,Hard,true
+2025-02-05,Medvedev,Alcaraz,1,2,Hard,true
+2025-02-05,Alcaraz,Rune,2,1,Hard,true
+2025-02-05,Alcaraz,Medvedev,2,1,Hard,true
+2025-02-06,Ruud,Fritz,2,1,Hard,true
+2025-02-06,Tsitsipas,Djokovic,0,2,Hard,true
+2025-02-06,Rune,De Minaur,2,0,Hard,true
+2025-02-07,Rune,Medvedev,0,2,Hard,true
+2025-02-07,Medvedev,Alcaraz,0,2,Hard,true
+2025-02-07,Zverev,De Minaur,2,0,Clay,true
+2025-02-08,Sinner,Zverev,2,1,Clay,true
+2025-02-08,Rune,Zverev,1,2,Clay,true
+2025-02-08,Tsitsipas,Zverev,0,2,Hard,true
+2025-02-09,Rune,Djokovic,0,2,Hard,true
+2025-02-09,Fritz,De Minaur,2,0,Hard,true
+2025-02-09,Sinner,Ruud,2,1,Hard,true
+2025-02-10,Zverev,Fritz,2,0,Hard,true
+2025-02-10,Medvedev,Ruud,2,0,Hard,true
+2025-02-10,Ruud,Rune,0,2,Clay,true
+2025-02-11,De Minaur,Sinner,1,2,Hard,true
+2025-02-11,Sinner,Tsitsipas,2,0,Clay,true
+2025-02-11,Tsitsipas,Ruud,1,2,Hard,true
+2025-02-12,Zverev,Ruud,2,0,Hard,true
+2025-02-12,Medvedev,Djokovic,1,2,Hard,true
+2025-02-12,Rune,De Minaur,2,0,Clay,true
+2025-02-13,Fritz,Alcaraz,0,2,Hard,true
+2025-02-13,Medvedev,De Minaur,2,1,Hard,true
+2025-02-13,Sinner,Zverev,1,2,Clay,true
+2025-02-14,De Minaur,Ruud,0,2,Hard,true
+2025-02-14,Ruud,Medvedev,2,0,Hard,true
+2025-02-14,Zverev,Djokovic,1,2,Clay,true
+2025-02-15,De Minaur,Ruud,1,2,Hard,true
+2025-02-15,Zverev,Sinner,2,0,Hard,true
+2025-02-15,De Minaur,Ruud,0,2,Hard,true
+2025-02-16,Tsitsipas,De Minaur,1,2,Grass,true
+2025-02-16,Tsitsipas,Djokovic,1,2,Clay,true
+2025-02-16,Sinner,Medvedev,2,0,Clay,true
+2025-02-17,De Minaur,Ruud,0,2,Hard,true
+2025-02-17,Zverev,Tsitsipas,2,1,Hard,true
+2025-02-17,Tsitsipas,Medvedev,0,2,Grass,true
+2025-02-18,Sinner,Zverev,2,1,Hard,true
+2025-02-18,Djokovic,Zverev,2,0,Hard,true
+2025-02-18,Rune,Djokovic,0,2,Hard,true
+2025-02-19,Djokovic,De Minaur,2,0,Clay,true
+2025-02-19,Tsitsipas,Alcaraz,0,2,Grass,true
+2025-02-19,Medvedev,Sinner,1,2,Hard,true
+2025-02-20,Alcaraz,Rune,2,1,Hard,true
+2025-02-20,Sinner,Fritz,2,0,Hard,true
+2025-02-20,Tsitsipas,Rune,0,2,Hard,true
+2025-02-21,Tsitsipas,Fritz,2,1,Clay,true
+2025-02-21,Alcaraz,Rune,2,0,Hard,true
+2025-02-21,Tsitsipas,Ruud,1,2,Clay,true
+2025-02-22,Alcaraz,Fritz,2,0,Hard,true
+2025-02-22,Zverev,Tsitsipas,2,0,Hard,true
+2025-02-22,Zverev,Rune,2,0,Hard,true
+2025-02-23,Fritz,Tsitsipas,2,1,Hard,true
+2025-02-23,Fritz,Tsitsipas,2,1,Hard,true
+2025-02-23,Medvedev,Sinner,0,2,Hard,true
+2025-02-24,Zverev,De Minaur,2,1,Hard,true
+2025-02-24,Rune,Tsitsipas,2,1,Hard,true
+2025-02-24,Djokovic,Zverev,2,1,Hard,true
+2025-02-25,Tsitsipas,Djokovic,1,2,Clay,true
+2025-02-25,Ruud,Tsitsipas,2,0,Hard,true
+2025-02-25,Sinner,Zverev,1,2,Clay,true
+2025-02-26,Tsitsipas,Djokovic,1,2,Grass,true
+2025-02-26,Tsitsipas,Rune,1,2,Clay,true
+2025-02-26,Medvedev,Rune,1,2,Hard,true
+2025-02-27,Alcaraz,Medvedev,2,1,Hard,true
+2025-02-27,Djokovic,Sinner,2,0,Clay,true
+2025-02-27,Ruud,Sinner,2,1,Grass,true
+2025-02-28,Djokovic,Medvedev,2,0,Hard,true
+2025-02-28,Sinner,Medvedev,2,0,Hard,true
+2025-02-28,De Minaur,Tsitsipas,1,2,Hard,true
+2025-03-01,Tsitsipas,Sinner,0,2,Hard,true
+2025-03-01,Medvedev,De Minaur,0,2,Clay,true
+2025-03-01,Djokovic,Fritz,2,1,Hard,true
+2025-03-02,Tsitsipas,Rune,2,0,Clay,true
+2025-03-02,De Minaur,Rune,0,2,Clay,true
+2025-03-02,De Minaur,Alcaraz,1,2,Clay,true
+2025-03-03,Tsitsipas,Sinner,1,2,Hard,true
+2025-03-03,Ruud,Medvedev,0,2,Hard,true
+2025-03-03,Djokovic,De Minaur,2,0,Clay,true
+2025-03-04,Ruud,Zverev,2,1,Clay,true
+2025-03-04,Fritz,Ruud,1,2,Clay,true
+2025-03-04,Sinner,Djokovic,1,2,Clay,true
+2025-03-05,Alcaraz,Medvedev,2,1,Clay,true
+2025-03-05,Djokovic,Fritz,2,0,Hard,true
+2025-03-05,Fritz,Rune,1,2,Hard,true
+2025-03-06,Rune,De Minaur,2,1,Hard,true
+2025-03-06,De Minaur,Ruud,1,2,Hard,true
+2025-03-06,Fritz,De Minaur,1,2,Hard,true
+2025-03-07,Sinner,Tsitsipas,2,0,Hard,true
+2025-03-07,Alcaraz,Tsitsipas,2,0,Hard,true
+2025-03-07,De Minaur,Sinner,0,2,Hard,true
+2025-03-08,Djokovic,Ruud,2,0,Hard,true
+2025-03-08,Ruud,Medvedev,2,1,Hard,true
+2025-03-08,Rune,Sinner,1,2,Clay,true
+2025-03-09,Fritz,De Minaur,2,1,Hard,true
+2025-03-09,Rune,De Minaur,2,1,Hard,true
+2025-03-09,Sinner,De Minaur,2,0,Clay,true
+2025-03-10,Fritz,Ruud,2,1,Hard,true
+2025-03-10,Medvedev,Tsitsipas,2,1,Hard,true
+2025-03-10,Sinner,Rune,2,1,Clay,true
+2025-03-11,Ruud,Fritz,1,2,Hard,true
+2025-03-11,Tsitsipas,Sinner,0,2,Hard,true
+2025-03-11,De Minaur,Rune,0,2,Clay,true
+2025-03-12,Medvedev,Zverev,2,1,Clay,true
+2025-03-12,Sinner,De Minaur,2,1,Grass,true
+2025-03-12,Tsitsipas,Ruud,1,2,Clay,true
+2025-03-13,Djokovic,Tsitsipas,2,1,Hard,true
+2025-03-13,Sinner,Zverev,2,0,Hard,true
+2025-03-13,Alcaraz,Ruud,2,1,Grass,true
+2025-03-14,Tsitsipas,Zverev,0,2,Clay,true
+2025-03-14,Zverev,De Minaur,0,2,Clay,true
+2025-03-14,Fritz,Sinner,0,2,Clay,true
+2025-03-15,Fritz,Zverev,0,2,Clay,true
+2025-03-15,De Minaur,Zverev,1,2,Clay,true
+2025-03-15,Tsitsipas,Rune,0,2,Grass,true
+2025-03-16,Alcaraz,Sinner,2,1,Clay,true
+2025-03-16,Rune,Tsitsipas,2,0,Hard,true
+2025-03-16,Zverev,Ruud,2,1,Hard,true
+2025-03-17,Ruud,Zverev,0,2,Clay,true
+2025-03-17,Tsitsipas,Sinner,1,2,Hard,true
+2025-03-17,Ruud,Medvedev,2,1,Hard,true
+2025-03-18,Fritz,Medvedev,2,1,Hard,true
+2025-03-18,Rune,Medvedev,1,2,Hard,true
+2025-03-18,Djokovic,Fritz,2,0,Hard,true
+2025-03-19,Djokovic,Fritz,2,0,Hard,true
+2025-03-19,De Minaur,Tsitsipas,1,2,Hard,true
+2025-03-19,Sinner,Tsitsipas,2,0,Grass,true
+2025-03-20,Rune,Medvedev,0,2,Hard,true
+2025-03-20,Fritz,De Minaur,0,2,Clay,true
+2025-03-20,Medvedev,Tsitsipas,2,0,Hard,true
+2025-03-21,Zverev,Alcaraz,1,2,Hard,true
+2025-03-21,De Minaur,Djokovic,1,2,Grass,true
+2025-03-21,Alcaraz,De Minaur,2,0,Hard,true
+2025-03-22,Rune,Sinner,1,2,Hard,true
+2025-03-22,De Minaur,Rune,0,2,Clay,true
+2025-03-22,Fritz,De Minaur,2,1,Clay,true
+2025-03-23,Djokovic,Tsitsipas,2,0,Hard,true
+2025-03-23,Tsitsipas,Sinner,0,2,Hard,true
+2025-03-23,Alcaraz,Tsitsipas,2,1,Clay,true
+2025-03-24,Medvedev,Fritz,2,0,Hard,true
+2025-03-24,Zverev,Ruud,1,2,Hard,true
+2025-03-24,Djokovic,Ruud,2,0,Hard,true
+2025-03-25,Djokovic,Tsitsipas,2,0,Hard,true
+2025-03-25,Sinner,Djokovic,1,2,Clay,true
+2025-03-25,Ruud,Fritz,2,1,Hard,true
+2025-03-26,Medvedev,Fritz,0,2,Hard,true
+2025-03-26,Zverev,Ruud,2,1,Hard,true
+2025-03-26,Fritz,Rune,0,2,Clay,true
+2025-03-27,De Minaur,Rune,0,2,Clay,true
+2025-03-27,Sinner,De Minaur,2,1,Clay,true
+2025-03-27,Ruud,De Minaur,0,2,Hard,true
+2025-03-28,Fritz,Zverev,1,2,Clay,true
+2025-03-28,Fritz,Alcaraz,0,2,Clay,true
+2025-03-28,Djokovic,Medvedev,2,0,Hard,true
+2025-03-29,De Minaur,Rune,1,2,Hard,true
+2025-03-29,Ruud,De Minaur,0,2,Hard,true
+2025-03-29,Djokovic,Zverev,2,1,Hard,true
+2025-03-30,Rune,Medvedev,1,2,Hard,true
+2025-03-30,Medvedev,De Minaur,2,1,Hard,true
+2025-03-30,De Minaur,Djokovic,1,2,Hard,true
+2025-03-31,Alcaraz,Djokovic,2,1,Clay,true
+2025-03-31,Rune,Ruud,0,2,Hard,true
+2025-03-31,Ruud,Djokovic,0,2,Clay,true
+2025-04-01,Ruud,Sinner,1,2,Hard,true
+2025-04-01,Ruud,Tsitsipas,2,1,Clay,true
+2025-04-01,Rune,Ruud,2,0,Clay,true
+2025-04-02,Djokovic,Medvedev,2,0,Hard,true
+2025-04-02,Fritz,Djokovic,2,1,Hard,true
+2025-04-02,Ruud,Fritz,2,0,Hard,true
+2025-04-03,Medvedev,Zverev,2,0,Hard,true
+2025-04-03,Zverev,Fritz,2,1,Hard,true
+2025-04-03,Zverev,Djokovic,2,0,Hard,true
+2025-04-04,Medvedev,Zverev,2,1,Hard,true
+2025-04-04,Ruud,Zverev,1,2,Hard,true
+2025-04-04,Alcaraz,Ruud,2,0,Grass,true
+2025-04-05,Alcaraz,Medvedev,2,0,Hard,true
+2025-04-05,Zverev,Tsitsipas,2,1,Clay,true
+2025-04-05,Fritz,De Minaur,2,1,Hard,true
+2025-04-06,Medvedev,Sinner,0,2,Clay,true
+2025-04-06,Ruud,Sinner,2,1,Hard,true
+2025-04-06,Tsitsipas,Medvedev,1,2,Clay,true
+2025-04-07,Rune,Medvedev,1,2,Hard,true
+2025-04-07,Fritz,Alcaraz,0,2,Hard,true
+2025-04-07,Zverev,Tsitsipas,2,0,Hard,true
+2025-04-08,De Minaur,Ruud,0,2,Hard,true
+2025-04-08,De Minaur,Alcaraz,1,2,Clay,true
+2025-04-08,Zverev,Alcaraz,2,1,Clay,true
+2025-04-09,Medvedev,Fritz,2,0,Hard,true
+2025-04-09,De Minaur,Medvedev,0,2,Hard,true
+2025-04-09,Ruud,Djokovic,0,2,Hard,true
+2025-04-10,Tsitsipas,Djokovic,0,2,Hard,true
+2025-04-10,De Minaur,Tsitsipas,1,2,Hard,true
+2025-04-10,Tsitsipas,Zverev,1,2,Hard,true
+2025-04-11,Zverev,Sinner,1,2,Grass,true
+2025-04-11,Djokovic,Zverev,2,0,Grass,true
+2025-04-11,De Minaur,Rune,0,2,Hard,true
+2025-04-12,Tsitsipas,Alcaraz,0,2,Clay,true
+2025-04-12,Ruud,Fritz,0,2,Hard,true
+2025-04-12,Ruud,Fritz,0,2,Hard,true
+2025-04-13,Rune,Alcaraz,0,2,Hard,true
+2025-04-13,Tsitsipas,Alcaraz,1,2,Hard,true
+2025-04-13,Zverev,Alcaraz,0,2,Hard,true
+2025-04-14,Djokovic,Alcaraz,0,2,Hard,true
+2025-04-14,Medvedev,Djokovic,1,2,Grass,true
+2025-04-14,Medvedev,Djokovic,0,2,Hard,true
+2025-04-15,Rune,Tsitsipas,2,0,Hard,true
+2025-04-15,Medvedev,Ruud,2,0,Hard,true
+2025-04-15,Tsitsipas,De Minaur,1,2,Grass,true
+2025-04-16,De Minaur,Medvedev,1,2,Hard,true
+2025-04-16,Alcaraz,Ruud,2,0,Hard,true
+2025-04-16,Djokovic,Medvedev,2,1,Hard,true
+2025-04-17,Djokovic,Rune,2,0,Hard,true
+2025-04-17,Tsitsipas,Alcaraz,1,2,Clay,true
+2025-04-17,Tsitsipas,Medvedev,0,2,Clay,true
+2025-04-18,Tsitsipas,De Minaur,1,2,Clay,true
+2025-04-18,Djokovic,Fritz,2,0,Hard,true
+2025-04-18,Tsitsipas,De Minaur,2,0,Clay,true
+2025-04-19,Rune,Ruud,0,2,Clay,true
+2025-04-19,De Minaur,Fritz,1,2,Hard,true
+2025-04-19,Alcaraz,Djokovic,2,1,Hard,true
+2025-04-20,Ruud,Rune,0,2,Clay,true
+2025-04-20,Rune,Zverev,0,2,Hard,true
+2025-04-20,Zverev,Sinner,1,2,Clay,true
+2025-04-21,Medvedev,Fritz,2,1,Clay,true
+2025-04-21,Rune,Alcaraz,0,2,Hard,true
+2025-04-21,Sinner,De Minaur,2,1,Hard,true
+2025-04-22,Alcaraz,Medvedev,1,2,Hard,true
+2025-04-22,Medvedev,Tsitsipas,2,0,Clay,true
+2025-04-22,De Minaur,Rune,1,2,Hard,true
+2025-04-23,Zverev,Ruud,2,1,Grass,true
+2025-04-23,Sinner,Alcaraz,1,2,Hard,true
+2025-04-23,Rune,Ruud,2,0,Grass,true
+2025-04-24,Djokovic,Alcaraz,2,1,Hard,true
+2025-04-24,Sinner,Tsitsipas,2,0,Clay,true
+2025-04-24,Medvedev,Djokovic,0,2,Clay,true
+2025-04-25,De Minaur,Alcaraz,1,2,Clay,true
+2025-04-25,Alcaraz,Ruud,2,0,Clay,true
+2025-04-25,Ruud,Tsitsipas,2,1,Clay,true
+2025-04-26,Tsitsipas,Medvedev,0,2,Hard,true
+2025-04-26,Sinner,Alcaraz,1,2,Hard,true
+2025-04-26,Alcaraz,Fritz,2,0,Clay,true
+2025-04-27,Zverev,Djokovic,1,2,Hard,true
+2025-04-27,De Minaur,Medvedev,0,2,Hard,true
+2025-04-27,Tsitsipas,Alcaraz,1,2,Clay,true
+2025-04-28,De Minaur,Ruud,2,1,Hard,true
+2025-04-28,Alcaraz,Sinner,0,2,Hard,true
+2025-04-28,Rune,Zverev,0,2,Clay,true
+2025-04-29,Sinner,Tsitsipas,2,1,Hard,true
+2025-04-29,Zverev,Ruud,2,1,Hard,true
+2025-04-29,Medvedev,Zverev,0,2,Clay,true
+2025-04-30,De Minaur,Sinner,0,2,Hard,true
+2025-04-30,Tsitsipas,Sinner,0,2,Hard,true
+2025-04-30,Rune,Tsitsipas,2,1,Grass,true
+2025-05-01,De Minaur,Ruud,0,2,Hard,true
+2025-05-01,Fritz,Djokovic,0,2,Hard,true
+2025-05-01,Tsitsipas,Sinner,1,2,Clay,true
+2025-05-02,Sinner,Djokovic,0,2,Clay,true
+2025-05-02,Fritz,Alcaraz,0,2,Clay,true
+2025-05-02,De Minaur,Fritz,2,1,Grass,true
+2025-05-03,De Minaur,Fritz,1,2,Hard,true
+2025-05-03,Medvedev,De Minaur,2,1,Clay,true
+2025-05-03,De Minaur,Tsitsipas,2,0,Clay,true
+2025-05-04,Rune,De Minaur,2,1,Clay,true
+2025-05-04,Fritz,Rune,1,2,Hard,true
+2025-05-04,Ruud,Sinner,0,2,Clay,true
+2025-05-05,Alcaraz,Ruud,2,0,Grass,true
+2025-05-05,De Minaur,Ruud,2,1,Clay,true
+2025-05-05,Djokovic,Sinner,2,1,Clay,true
+2025-05-06,Fritz,Djokovic,0,2,Clay,true
+2025-05-06,Medvedev,Djokovic,2,0,Clay,true
+2025-05-06,Rune,Sinner,2,0,Clay,true
+2025-05-07,Medvedev,Sinner,1,2,Hard,true
+2025-05-07,Medvedev,Sinner,0,2,Grass,true
+2025-05-07,Zverev,Ruud,0,2,Clay,true
+2025-05-08,Zverev,Medvedev,0,2,Clay,true
+2025-05-08,Zverev,Alcaraz,2,0,Grass,true
+2025-05-08,Medvedev,Zverev,2,0,Clay,true
+2025-05-09,Sinner,Rune,2,0,Hard,true
+2025-05-09,Zverev,Ruud,2,1,Hard,true
+2025-05-09,Rune,Tsitsipas,2,0,Hard,true
+2025-05-10,Djokovic,Ruud,2,1,Clay,true
+2025-05-10,Ruud,De Minaur,2,1,Hard,true
+2025-05-10,Zverev,Alcaraz,0,2,Clay,true
+2025-05-11,Tsitsipas,Fritz,2,1,Clay,true
+2025-05-11,Alcaraz,Djokovic,2,0,Hard,true
+2025-05-11,De Minaur,Ruud,1,2,Hard,true
+2025-05-12,Zverev,Ruud,2,0,Hard,true
+2025-05-12,Tsitsipas,Alcaraz,0,2,Hard,true
+2025-05-12,Ruud,Zverev,0,2,Clay,true
+2025-05-13,Sinner,De Minaur,2,0,Hard,true
+2025-05-13,Ruud,Rune,2,0,Clay,true
+2025-05-13,Djokovic,Medvedev,2,1,Hard,true
+2025-05-14,Medvedev,Fritz,2,1,Clay,true
+2025-05-14,Tsitsipas,Alcaraz,0,2,Hard,true
+2025-05-14,Djokovic,Tsitsipas,2,1,Hard,true
+2025-05-15,Djokovic,Ruud,2,1,Hard,true
+2025-05-15,Medvedev,De Minaur,2,0,Hard,true
+2025-05-15,De Minaur,Zverev,0,2,Hard,true
+2025-05-16,Ruud,Rune,0,2,Hard,true
+2025-05-16,Ruud,Fritz,2,1,Clay,true
+2025-05-16,Alcaraz,Djokovic,2,0,Hard,true
+2025-05-17,Sinner,Zverev,2,0,Hard,true
+2025-05-17,Zverev,Fritz,2,1,Grass,true
+2025-05-17,Rune,Zverev,0,2,Clay,true
+2025-05-18,Rune,De Minaur,2,0,Hard,true
+2025-05-18,Ruud,Tsitsipas,1,2,Hard,true
+2025-05-18,Sinner,Alcaraz,1,2,Grass,true
+2025-05-19,Fritz,De Minaur,1,2,Hard,true
+2025-05-19,Tsitsipas,Zverev,0,2,Clay,true
+2025-05-19,Sinner,Tsitsipas,2,0,Hard,true
+2025-05-20,Rune,De Minaur,0,2,Clay,true
+2025-05-20,Zverev,Djokovic,0,2,Hard,true
+2025-05-20,Tsitsipas,Ruud,0,2,Clay,true
+2025-05-21,Tsitsipas,Rune,1,2,Clay,true
+2025-05-21,Fritz,Zverev,1,2,Hard,true
+2025-05-21,Zverev,Ruud,2,1,Clay,true
+2025-05-22,Sinner,Medvedev,2,1,Hard,true
+2025-05-22,Zverev,Medvedev,1,2,Hard,true
+2025-05-22,Medvedev,Zverev,2,1,Clay,true
+2025-05-23,Ruud,Tsitsipas,2,1,Clay,true
+2025-05-23,De Minaur,Djokovic,1,2,Hard,true
+2025-05-23,Djokovic,Sinner,2,1,Hard,true
+2025-05-24,Alcaraz,Medvedev,2,0,Clay,true
+2025-05-24,Medvedev,Ruud,2,0,Hard,true
+2025-05-24,Fritz,Djokovic,2,1,Grass,true
+2025-05-25,Sinner,Zverev,2,0,Clay,true
+2025-05-25,Alcaraz,Medvedev,2,1,Grass,true
+2025-05-25,Fritz,Ruud,1,2,Clay,true
+2025-05-26,Tsitsipas,Ruud,0,2,Hard,true
+2025-05-26,Ruud,Djokovic,1,2,Clay,true
+2025-05-26,Djokovic,De Minaur,2,1,Hard,true
+2025-05-27,Alcaraz,Tsitsipas,2,0,Clay,true
+2025-05-27,Fritz,Tsitsipas,2,0,Grass,true
+2025-05-27,Fritz,Djokovic,1,2,Clay,true
+2025-05-28,Ruud,Djokovic,0,2,Clay,true
+2025-05-28,Ruud,Rune,0,2,Hard,true
+2025-05-28,Zverev,Tsitsipas,2,0,Clay,true
+2025-05-29,Sinner,Alcaraz,2,0,Hard,true
+2025-05-29,De Minaur,Djokovic,0,2,Hard,true
+2025-05-29,Zverev,Rune,2,0,Clay,true
+2025-05-30,Tsitsipas,Rune,2,0,Hard,true
+2025-05-30,Djokovic,Alcaraz,1,2,Hard,true
+2025-05-30,Alcaraz,De Minaur,2,1,Clay,true
+2025-05-31,Zverev,De Minaur,0,2,Hard,true
+2025-05-31,Ruud,Alcaraz,0,2,Grass,true
+2025-05-31,Fritz,De Minaur,1,2,Grass,true
+2025-06-01,Zverev,Djokovic,1,2,Clay,true
+2025-06-01,Zverev,De Minaur,2,0,Hard,true
+2025-06-01,Medvedev,Rune,2,0,Hard,true
+2025-06-02,Zverev,Djokovic,2,1,Hard,true
+2025-06-02,De Minaur,Sinner,1,2,Hard,true
+2025-06-02,Alcaraz,Djokovic,2,1,Hard,true
+2025-06-03,Djokovic,Ruud,2,0,Hard,true
+2025-06-03,De Minaur,Medvedev,1,2,Hard,true
+2025-06-03,Djokovic,Rune,0,2,Hard,true
+2025-06-04,Ruud,Fritz,0,2,Clay,true
+2025-06-04,De Minaur,Djokovic,1,2,Hard,true
+2025-06-04,Sinner,Djokovic,2,0,Clay,true
+2025-06-05,Djokovic,Tsitsipas,2,1,Clay,true
+2025-06-05,Rune,Tsitsipas,2,1,Hard,true
+2025-06-05,Sinner,Rune,2,1,Hard,true
+2025-06-06,Alcaraz,Zverev,2,1,Hard,true
+2025-06-06,De Minaur,Sinner,1,2,Hard,true
+2025-06-06,Tsitsipas,Rune,2,0,Hard,true
+2025-06-07,Alcaraz,Rune,2,0,Clay,true
+2025-06-07,Djokovic,Medvedev,0,2,Hard,true
+2025-06-07,Fritz,Tsitsipas,2,0,Hard,true
+2025-06-08,Zverev,Ruud,2,1,Grass,true
+2025-06-08,Zverev,Tsitsipas,0,2,Grass,true
+2025-06-08,Rune,Medvedev,0,2,Clay,true
+2025-06-09,Medvedev,Alcaraz,1,2,Hard,true
+2025-06-09,Djokovic,De Minaur,2,0,Hard,true
+2025-06-09,Rune,Zverev,0,2,Clay,true
+2025-06-10,Rune,Tsitsipas,2,1,Hard,true
+2025-06-10,Tsitsipas,Medvedev,2,1,Hard,true
+2025-06-10,De Minaur,Medvedev,0,2,Clay,true
+2025-06-11,Fritz,Djokovic,0,2,Clay,true
+2025-06-11,Fritz,Alcaraz,2,1,Hard,true
+2025-06-11,Tsitsipas,Alcaraz,0,2,Hard,true
+2025-06-12,Medvedev,Ruud,0,2,Clay,true
+2025-06-12,Ruud,Medvedev,0,2,Clay,true
+2025-06-12,Ruud,Zverev,2,0,Grass,true
+2025-06-13,Alcaraz,Medvedev,2,0,Hard,true
+2025-06-13,Tsitsipas,De Minaur,2,1,Hard,true
+2025-06-13,Tsitsipas,Medvedev,1,2,Hard,true
+2025-06-14,Ruud,Medvedev,1,2,Hard,true
+2025-06-14,Zverev,Tsitsipas,2,0,Grass,true
+2025-06-14,Djokovic,Tsitsipas,2,0,Hard,true
+2025-06-15,Alcaraz,Djokovic,1,2,Hard,true
+2025-06-15,Alcaraz,Fritz,2,1,Hard,true
+2025-06-15,Sinner,Ruud,0,2,Grass,true
+2025-06-16,Ruud,Rune,2,1,Hard,true
+2025-06-16,Sinner,Zverev,1,2,Grass,true
+2025-06-16,Fritz,Djokovic,1,2,Clay,true
+2025-06-17,Rune,Medvedev,2,0,Hard,true
+2025-06-17,Djokovic,Rune,2,1,Hard,true
+2025-06-17,Alcaraz,De Minaur,2,0,Hard,true
+2025-06-18,Rune,Tsitsipas,2,1,Hard,true
+2025-06-18,Djokovic,Zverev,2,1,Clay,true
+2025-06-18,De Minaur,Tsitsipas,0,2,Hard,true
+2025-06-19,Sinner,De Minaur,2,1,Clay,true
+2025-06-19,Ruud,De Minaur,0,2,Hard,true
+2025-06-19,Tsitsipas,Ruud,2,0,Clay,true
+2025-06-20,Medvedev,Tsitsipas,2,1,Clay,true
+2025-06-20,Ruud,Rune,1,2,Clay,true
+2025-06-20,De Minaur,Fritz,2,1,Hard,true
+2025-06-21,Ruud,Medvedev,2,1,Grass,true
+2025-06-21,De Minaur,Medvedev,2,1,Hard,true
+2025-06-21,Alcaraz,Zverev,1,2,Clay,true
+2025-06-22,Djokovic,Ruud,2,1,Hard,true
+2025-06-22,De Minaur,Ruud,1,2,Hard,true
+2025-06-22,Tsitsipas,Zverev,0,2,Hard,true
+2025-06-23,De Minaur,Rune,2,1,Clay,true
+2025-06-23,Medvedev,Tsitsipas,2,0,Hard,true
+2025-06-23,Ruud,Sinner,0,2,Clay,true
+2025-06-24,Djokovic,Alcaraz,2,0,Hard,true
+2025-06-24,Rune,Fritz,1,2,Clay,true
+2025-06-24,Rune,Sinner,1,2,Clay,true
+2025-06-25,Rune,De Minaur,2,1,Hard,true
+2025-06-25,Djokovic,Medvedev,2,1,Hard,true
+2025-06-25,Alcaraz,Djokovic,0,2,Hard,true
+2025-06-26,Djokovic,Alcaraz,1,2,Hard,true
+2025-06-26,De Minaur,Djokovic,1,2,Clay,true
+2025-06-26,Alcaraz,Medvedev,2,1,Clay,true
+2025-06-27,Djokovic,Zverev,2,1,Clay,true
+2025-06-27,Rune,Fritz,0,2,Clay,true
+2025-06-27,Fritz,Tsitsipas,1,2,Hard,true
+2025-06-28,Rune,Tsitsipas,1,2,Clay,true
+2025-06-28,De Minaur,Tsitsipas,2,1,Clay,true
+2025-06-28,Sinner,Djokovic,2,1,Clay,true
+2025-06-29,Sinner,Ruud,2,1,Hard,true
+2025-06-29,Fritz,De Minaur,0,2,Grass,true
+2025-06-29,Sinner,Tsitsipas,2,1,Clay,true
+2025-06-30,De Minaur,Zverev,0,2,Hard,true
+2025-06-30,Ruud,Sinner,1,2,Grass,true
+2025-06-30,Zverev,Fritz,2,0,Clay,true
+2025-07-01,Zverev,De Minaur,1,2,Clay,true
+2025-07-01,Sinner,De Minaur,2,1,Hard,true
+2025-07-01,Alcaraz,Tsitsipas,2,0,Hard,true
+2025-07-02,Fritz,Alcaraz,0,2,Clay,true
+2025-07-02,Djokovic,Tsitsipas,2,0,Hard,true
+2025-07-02,Rune,Djokovic,0,2,Clay,true
+2025-07-03,De Minaur,Sinner,0,2,Clay,true
+2025-07-03,Zverev,Djokovic,1,2,Clay,true
+2025-07-03,Ruud,Rune,0,2,Hard,true
+2025-07-04,Rune,Alcaraz,0,2,Hard,true
+2025-07-04,Zverev,Rune,1,2,Clay,true
+2025-07-04,Alcaraz,Ruud,2,0,Hard,true
+2025-07-05,Zverev,Sinner,1,2,Hard,true
+2025-07-05,Medvedev,Sinner,2,0,Hard,true
+2025-07-05,Rune,Medvedev,2,1,Clay,true
+2025-07-06,Djokovic,De Minaur,0,2,Hard,true
+2025-07-06,Sinner,Rune,2,0,Hard,true
+2025-07-06,Alcaraz,De Minaur,2,0,Hard,true
+2025-07-07,Alcaraz,Rune,2,0,Hard,true
+2025-07-07,Rune,Alcaraz,0,2,Hard,true
+2025-07-07,Medvedev,Tsitsipas,2,1,Clay,true
+2025-07-08,Zverev,Alcaraz,0,2,Grass,true
+2025-07-08,Rune,Tsitsipas,2,0,Hard,true
+2025-07-08,Ruud,De Minaur,0,2,Hard,true
+2025-07-09,Djokovic,Ruud,2,0,Hard,true
+2025-07-09,Alcaraz,Medvedev,0,2,Hard,true
+2025-07-09,Tsitsipas,Rune,2,1,Hard,true
+2025-07-10,Medvedev,De Minaur,2,1,Hard,true
+2025-07-10,Djokovic,Alcaraz,0,2,Hard,true
+2025-07-10,Zverev,Medvedev,1,2,Hard,true
+2025-07-11,De Minaur,Tsitsipas,1,2,Hard,true
+2025-07-11,Sinner,Ruud,2,1,Clay,true
+2025-07-11,Djokovic,Zverev,1,2,Clay,true
+2025-07-12,Fritz,Tsitsipas,2,1,Hard,true
+2025-07-12,De Minaur,Medvedev,0,2,Hard,true
+2025-07-12,De Minaur,Sinner,1,2,Clay,true
+2025-07-13,Alcaraz,Fritz,2,0,Grass,true
+2025-07-13,Medvedev,Zverev,0,2,Hard,true
+2025-07-13,Fritz,De Minaur,2,0,Clay,true
+2025-07-14,Fritz,Medvedev,0,2,Hard,true
+2025-07-14,Tsitsipas,Djokovic,2,0,Clay,true
+2025-07-14,Djokovic,Medvedev,1,2,Clay,true
+2025-07-15,Rune,Djokovic,2,1,Hard,true
+2025-07-15,Fritz,Ruud,0,2,Clay,true
+2025-07-15,Sinner,De Minaur,2,0,Clay,true
+2025-07-16,Ruud,Fritz,2,0,Clay,true
+2025-07-16,Djokovic,Fritz,2,1,Hard,true
+2025-07-16,Fritz,Zverev,1,2,Grass,true
+2025-07-17,Sinner,Medvedev,2,0,Clay,true
+2025-07-17,Rune,De Minaur,2,0,Hard,true
+2025-07-17,Rune,Djokovic,1,2,Clay,true
+2025-07-18,Zverev,Medvedev,2,0,Grass,true
+2025-07-18,Rune,De Minaur,2,0,Hard,true
+2025-07-18,Djokovic,Ruud,2,0,Hard,true
+2025-07-19,De Minaur,Djokovic,0,2,Hard,true
+2025-07-19,Ruud,Sinner,0,2,Clay,true
+2025-07-19,Djokovic,Ruud,2,0,Clay,true
+2025-07-20,Fritz,De Minaur,2,1,Hard,true
+2025-07-20,Sinner,De Minaur,2,0,Hard,true
+2025-07-20,Tsitsipas,Rune,1,2,Clay,true
+2025-07-21,Medvedev,Fritz,1,2,Clay,true
+2025-07-21,Alcaraz,Ruud,2,1,Hard,true
+2025-07-21,Sinner,Ruud,2,0,Hard,true
+2025-07-22,Rune,Djokovic,2,0,Clay,true
+2025-07-22,Ruud,Zverev,2,1,Hard,true
+2025-07-22,Sinner,Alcaraz,2,1,Hard,true
+2025-07-23,Sinner,Zverev,0,2,Hard,true
+2025-07-23,Sinner,De Minaur,2,1,Hard,true
+2025-07-23,Tsitsipas,Fritz,0,2,Hard,true
+2025-07-24,Fritz,Alcaraz,0,2,Hard,true
+2025-07-24,Tsitsipas,Medvedev,1,2,Hard,true
+2025-07-24,Alcaraz,Fritz,2,1,Clay,true
+2025-07-25,Medvedev,De Minaur,2,0,Clay,true
+2025-07-25,Tsitsipas,Sinner,1,2,Hard,true
+2025-07-25,Zverev,Tsitsipas,2,0,Grass,true
+2025-07-26,Ruud,Alcaraz,0,2,Grass,true
+2025-07-26,Rune,De Minaur,2,1,Hard,true
+2025-07-26,Medvedev,Tsitsipas,2,0,Grass,true
+2025-07-27,Medvedev,Djokovic,2,1,Hard,true
+2025-07-27,Ruud,Zverev,0,2,Hard,true
+2025-07-27,Sinner,Medvedev,1,2,Clay,true
+2025-07-28,Sinner,Tsitsipas,2,1,Clay,true
+2025-07-28,Sinner,Tsitsipas,2,1,Hard,true
+2025-07-28,De Minaur,Sinner,1,2,Grass,true
+2025-07-29,Medvedev,Alcaraz,2,0,Hard,true
+2025-07-29,Tsitsipas,Rune,0,2,Clay,true
+2025-07-29,De Minaur,Ruud,0,2,Clay,true
+2025-07-30,Rune,Ruud,2,0,Clay,true
+2025-07-30,Ruud,Tsitsipas,2,0,Hard,true
+2025-07-30,Fritz,Zverev,0,2,Clay,true
+2025-07-31,Medvedev,Zverev,0,2,Hard,true
+2025-07-31,De Minaur,Tsitsipas,0,2,Clay,true
+2025-07-31,Alcaraz,De Minaur,2,1,Hard,true
+2025-08-01,Djokovic,Sinner,0,2,Hard,true
+2025-08-01,De Minaur,Zverev,0,2,Grass,true
+2025-08-01,Fritz,Sinner,0,2,Hard,true
+2025-08-02,De Minaur,Medvedev,1,2,Hard,true
+2025-08-02,Medvedev,Tsitsipas,2,1,Grass,true
+2025-08-02,Zverev,Alcaraz,1,2,Hard,true
+2025-08-03,Zverev,Ruud,2,1,Hard,true
+2025-08-03,Rune,Alcaraz,0,2,Grass,true
+2025-08-03,De Minaur,Sinner,0,2,Hard,true
+2025-08-04,Ruud,Sinner,0,2,Hard,true
+2025-08-04,Rune,Tsitsipas,2,1,Hard,true
+2025-08-04,Rune,Zverev,2,0,Clay,true
+2025-08-05,Fritz,Sinner,1,2,Hard,true
+2025-08-05,Fritz,Tsitsipas,2,1,Clay,true
+2025-08-05,Rune,Djokovic,0,2,Hard,true
+2025-08-06,Rune,Zverev,0,2,Hard,true
+2025-08-06,Sinner,Medvedev,2,0,Clay,true
+2025-08-06,Tsitsipas,Alcaraz,1,2,Grass,true
+2025-08-07,Djokovic,Medvedev,2,1,Grass,true
+2025-08-07,Ruud,Rune,1,2,Hard,true
+2025-08-07,De Minaur,Fritz,1,2,Clay,true
+2025-08-08,Zverev,Alcaraz,1,2,Clay,true
+2025-08-08,Djokovic,Sinner,0,2,Clay,true
+2025-08-08,De Minaur,Medvedev,1,2,Grass,true
+2025-08-09,Sinner,Rune,2,0,Hard,true
+2025-08-09,Zverev,Fritz,1,2,Grass,true
+2025-08-09,Djokovic,Alcaraz,0,2,Clay,true
+2025-08-10,Zverev,Ruud,2,0,Hard,true
+2025-08-10,Medvedev,Ruud,0,2,Clay,true
+2025-08-10,Rune,Ruud,2,0,Hard,true
+2025-08-11,Medvedev,Zverev,0,2,Hard,true
+2025-08-11,Rune,Zverev,1,2,Clay,true
+2025-08-11,Alcaraz,De Minaur,2,0,Clay,true
+2025-08-12,Ruud,Medvedev,0,2,Grass,true
+2025-08-12,Medvedev,Rune,1,2,Clay,true
+2025-08-12,Djokovic,Fritz,2,0,Hard,true
+2025-08-13,Tsitsipas,Fritz,0,2,Clay,true
+2025-08-13,Djokovic,Fritz,2,1,Hard,true
+2025-08-13,Rune,Tsitsipas,2,0,Grass,true
+2025-08-14,Djokovic,Ruud,2,0,Hard,true
+2025-08-14,Ruud,Djokovic,0,2,Hard,true
+2025-08-14,Zverev,Djokovic,2,0,Grass,true
+2025-08-15,Tsitsipas,Rune,0,2,Grass,true
+2025-08-15,Medvedev,Alcaraz,0,2,Clay,true
+2025-08-15,De Minaur,Djokovic,1,2,Clay,true
+2025-08-16,Alcaraz,Ruud,2,1,Clay,true
+2025-08-16,Medvedev,Ruud,2,0,Hard,true
+2025-08-16,Djokovic,Rune,2,0,Hard,true
+2025-08-17,Ruud,Tsitsipas,0,2,Hard,true
+2025-08-17,Alcaraz,Djokovic,2,1,Hard,true
+2025-08-17,Djokovic,Ruud,2,1,Hard,true
+2025-08-18,De Minaur,Sinner,1,2,Hard,true
+2025-08-18,Tsitsipas,Rune,0,2,Clay,true
+2025-08-18,De Minaur,Zverev,1,2,Hard,true
+2025-08-19,Fritz,De Minaur,1,2,Hard,true
+2025-08-19,Sinner,Rune,2,0,Hard,true
+2025-08-19,Medvedev,Djokovic,0,2,Hard,true
+2025-08-20,Tsitsipas,Zverev,0,2,Hard,true
+2025-08-20,Djokovic,Tsitsipas,2,0,Hard,true
+2025-08-20,Alcaraz,Sinner,1,2,Hard,true
+2025-08-21,De Minaur,Rune,2,1,Hard,true
+2025-08-21,De Minaur,Ruud,1,2,Grass,true
+2025-08-21,Fritz,Rune,2,0,Hard,true
+2025-08-22,Sinner,Zverev,0,2,Hard,true
+2025-08-22,Fritz,Tsitsipas,2,1,Hard,true
+2025-08-22,Rune,Medvedev,2,1,Clay,true
+2025-08-23,Rune,Djokovic,0,2,Hard,true
+2025-08-23,Medvedev,Zverev,1,2,Clay,true
+2025-08-23,Rune,Zverev,1,2,Clay,true
+2025-08-24,Tsitsipas,Zverev,0,2,Hard,true
+2025-08-24,Sinner,Zverev,2,0,Hard,true
+2025-08-24,Ruud,Zverev,1,2,Hard,true
+2025-08-25,Zverev,De Minaur,2,0,Clay,true
+2025-08-25,Djokovic,Sinner,2,0,Hard,true
+2025-08-25,Medvedev,Tsitsipas,2,0,Hard,true
+2025-08-26,Tsitsipas,Medvedev,0,2,Clay,true
+2025-08-26,Djokovic,Fritz,1,2,Clay,true
+2025-08-26,Djokovic,Alcaraz,1,2,Hard,true
+2025-08-27,Ruud,Sinner,0,2,Hard,true
+2025-08-27,De Minaur,Djokovic,0,2,Hard,true
+2025-08-27,De Minaur,Medvedev,1,2,Hard,true
+2025-08-28,Djokovic,Tsitsipas,2,1,Hard,true
+2025-08-28,De Minaur,Medvedev,1,2,Grass,true
+2025-08-28,Alcaraz,Tsitsipas,2,0,Hard,true
+2025-08-29,De Minaur,Rune,0,2,Clay,true
+2025-08-29,De Minaur,Zverev,1,2,Clay,true
+2025-08-29,Fritz,Sinner,0,2,Hard,true
+2025-08-30,Zverev,Medvedev,0,2,Hard,true
+2025-08-30,Sinner,Medvedev,2,0,Clay,true
+2025-08-30,Fritz,Medvedev,1,2,Clay,true
+2025-08-31,Djokovic,Alcaraz,1,2,Grass,true

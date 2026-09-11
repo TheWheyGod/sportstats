@@ -1,0 +1,73 @@
+# Configuration sportvalue. Copier en config.yaml et adapter.
+
+bankroll: 1000.0
+
+scanner:
+  # Seuil de "haute probabilite". C'est LE filtre qui distingue cet outil
+  # d'un tri par esperance de gain : sans lui, on remonte des outsiders a 8.00.
+  min_probability: 0.55
+
+  # Le backtest 5 books trouve ses meilleurs resultats vers 1-2%.
+  # Monter ce seuil reduit l'echantillon sans ameliorer le ROI.
+  min_edge: 0.015
+
+  # Poids du modele face a la reference sharp.
+  # MESURE A ZERO sur le football 1X2 (le Dixon-Coles n'ajoute rien a Pinnacle).
+  # Ne le relever que si fit_blend_weight le justifie sur VOS donnees,
+  # ou pour des marches que la reference ne cote pas (rugby meteo, totaux tennis).
+  blend_weight: 0.0
+
+  # TRJ minimal du marche cote ARJEL. La loi francaise plafonnant le TRJ moyen
+  # a 85%, les operateurs se rattrapent sur les marches de niche : ce filtre
+  # les ecarte avant toute analyse.
+  min_trj: 0.90
+
+  devig_method: shin          # shin | power | odds_ratio | multiplicative | additive
+  conservative_devig: false   # true = prend le max des methodes (edge plus prudent)
+  require_robust_devig: true  # l'edge doit survivre aux 3 methodes
+  max_deviation: 0.15         # ecart max tolere modele <-> reference
+  min_arjel_books: 2
+  allow_no_reference: false   # true = comparer les books FR entre eux (degrade)
+
+staking:
+  kelly_fraction: 0.25        # quart de Kelly : divise la volatilite par ~4
+  max_stake_pct: 0.02         # plafond dur par pari, applique APRES la fraction
+  round_to: 0.5
+
+modeles:
+  football:
+    xi: 0.0035                # decroissance temporelle par jour
+    ridge: 0.02
+    max_goals: 12
+  rugby:
+    part_essais: 0.58         # Top 14 / Premiership. ~0.62 en Super Rugby.
+    taux_transformation: 0.72
+    half_life_days: 400
+  basket:
+    half_life_days: 240
+    ridge: 3.0
+  tennis:
+    tour: atp                 # atp | wta
+    surface_weight: 0.5       # part de l'Elo de surface dans la prediction
+
+# Coefficients meteo rugby. Ce sont des PRIORS explicites, pas des valeurs
+# estimees sur donnees. calibrate_weather() les reestime si vous avez un
+# historique avec meteo (plusieurs centaines de matchs minimum).
+meteo_rugby:
+  vent_seuil_kmh: 20.0
+  vent_kick_par_10kmh: 0.045
+  vent_essais_par_10kmh: 0.955
+  pluie_legere_mm: 0.5
+  pluie_forte_mm: 3.0
+  pluie_legere_essais: 0.93
+  pluie_forte_essais: 0.84
+  pluie_penalites: 1.06
+
+# The Odds API (optionnel). Palier gratuit : 500 credits/mois.
+# ATTENTION : 1 credit PAR REGION ET PAR MARCHE. regions=eu,fr + markets=h2h,totals
+# coute 4 credits, pas 1. Un scan horaire epuise le quota en 5 jours.
+odds_api:
+  key: ""                     # ou variable d'environnement ODDS_API_KEY
+  ttl_secondes: 900
+  min_credits: 10
+  regions: [eu, fr]           # eu apporte Pinnacle (verite), fr les books ARJEL

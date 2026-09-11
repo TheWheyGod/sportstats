@@ -1,0 +1,183 @@
+date,home,away,home_score,away_score,neutral
+2025-09-06,La Rochelle,Vannes,55,14,false
+2025-09-06,Lyon,Perpignan,39,19,false
+2025-09-06,Bordeaux,Pau,32,24,false
+2025-09-06,Clermont,Montpellier,43,16,false
+2025-09-06,Racing 92,Stade Francais,34,23,false
+2025-09-06,Toulon,Bayonne,26,1,false
+2025-09-06,Castres,Toulouse,30,23,false
+2025-09-13,Racing 92,Bayonne,26,23,false
+2025-09-13,Castres,Pau,38,19,false
+2025-09-13,Perpignan,Bordeaux,30,42,false
+2025-09-13,Toulouse,Toulon,32,15,false
+2025-09-13,Clermont,Lyon,35,26,false
+2025-09-13,Stade Francais,La Rochelle,32,18,false
+2025-09-13,Vannes,Montpellier,19,12,false
+2025-09-20,Castres,Pau,36,3,false
+2025-09-20,Clermont,Vannes,38,14,false
+2025-09-20,Lyon,Perpignan,40,16,false
+2025-09-20,Montpellier,Toulouse,21,37,false
+2025-09-20,Bayonne,Stade Francais,20,25,false
+2025-09-20,Toulon,Bordeaux,29,33,false
+2025-09-20,Racing 92,La Rochelle,24,39,false
+2025-09-27,Clermont,Lyon,30,12,false
+2025-09-27,Toulouse,Vannes,53,0,false
+2025-09-27,La Rochelle,Montpellier,43,31,false
+2025-09-27,Stade Francais,Perpignan,6,21,false
+2025-09-27,Pau,Bordeaux,11,33,false
+2025-09-27,Bayonne,Toulon,41,51,false
+2025-09-27,Racing 92,Castres,13,15,false
+2025-10-04,Lyon,Toulouse,31,34,false
+2025-10-04,Perpignan,Racing 92,24,25,false
+2025-10-04,Montpellier,Pau,11,19,false
+2025-10-04,Toulon,Vannes,50,14,false
+2025-10-04,La Rochelle,Bayonne,20,32,false
+2025-10-04,Stade Francais,Clermont,28,52,false
+2025-10-04,Bordeaux,Castres,36,15,false
+2025-10-11,Toulon,La Rochelle,27,29,false
+2025-10-11,Toulouse,Perpignan,50,18,false
+2025-10-11,Castres,Bordeaux,36,25,false
+2025-10-11,Stade Francais,Clermont,25,5,false
+2025-10-11,Vannes,Bayonne,10,31,false
+2025-10-11,Montpellier,Pau,19,31,false
+2025-10-11,Lyon,Racing 92,35,40,false
+2025-10-18,Perpignan,Stade Francais,24,17,false
+2025-10-18,Castres,La Rochelle,29,25,false
+2025-10-18,Bayonne,Racing 92,3,27,false
+2025-10-18,Bordeaux,Montpellier,40,28,false
+2025-10-18,Lyon,Pau,37,15,false
+2025-10-18,Toulon,Toulouse,22,51,false
+2025-10-18,Clermont,Vannes,42,37,false
+2025-10-25,Montpellier,Vannes,30,3,false
+2025-10-25,Castres,Perpignan,28,13,false
+2025-10-25,Bayonne,Bordeaux,24,26,false
+2025-10-25,Toulon,Toulouse,37,38,false
+2025-10-25,Clermont,Stade Francais,38,19,false
+2025-10-25,Racing 92,Pau,34,16,false
+2025-10-25,Lyon,La Rochelle,26,23,false
+2025-11-01,Lyon,Perpignan,25,24,false
+2025-11-01,Clermont,Pau,26,9,false
+2025-11-01,Toulon,Castres,24,36,false
+2025-11-01,Bordeaux,La Rochelle,33,13,false
+2025-11-01,Stade Francais,Toulouse,19,17,false
+2025-11-01,Vannes,Montpellier,46,5,false
+2025-11-01,Bayonne,Racing 92,30,34,false
+2025-11-08,Bayonne,Vannes,32,18,false
+2025-11-08,Toulouse,Montpellier,46,5,false
+2025-11-08,Bordeaux,Clermont,43,17,false
+2025-11-08,Lyon,Racing 92,17,30,false
+2025-11-08,Perpignan,Pau,46,34,false
+2025-11-08,Castres,Toulon,21,35,false
+2025-11-08,La Rochelle,Stade Francais,33,13,false
+2025-11-15,Bayonne,Bordeaux,32,50,false
+2025-11-15,Montpellier,Toulouse,21,45,false
+2025-11-15,Toulon,Lyon,30,1,false
+2025-11-15,Vannes,Perpignan,27,29,false
+2025-11-15,Pau,La Rochelle,21,32,false
+2025-11-15,Castres,Stade Francais,39,7,false
+2025-11-15,Clermont,Racing 92,14,23,false
+2025-11-22,Racing 92,Castres,40,33,false
+2025-11-22,Bayonne,La Rochelle,19,38,false
+2025-11-22,Bordeaux,Toulouse,54,36,false
+2025-11-22,Stade Francais,Perpignan,17,31,false
+2025-11-22,Clermont,Vannes,48,21,false
+2025-11-22,Toulon,Montpellier,29,34,false
+2025-11-22,Lyon,Pau,17,27,false
+2025-11-29,Lyon,Montpellier,35,25,false
+2025-11-29,La Rochelle,Perpignan,38,19,false
+2025-11-29,Bordeaux,Stade Francais,44,11,false
+2025-11-29,Castres,Clermont,41,27,false
+2025-11-29,Pau,Toulon,29,34,false
+2025-11-29,Toulouse,Bayonne,27,8,false
+2025-11-29,Racing 92,Vannes,52,20,false
+2025-12-06,Clermont,Pau,26,4,false
+2025-12-06,Toulouse,Bayonne,36,12,false
+2025-12-06,La Rochelle,Perpignan,37,6,false
+2025-12-06,Stade Francais,Montpellier,29,62,false
+2025-12-06,Lyon,Toulon,14,31,false
+2025-12-06,Bordeaux,Racing 92,31,25,false
+2025-12-06,Castres,Vannes,12,5,false
+2025-12-13,Montpellier,Toulouse,30,34,false
+2025-12-13,Stade Francais,Pau,15,28,false
+2025-12-13,La Rochelle,Vannes,66,29,false
+2025-12-13,Clermont,Racing 92,0,24,false
+2025-12-13,Bayonne,Bordeaux,13,38,false
+2025-12-13,Perpignan,Lyon,25,47,false
+2025-12-13,Toulon,Castres,44,31,false
+2025-12-20,Racing 92,La Rochelle,21,21,false
+2025-12-20,Stade Francais,Lyon,15,0,false
+2025-12-20,Toulon,Pau,45,26,false
+2025-12-20,Clermont,Castres,29,34,false
+2025-12-20,Vannes,Perpignan,30,28,false
+2025-12-20,Toulouse,Bordeaux,6,23,false
+2025-12-20,Montpellier,Bayonne,32,40,false
+2025-12-27,Castres,Stade Francais,16,22,false
+2025-12-27,Perpignan,Pau,23,27,false
+2025-12-27,Clermont,Bayonne,38,18,false
+2025-12-27,Lyon,Racing 92,32,26,false
+2025-12-27,La Rochelle,Toulon,41,30,false
+2025-12-27,Toulouse,Bordeaux,28,19,false
+2025-12-27,Montpellier,Vannes,47,19,false
+2026-01-03,La Rochelle,Stade Francais,37,32,false
+2026-01-03,Pau,Lyon,2,30,false
+2026-01-03,Perpignan,Racing 92,20,32,false
+2026-01-03,Clermont,Toulon,24,30,false
+2026-01-03,Vannes,Bordeaux,38,36,false
+2026-01-03,Toulouse,Bayonne,43,20,false
+2026-01-03,Castres,Montpellier,23,25,false
+2026-01-10,Bordeaux,Pau,52,30,false
+2026-01-10,La Rochelle,Toulouse,45,35,false
+2026-01-10,Clermont,Racing 92,29,21,false
+2026-01-10,Lyon,Vannes,30,28,false
+2026-01-10,Castres,Stade Francais,34,0,false
+2026-01-10,Toulon,Montpellier,35,1,false
+2026-01-10,Perpignan,Bayonne,31,8,false
+2026-01-17,Vannes,La Rochelle,14,26,false
+2026-01-17,Castres,Bordeaux,24,14,false
+2026-01-17,Pau,Stade Francais,46,23,false
+2026-01-17,Toulouse,Toulon,26,21,false
+2026-01-17,Bayonne,Montpellier,11,17,false
+2026-01-17,Perpignan,Clermont,36,8,false
+2026-01-17,Racing 92,Lyon,27,24,false
+2026-01-24,Perpignan,Lyon,45,28,false
+2026-01-24,Toulouse,Toulon,33,30,false
+2026-01-24,Castres,Vannes,11,18,false
+2026-01-24,Montpellier,Racing 92,12,55,false
+2026-01-24,Bordeaux,Bayonne,45,18,false
+2026-01-24,Pau,Stade Francais,29,0,false
+2026-01-24,La Rochelle,Clermont,41,41,false
+2026-01-31,Pau,Bordeaux,26,42,false
+2026-01-31,Perpignan,Racing 92,12,38,false
+2026-01-31,Stade Francais,Vannes,21,0,false
+2026-01-31,Clermont,Bayonne,32,8,false
+2026-01-31,Lyon,Montpellier,36,5,false
+2026-01-31,Toulouse,La Rochelle,46,17,false
+2026-01-31,Castres,Toulon,31,21,false
+2026-02-07,La Rochelle,Lyon,30,24,false
+2026-02-07,Bordeaux,Racing 92,23,12,false
+2026-02-07,Montpellier,Stade Francais,19,23,false
+2026-02-07,Vannes,Toulouse,23,25,false
+2026-02-07,Bayonne,Pau,35,32,false
+2026-02-07,Castres,Clermont,30,37,false
+2026-02-07,Toulon,Perpignan,31,18,false
+2026-02-14,Stade Francais,La Rochelle,5,38,false
+2026-02-14,Lyon,Bordeaux,41,41,false
+2026-02-14,Vannes,Pau,34,8,false
+2026-02-14,Racing 92,Toulon,22,21,false
+2026-02-14,Bayonne,Montpellier,18,33,false
+2026-02-14,Castres,Clermont,30,25,false
+2026-02-14,Perpignan,Toulouse,29,21,false
+2026-02-21,Bayonne,La Rochelle,17,32,false
+2026-02-21,Perpignan,Clermont,11,21,false
+2026-02-21,Montpellier,Racing 92,34,41,false
+2026-02-21,Bordeaux,Pau,48,19,false
+2026-02-21,Lyon,Toulon,26,39,false
+2026-02-21,Vannes,Stade Francais,23,23,false
+2026-02-21,Castres,Toulouse,40,27,false
+2026-02-28,La Rochelle,Toulon,23,27,false
+2026-02-28,Pau,Clermont,17,11,false
+2026-02-28,Stade Francais,Vannes,12,11,false
+2026-02-28,Racing 92,Montpellier,33,6,false
+2026-02-28,Toulouse,Castres,39,38,false
+2026-02-28,Lyon,Bayonne,30,33,false
+2026-02-28,Bordeaux,Perpignan,40,6,false
