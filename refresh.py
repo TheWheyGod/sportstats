@@ -125,10 +125,10 @@ def compacter(slate: list, n: int = 3000) -> list:
     from sportvalue.core.scoredist import ScoreDistribution
 
     rng = np.random.default_rng(0)
-    for m in slate:
-        sd = m.get("sd")
-        if sd is None or len(sd.w) <= n or m.get("sport") == "football":
-            continue
+
+    def reduit(sd):
+        if sd is None or len(sd.w) <= n:
+            return sd
         idx = rng.choice(len(sd.w), size=n, replace=True, p=sd.w)
         petit = ScoreDistribution(sd.h[idx], sd.a[idx], np.ones(n))
         for attr in ("event_rates", "weather_notes", "expected_tries"):
@@ -138,7 +138,16 @@ def compacter(slate: list, n: int = 3000) -> list:
             t = sd.tries
             j = rng.choice(len(t.w), size=n, replace=True, p=t.w)
             petit.tries = ScoreDistribution(t.h[j], t.a[j], np.ones(n))
-        m["sd"] = petit
+        return petit
+
+    for m in slate:
+        if m.get("sport") == "football":
+            continue
+        # la distribution d'avant-match (base de chaque recalcul en direct)
+        # et la distribution courante sont reduites toutes les deux
+        for cle in ("sd", "sd_avant_match"):
+            if m.get(cle) is not None:
+                m[cle] = reduit(m[cle])
         m["scorers"] = None   # tableaux deja rendus dans marches["marqueurs_essais"]
     return slate
 
@@ -184,6 +193,8 @@ def live() -> None:
     if not SLATE.exists():
         print("pas de journee : lancer d'abord `refresh.py complet`", flush=True)
         return
+    # Football : API-Football, tous les championnats, 2 requetes. Rugby :
+    # The Odds API, NRL seulement (--leagues borne le cout en credits).
     run("live", "--html", str(HTML), "--titre", TITRE, "--leagues", "top5,F2")
     fragment()
 

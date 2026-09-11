@@ -40,7 +40,7 @@ import pandas as pd
 
 from .cache import get_cache
 
-__all__ = ["FDO_CODES", "load_scorers", "build_squads", "name_key"]
+__all__ = ["FDO_CODES", "load_scorers", "load_squads", "build_squads", "name_key"]
 
 _TTL = 60 * 60 * 20          # une fois par jour suffit : les stats bougent par journee
 _MIN_PAR_MATCH = 78.0
@@ -120,6 +120,23 @@ def load_scorers(fdo_code: str, api_key: str | None = None, season: int | None =
     return pd.DataFrame(rows), meta
 
 
+def load_squads(fdo_code: str, api_key: str | None = None) -> dict:
+    """
+    Effectifs ACTUELS de la competition : {id_joueur: nom court d'equipe}.
+    Une requete par competition. Sert a ecarter les joueurs partis depuis la
+    saison passee et a suivre ceux qui ont change de club dans le championnat.
+    """
+    key = api_key or os.environ.get("FOOTBALL_DATA_ORG_KEY", "")
+    j = _get(f"https://api.football-data.org/v4/competitions/{fdo_code}/teams", key)
+    out = {}
+    for t in j.get("teams") or []:
+        nom = t.get("shortName") or t.get("name") or ""
+        for pl in t.get("squad") or []:
+            if pl.get("id") is not None:
+                out[pl["id"]] = nom
+    return out
+
+
 def _matchs_saison(meta: dict, df: pd.DataFrame) -> float:
     """Nombre de matchs d'une saison achevee : le maximum joue par un joueur."""
     return float(df["matchs"].max()) if not df.empty else 34.0
@@ -149,10 +166,16 @@ def build_squads(codes: list[str], api_key: str | None = None, verbose: bool = T
             if verbose:
                 print(f"   [!] football-data.org {code} : {e}")
             continue
-        cur[code], prev[code], metas[code] = c, p, (mc, mp)
+        try:
+            eff = load_squads(fdo, key)
+        except Exception as e:
+            eff = {}
+            if verbose:
+                print(f"   [!] effectifs {code} indisponibles ({type(e).__name__}) : transferts non filtres")
+        cur[code], prev[code], metas[code] = c, p, (mc, mp, eff)
         if verbose:
             print(f"   {code:<5} {fdo:<4} saison {mc['annee']} : {len(c):>3} buteurs (J{mc['journee']}), "
-                  f"saison {mp['annee']} : {len(p):>3}")
+                  f"saison {mp['annee']} : {len(p):>3}, effectifs : {len(eff)} joueurs")
 
     # joueur -> competition ou il a marque CETTE saison (detection de transfert)
     ou_joue = {}
@@ -163,8 +186,9 @@ def build_squads(codes: list[str], api_key: str | None = None, verbose: bool = T
     out = {}
     for code in cur:
         c, p = cur[code], prev[code]
-        mc, mp = metas[code]
+        mc, mp, eff = metas[code]
         journee = max(mc["journee"], 1)
+        n_partis = 0
         n_prev = _matchs_saison(mp, p)
         rows = {}
         for r in c.itertuples(index=False):
@@ -184,9 +208,19 @@ def build_squads(codes: list[str], api_key: str | None = None, verbose: bool = T
             else:
                 if ou_joue.get(r.joueur_id, code) != code:
                     continue                    # a marque ailleurs cette saison : parti
+                equipe = r.equipe_fdo
+                if eff:
+                    # Effectifs actuels connus : un joueur de la saison passee
+                    # absent de tous les effectifs a quitte le championnat
+                    # (Greenwood parti de Marseille, par exemple) ; present
+                    # dans un autre effectif, il a change de club.
+                    if r.joueur_id not in eff:
+                        n_partis += 1
+                        continue
+                    equipe = eff[r.joueur_id]
                 rows[r.joueur_id] = {
                     "joueur_id": r.joueur_id, "joueur": r.joueur, "poste": r.poste,
-                    "equipe_fdo": r.equipe_fdo, "equipe_fdo_long": r.equipe_fdo_long,
+                    "equipe_fdo": equipe, "equipe_fdo_long": r.equipe_fdo_long,
                     "matchs_c": 0, "buts_c": 0, "pen_c": 0, "passes_c": 0,
                     "matchs_p": r.matchs, "buts_p": r.buts, "pen_p": r.penaltys,
                     "passes_p": r.passes,
@@ -194,6 +228,8 @@ def build_squads(codes: list[str], api_key: str | None = None, verbose: bool = T
         d = pd.DataFrame(list(rows.values()))
         if d.empty:
             continue
+        if verbose and n_partis:
+            print(f"   {code:<5} {n_partis} joueur(s) de la saison passee ecarte(s) : plus dans les effectifs")
         d["minutes"] = _MIN_PAR_MATCH * (d["matchs_c"] + _DECAY_PREV * d["matchs_p"])
         d["buts_hors_penalty"] = ((d["buts_c"] - d["pen_c"]).clip(lower=0)
                                   + _DECAY_PREV * (d["buts_p"] - d["pen_p"]).clip(lower=0))
@@ -203,8 +239,9 @@ def build_squads(codes: list[str], api_key: str | None = None, verbose: bool = T
         # dans l'effectif n'est connue que de la saison passee
         d["minutes_attendues"] = (90.0 * d["matchs_c"] / journee).clip(0, 90)
         seule = d["saison_seule_passee"]
+        presence = 1.0 if eff else _PRESENCE_PREV
         d.loc[seule, "minutes_attendues"] = (
-            90.0 * d.loc[seule, "matchs_p"] / n_prev * _PRESENCE_PREV).clip(0, 90)
+            90.0 * d.loc[seule, "matchs_p"] / n_prev * presence).clip(0, 90)
         # tireur de penalty : le plus de penaltys marques, saison en cours d'abord
         d["tireur_penalty"] = 0
         for eq, g in d.groupby("equipe_fdo"):

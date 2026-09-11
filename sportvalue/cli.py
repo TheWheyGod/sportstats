@@ -962,10 +962,36 @@ def cmd_live(args) -> int:
     if args.leagues:
         codes = expand_presets([c for c in args.leagues.split(",") if c.strip()])
         autorisees = {fd.nom_competition(c) for c in codes} | {"NRL"}
+    # FOOTBALL : API-Football donne tous les matchs en cours du monde en une
+    # requete, avec le chrono officiel. Aucun credit The Odds API, aucune
+    # restriction de championnat. The Odds API ne sert plus qu'au rugby.
+    index = {}
+    cle_foot = args.cle_football or os.environ.get("API_FOOTBALL_KEY", "")
+    foot = [m for m in slate if m.get("sport") == "football"]
+    if foot and cle_foot:
+        from .data.injuries import LEAGUE_IDS
+        id_vers_comp = {i: fd.nom_competition(c) for c, i in LEAGUE_IDS.items()}
+        par_comp = {}
+        for m in foot:
+            par_comp.setdefault(m.get("competition"), set()).update([m["home"], m["away"]])
+        try:
+            for v in SC.fetch_live_apifootball(cle_foot):
+                comp = id_vers_comp.get(v["league_id"])
+                if comp not in par_comp:
+                    continue
+                rh = resolve_team(v["home"], par_comp[comp])
+                ra = resolve_team(v["away"], par_comp[comp])
+                if rh and ra:
+                    index[(rh.lower(), ra.lower())] = v
+        except Exception as e:
+            print(f"   Live football indisponible : {e}")
+
     cles = set()
     for m in slate:
         comp = m.get("competition")
         ke = m.get("coup_envoi")
+        if m.get("sport") == "football" and cle_foot:
+            continue                      # deja couvert ci-dessus
         if comp not in SC.SPORT_KEYS_SCORES or ke is None:
             continue
         if autorisees is not None and comp not in autorisees:
@@ -975,26 +1001,22 @@ def cmd_live(args) -> int:
         duree = LV.DUREES.get(m.get("sport")) or 90.0
         if ke <= maintenant <= ke + _td(minutes=duree + 30) or args.tout:
             cles.add(SC.SPORT_KEYS_SCORES[comp])
-    if not cles:
-        print("   Aucun match en cours d'apres les heures de coup d'envoi :")
-        print("   aucun credit consomme. (--tout pour forcer toutes les competitions)")
+    if cles:
+        print(f"   {len(cles)} competition(s) avec match en cours (The Odds API) : {', '.join(sorted(cles))}")
+        try:
+            sc = SC.fetch_scores(cles, args.cle)
+        except Exception as e:
+            print(f"   Scores indisponibles : {e}")
+            sc = {}
+        equipes = {m["home"] for m in slate} | {m["away"] for m in slate}
+        for (h, a), v in sc.items():
+            index[(h.lower(), a.lower())] = v
+            rh, ra = resolve_team(h, equipes), resolve_team(a, equipes)
+            if rh and ra:
+                index[(rh.lower(), ra.lower())] = v
+    if not index:
+        print("   Aucun match en cours ni termine aujourd'hui : page inchangee.")
         return 0
-    print(f"   {len(cles)} competition(s) avec match en cours : {', '.join(sorted(cles))}")
-
-    try:
-        sc = SC.fetch_scores(cles, args.cle)
-    except Exception as e:
-        print(f"   Scores indisponibles : {e}")
-        return 1
-
-    index = {}
-    for (h, a), v in sc.items():
-        index[(h.lower(), a.lower())] = v
-    equipes = {m["home"] for m in slate} | {m["away"] for m in slate}
-    for (h, a), v in sc.items():
-        rh, ra = resolve_team(h, equipes), resolve_team(a, equipes)
-        if rh and ra:
-            index[(rh.lower(), ra.lower())] = v
 
     n_live, n_fin = 0, 0
     maintenant = datetime.now(timezone.utc)
@@ -1012,7 +1034,13 @@ def cmd_live(args) -> int:
 
         duree = LV.DUREES.get(m.get("sport"), 90.0)
         debut = m.get("coup_envoi")
-        mins = LV.minutes_ecoulees(debut, maintenant, duree or 90.0) if debut else None
+        # Chrono officiel quand la source le donne (API-Football), sinon
+        # deduction depuis le coup d'envoi.
+        chrono = v.get("minute")
+        if chrono is not None:
+            mins = float(chrono)
+        else:
+            mins = LV.minutes_ecoulees(debut, maintenant, duree or 90.0) if debut else None
         if mins is None:
             # Sans heure de coup d'envoi, on ne peut pas conditionner : on
             # affiche le score sans toucher aux probabilites, plutot que
@@ -1020,6 +1048,7 @@ def cmd_live(args) -> int:
             m["live"]["minutes"] = None
             continue
 
+        m.setdefault("sd_avant_match", m["sd"])
         sd = LV.recalcule_conditionnel(m, int(hs), int(as_), mins)
         if sd is None:
             continue
@@ -1034,8 +1063,9 @@ def cmd_live(args) -> int:
         m["live"]["minutes"] = round(mins)
         m["marches"]["conditionnel"] = [
             f"Probabilites recalculees sachant {hs}-{as_} a la {round(mins)}e minute.",
-            "Le temps ecoule est deduit des horodatages, pas lu sur un chrono : "
-            "une erreur de quelques minutes deplace sensiblement le resultat.",
+            ("Minute lue sur le chrono officiel du match." if chrono is not None else
+             "Le temps ecoule est deduit des horodatages, pas lu sur un chrono : "
+             "une erreur de quelques minutes deplace sensiblement le resultat."),
         ]
         n_live += 1
         print(f"   [en cours] {m['home']} {hs}-{as_} {m['away']}  "
@@ -1528,7 +1558,9 @@ def build_parser() -> argparse.ArgumentParser:
     lv = sub.add_parser("live", help="rafraichit une journee avec les scores en cours")
     lv.add_argument("--html", default="journee.html")
     lv.add_argument("--titre", default="Journée")
-    lv.add_argument("--cle", default=None, help="cle The Odds API")
+    lv.add_argument("--cle", default=None, help="cle The Odds API (rugby)")
+    lv.add_argument("--cle-football", dest="cle_football", default=None,
+                    help="cle API-Football (sinon API_FOOTBALL_KEY) : live de tout le football")
     lv.add_argument("--leagues", default="top5,F2",
                     help="championnats suivis en direct (plafonne le cout). "
                          "Vide = tous ceux de la journee.")

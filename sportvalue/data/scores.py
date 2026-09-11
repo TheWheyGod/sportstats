@@ -23,7 +23,90 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-__all__ = ["fetch_scores", "SPORT_KEYS_SCORES"]
+__all__ = ["fetch_scores", "fetch_live_apifootball", "SPORT_KEYS_SCORES"]
+
+# Statuts API-Football -> statut interne. Tout ce qui n'est pas la est ignore
+# (reporte, annule, a venir).
+_EN_COURS = {"1H", "HT", "2H", "ET", "BT", "P", "LIVE", "INT"}
+_TERMINE = {"FT", "AET", "PEN"}
+
+
+def fetch_live_apifootball(api_key: str | None = None, verbose: bool = True) -> list:
+    """
+    Tous les matchs de football en cours dans le monde, PLUS ceux termines
+    aujourd'hui : deux requetes API-Football, zero credit The Odds API.
+
+    Chaque element : {league_id, home, away, home_score, away_score, statut,
+    minute, ht_home, ht_away, maj}. `minute` est le chrono officiel du match
+    (fixture.status.elapsed), pas une deduction depuis le coup d'envoi.
+    """
+    import os
+
+    import requests
+
+    from .cache import get_cache
+
+    key = api_key or os.environ.get("API_FOOTBALL_KEY", "")
+    if not key:
+        raise RuntimeError("API_FOOTBALL_KEY absente : live indisponible.")
+
+    def charge(params: dict, ttl: float):
+        url = "https://v3.football.api-sports.io/fixtures?" + "&".join(f"{k}={v}" for k, v in params.items())
+
+        def loader():
+            r = requests.get("https://v3.football.api-sports.io/fixtures",
+                             headers={"x-apisports-key": key}, params=params, timeout=40)
+            r.raise_for_status()
+            return __import__("json").dumps(r.json())
+
+        return __import__("json").loads(get_cache().get_text(url, ttl, loader))
+
+    maj = datetime.now(timezone.utc)
+    out = []
+    vus = set()
+    # 1) en cours : 4 minutes de cache, la tache tourne toutes les heures
+    # 2) termines aujourd'hui (date UTC) : 20 minutes, pour les verdicts
+    for params, ttl in ((dict(live="all"), 240), (dict(date=maj.strftime("%Y-%m-%d")), 1200)):
+        try:
+            j = charge(params, ttl)
+        except Exception as e:
+            if verbose:
+                print(f"   [!] API-Football {params} : {type(e).__name__}")
+            continue
+        if j.get("errors"):
+            if verbose:
+                print(f"   [!] API-Football {params} : {j['errors']}")
+            continue
+        for x in j.get("response", []):
+            f = x.get("fixture") or {}
+            st = ((f.get("status") or {}).get("short")) or ""
+            if st in _EN_COURS:
+                statut = "en_cours"
+            elif st in _TERMINE:
+                statut = "termine"
+            else:
+                continue
+            fid = f.get("id")
+            if fid in vus:
+                continue
+            vus.add(fid)
+            g = x.get("goals") or {}
+            ht = (x.get("score") or {}).get("halftime") or {}
+            out.append({
+                "fixture_id": fid,
+                "league_id": (x.get("league") or {}).get("id"),
+                "home": ((x.get("teams") or {}).get("home") or {}).get("name", ""),
+                "away": ((x.get("teams") or {}).get("away") or {}).get("name", ""),
+                "home_score": g.get("home"), "away_score": g.get("away"),
+                "statut": statut,
+                "minute": (f.get("status") or {}).get("elapsed"),
+                "ht_home": ht.get("home"), "ht_away": ht.get("away"),
+                "maj": maj,
+            })
+    if verbose:
+        n_live = sum(1 for x in out if x["statut"] == "en_cours")
+        print(f"   API-Football : {n_live} match(s) en cours, {len(out) - n_live} termine(s) aujourd'hui")
+    return out
 
 # Competitions dont on sait recuperer les scores, par libelle interne.
 SPORT_KEYS_SCORES = {

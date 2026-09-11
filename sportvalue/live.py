@@ -83,7 +83,10 @@ def recalcule_conditionnel(match: dict, score_dom: int, score_ext: int,
     if duree is None:
         return None
     reste = max(0.0, duree - float(minutes)) / duree
-    sd_pre = match.get("sd")
+    # TOUJOURS repartir de la distribution d'avant-match. Apres un premier
+    # recalcul, match["sd"] contient deja le score acquis : la reprendre
+    # comme base au recalcul suivant comptait les buts deux fois.
+    sd_pre = match.get("sd_avant_match") or match.get("sd")
     rng = np.random.default_rng(seed)
 
     if sport == "rugby" and sd_pre is not None and hasattr(sd_pre, "event_rates"):

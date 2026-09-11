@@ -383,6 +383,11 @@ def _panels(home: str, away: str, marches: dict, sd=None, scorers=None,
                 f'<div class="panel{" wide" if wide else ""}"><h2>{_esc(titre)}</h2>{contenu}</div>'
             )
 
+    # --- en direct : rappel de ce sur quoi les probabilites sont conditionnees
+    if marches.get("conditionnel"):
+        panels.append('<div class="panel wide"><h2>En direct</h2><div class="note">'
+                      + " ".join(_esc(x) for x in marches["conditionnel"]) + "</div></div>")
+
     # --- totaux (buts / points / essais / jeux)
     for cle, titre in [
         ("total_buts", "Nombre de buts"),
@@ -800,8 +805,10 @@ def build_slate_report(
             hs, as_ = live.get("home_score"), live.get("away_score")
             score = f"{hs} – {as_}" if hs is not None and as_ is not None else "—"
             if live["statut"] == "en_cours":
+                mn = live.get("minutes")
+                minute = f" {int(mn)}’" if mn is not None else ""
                 badge = (f'<span class="statut live"><span class="pt"></span>'
-                         f'EN COURS <b>{score}</b></span>')
+                         f'EN COURS{minute} <b>{score}</b></span>')
             else:
                 # Verdict : l'issue la plus probable du modele s'est-elle
                 # realisee ? C'est le retour le plus direct sur sa qualite.
