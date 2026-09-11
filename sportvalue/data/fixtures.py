@@ -475,11 +475,14 @@ def upcoming_from_apifootball(codes, api_key: str | None = None, verbose: bool =
                 "league_code": ids[lg],
                 "home": (x.get("teams") or {}).get("home", {}).get("name", ""),
                 "away": (x.get("teams") or {}).get("away", {}).get("name", ""),
+                # Designation d'arbitre : rarement connue plus d'un jour ou
+                # deux a l'avance, souvent vide. Utilisee quand elle existe.
+                "referee": (x.get("fixture") or {}).get("referee") or "",
             })
 
     df = pd.DataFrame(lignes)
     if df.empty:
-        return pd.DataFrame(columns=["date", "heure", "league_code", "home", "away"])
+        return pd.DataFrame(columns=["date", "heure", "league_code", "home", "away", "referee"])
     df = df.sort_values(["date", "league_code"]).reset_index(drop=True)
     if verbose:
         print(f"   {len(df)} match(s) sur 48 h : {df['league_code'].value_counts().to_dict()}")

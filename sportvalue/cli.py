@@ -342,6 +342,7 @@ def cmd_journee(args) -> int:
     from .models.tennis import TennisMatchModel
     from .models.elo import EloRating
     from .models.scorers import ScorerModel, PRIORS_FOOT, PRIORS_RUGBY
+    from .models.football_extra import FootballExtras
     from . import predict as P
     from .report import write_slate
 
@@ -408,6 +409,10 @@ def cmd_journee(args) -> int:
                 print(f"   Modele impossible : {e}")
                 continue
             connues = set(hist["home"]) | set(hist["away"])
+            # Mi-temps, corners, cartons, arbitre : memes resultats, modeles
+            # legers. Un championnat sans ces colonnes (Wikipedia, fichiers
+            # "new/") n'obtient simplement pas ces marches.
+            extras = FootballExtras(xi=args.xi).fit(hist)
 
             for r in sous.itertuples(index=False):
                 # Les noms du calendrier et ceux de l'historique ne coincident
@@ -430,12 +435,21 @@ def cmd_journee(args) -> int:
                         sm = ScorerModel(PRIORS_FOOT, k_shrink=args.k_shrink)
                         sc = sm.predict_match(sh, sa, sd.expected_home, sd.expected_away,
                                               fpl.estimate_minutes(sh), fpl.estimate_minutes(sa))
+                arbitre = getattr(r, "referee", "") or None
+                statiques = extras.counts(h, a, arbitre)      # corners, cartons
+                periodes = extras.periods(h, a, sd)            # mi-temps, 1er but
                 slate.append({
                     "sport": "football", "competition": fd.nom_competition(code),
                     "date": _date_paris(r.date),
                     "coup_envoi": r.date.to_pydatetime() if hasattr(r.date, "to_pydatetime") else r.date,
-                    "home": h, "away": a,
-                    "marches": P.football_markets(sd, sc), "sd": sd, "scorers": sc,
+                    "home": h, "away": a, "arbitre": arbitre,
+                    "marches": P.football_markets(sd, sc, extra={**periodes, **statiques}),
+                    "sd": sd, "scorers": sc,
+                    # Conserves a part : le direct regenere les marches a partir
+                    # du score, et les corners/cartons (independants du score)
+                    # doivent survivre, alors que les marches de mi-temps, eux,
+                    # n'ont plus de sens une fois le match commence.
+                    "marches_statiques": statiques,
                 })
                 p1 = P.football_markets(sd)["1x2"]
                 print(f"   {h} - {a}   1 {100*p1[chr(49)]:.0f}%  "
@@ -939,7 +953,8 @@ def cmd_live(args) -> int:
         if m.get("sport") == "rugby":
             m["marches"] = P.rugby_markets(sd)
         elif m.get("sport") == "football":
-            m["marches"] = P.football_markets(sd)
+            m["marches"] = P.football_markets(sd, absences=m["marches"].get("absences"),
+                                               extra=m.get("marches_statiques"))
         elif m.get("sport") == "basket":
             m["marches"] = P.basket_markets(sd)
         m["sd"] = sd

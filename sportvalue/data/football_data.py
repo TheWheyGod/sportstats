@@ -214,6 +214,14 @@ def load_league(
         if src in df.columns:
             out[dst] = pd.to_numeric(df[src], errors="coerce")
 
+    # score a la mi-temps et arbitre (l'arbitre n'est fourni que pour
+    # l'Angleterre) : nourrissent les marches par periode et l'effet arbitre.
+    for src, dst in [("HTHG", "ht_home"), ("HTAG", "ht_away")]:
+        if src in df.columns:
+            out[dst] = pd.to_numeric(df[src], errors="coerce")
+    if "Referee" in df.columns:
+        out["referee"] = df["Referee"].astype(str).str.strip().replace({"nan": ""})
+
     # statistiques de match (utiles pour un modele base sur les tirs cadres)
     stat_map = {
         "HS": "shots_home", "AS": "shots_away",

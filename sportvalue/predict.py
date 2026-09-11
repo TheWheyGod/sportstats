@@ -64,10 +64,15 @@ def _ou_block(sd: ScoreDistribution, lignes, label="total") -> list[dict]:
 # FOOTBALL
 # --------------------------------------------------------------------------
 def football_markets(sd: ScoreDistribution, scorers: pd.DataFrame | None = None,
-                     absences: list | None = None) -> dict:
+                     absences: list | None = None, extra: dict | None = None) -> dict:
     """
     1X2, doubles chances, buts, BTTS, scores exacts, totaux par equipe,
     et buteurs si un effectif est fourni.
+
+    `extra` : marches secondaires deja calcules (mi-temps, premiere equipe a
+    marquer, corners, cartons -- voir models.football_extra), simplement
+    fusionnes. Ils sont produits en amont parce qu'ils demandent des modeles
+    ajustes une fois par championnat, pas par match.
     """
     m = sd.market_1x2()
     out = {
@@ -106,6 +111,8 @@ def football_markets(sd: ScoreDistribution, scorers: pd.DataFrame | None = None,
         out["aucun_buteur"] = round(float(scorers["p_aucun_buteur"].iloc[0]), 4)
     if absences:
         out["absences"] = absences
+    if extra:
+        out.update(extra)
     return out
 
 

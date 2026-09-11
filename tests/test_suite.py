@@ -447,6 +447,73 @@ def test_scanner():
 
 
 # ==========================================================================
+def test_football_extra():
+    """Marches secondaires : coherence avec le 1X2, sommes a 1, retrecissement."""
+    from sportvalue.models.football_extra import (FootballExtras, first_to_score,
+                                                  half_markets, RateModel, HalfSplitModel)
+    print("\n[football_extra]")
+    rng = np.random.default_rng(3)
+    teams = [f"T{i}" for i in range(12)]
+    rows = []
+    d0 = datetime(2025, 8, 1)
+    for k in range(400):
+        h, a = rng.choice(teams, 2, replace=False)
+        hg, ag = rng.poisson(1.5), rng.poisson(1.1)
+        # T0 marque tot (70 % avant la pause), les autres a 45 %
+        sh = 0.70 if h == "T0" else 0.45
+        sa = 0.70 if a == "T0" else 0.45
+        rows.append({"date": d0 + timedelta(days=k // 2), "home": h, "away": a,
+                     "home_score": hg, "away_score": ag,
+                     "ht_home": rng.binomial(hg, sh), "ht_away": rng.binomial(ag, sa),
+                     "corners_home": rng.poisson(6 if h == "T1" else 4.5),
+                     "corners_away": rng.poisson(4.5),
+                     "yellow_home": rng.poisson(1.8), "yellow_away": rng.poisson(2.2),
+                     "red_home": rng.poisson(0.05), "red_away": rng.poisson(0.07),
+                     "referee": rng.choice(["A Ref", "B Ref", "C Ref"])})
+    hist = pd.DataFrame(rows)
+
+    ex = FootballExtras(xi=0.0).fit(hist)
+    hm = ex.halves
+    check(hm.fitted_ and 0.40 < hm.share_league_ < 0.55, "part 1re periode du championnat plausible")
+    check(hm.att_["T0"] > hm.share_league_ + 0.05, "equipe qui marque tot detectee (retrecissement inclus)")
+    sp = hm.split("T0", "T5", 1.5, 1.1)
+    check(0.25 <= sp["part_1ere_dom"] <= 0.65 and 0.25 <= sp["part_1ere_ext"] <= 0.65,
+          "parts par periode bornees a la prediction")
+
+    dc = DixonColesModel(xi=0.0).fit(hist)
+    sd = dc.predict("T0", "T5")
+    per = ex.periods("T0", "T5", sd)
+    f = per["premiere_equipe_a_marquer"]
+    # valeurs arrondies a 4 decimales : la somme peut s'ecarter de 1 de 1e-4
+    check(abs(sum(f.values()) - 1) < 1e-3, "premiere equipe a marquer : somme 1")
+    check(abs(sum(per["resultat_mi_temps"].values()) - 1) < 1e-3, "resultat mi-temps : somme 1")
+    check(abs(sum(per["mi_temps_prolifique"].values()) - 1) < 1e-3, "periode prolifique : somme 1")
+    t = per["mi_temps_fin"]
+    m1x2 = sd.market_1x2()
+    ok = all(abs(sum(t[r1][r2] for r1 in t) - m1x2[r2]) < 2e-3 for r2 in "1X2")
+    check(ok, "mi-temps/fin de match : colonnes egales au 1X2 du modele")
+    check(abs(sum(t[r1][r2] for r1 in t for r2 in t[r1]) - 1) < 2e-3, "mi-temps/fin de match : total 1")
+    bp = per["buts_par_periode"]
+    check(abs(bp["dom_1ere"] + bp["dom_2eme"] - sd.expected_home) < 1e-2,
+          "buts par periode : somme = buts attendus du modele")
+
+    cnt = ex.counts("T1", "T5", arbitre="A. Ref")
+    check(cnt["corners"]["attendus"]["domicile"] > cnt["corners"]["attendus"]["exterieur"],
+          "equipe a corners detectee")
+    tot = cnt["corners"]["total"]
+    check(all(tot[i]["over"] >= tot[i + 1]["over"] for i in range(len(tot) - 1)),
+          "corners : probabilites decroissantes avec la ligne")
+    check("arbitre" in cnt["cartons"] and cnt["cartons"]["arbitre"]["nom"] == "A. Ref",
+          "arbitre reconnu malgre la ponctuation")
+    check(0 < cnt["carton_rouge"]["match"] < 0.5, "carton rouge : probabilite plausible")
+
+    # sans colonnes : pas de marche, pas d'erreur
+    vide = FootballExtras().fit(hist[["date", "home", "away", "home_score", "away_score"]])
+    check(vide.counts("T1", "T5") == {} and "resultat_mi_temps" not in vide.periods("T1", "T5", sd),
+          "championnat sans statistiques : marches absents, pas d'exception")
+
+
+# ==========================================================================
 def main() -> int:
     print("=" * 70)
     print("SUITE DE TESTS sportvalue")
@@ -454,7 +521,7 @@ def main() -> int:
     for fn in [test_oddsmath, test_settlement, test_scoredist, test_kelly,
                test_calib, test_metrics, test_football_model, test_tennis,
                test_linear_and_rugby, test_predict_markets, test_scorers,
-               test_arjel, test_scanner]:
+               test_football_extra, test_arjel, test_scanner]:
         fn()
     print("\n" + "=" * 70)
     if FAILS:

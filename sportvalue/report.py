@@ -110,6 +110,8 @@ body{
   margin:0 0 12px; font-weight:600;
 }
 .panel.wide{grid-column:1/-1}
+.panel h3{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
+          font-weight:600; margin:14px 0 4px}
 
 /* ---------- lignes de marche ---------- */
 table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
@@ -212,6 +214,35 @@ def _rows(pairs, meter_max=None):
         '<table><thead><tr><th>Issue</th><th>Proba</th><th>Cote éq.</th></tr></thead>'
         f"<tbody>{''.join(out)}</tbody></table>"
     )
+
+
+def _ou_table(rows, libelle="Plus de") -> str:
+    """Tableau Plus/Moins avec cote equitable, pour toute liste de lignes."""
+    out = []
+    for r in rows:
+        po, pu = r.get("over", 0), r.get("under", 0)
+        out.append(
+            f'<tr><td class="lab">{_esc(libelle)} {_esc(r["ligne"])}'
+            f'<div class="meter"><i style="width:{100*po:.1f}%"></i></div></td>'
+            f'<td class="num">{_pct(po)}</td><td class="odds">{_fo(po)}</td>'
+            f'<td class="num">{_pct(pu)}</td><td class="odds">{_fo(pu)}</td></tr>'
+        )
+    return ("<table><thead><tr><th>Ligne</th><th>Plus</th><th>Cote éq.</th>"
+            f"<th>Moins</th><th>Cote éq.</th></tr></thead><tbody>{''.join(out)}</tbody></table>")
+
+
+def _two_sides_table(rows_h, rows_a, home, away, cle="over") -> str:
+    """Une ligne par seuil, une colonne par camp : 'Plus de 1.5' dom. / ext."""
+    out = []
+    for rh, ra in zip(rows_h, rows_a):
+        ph, pa = rh.get(cle, rh.get("p_over", 0)), ra.get(cle, ra.get("p_over", 0))
+        out.append(
+            f'<tr><td class="lab">Plus de {_esc(rh["ligne"])}</td>'
+            f'<td class="num">{_pct(ph)}</td><td class="odds">{_fo(ph)}</td>'
+            f'<td class="num">{_pct(pa)}</td><td class="odds">{_fo(pa)}</td></tr>'
+        )
+    return (f"<table><thead><tr><th>Ligne</th><th>{_esc(home)}</th><th>Cote éq.</th>"
+            f"<th>{_esc(away)}</th><th>Cote éq.</th></tr></thead><tbody>{''.join(out)}</tbody></table>")
 
 
 def _matrix_panel(sd, home: str, away: str, maxg: int = 6) -> str:
@@ -352,6 +383,91 @@ def _panels(home: str, away: str, marches: dict, sd=None, scorers=None,
         panel("Double chance", _rows([(f"{home} ou nul", dc["1X"]),
                                       (f"{home} ou {away}", dc["12"]),
                                       (f"Nul ou {away}", dc["X2"])], 1.0))
+
+    if "draw_no_bet" in marches:
+        dnb = marches["draw_no_bet"]
+        panel("Remboursé si nul", _rows([(home, dnb.get("1", 0)), (away, dnb.get("2", 0))], 1.0))
+
+    if marches.get("total_domicile") and marches.get("total_exterieur"):
+        panel("Buts par équipe",
+              _two_sides_table(marches["total_domicile"], marches["total_exterieur"], home, away)
+              + '<div class="note">« Moins de 0,5 » pour une équipe = cage inviolée pour l\'autre.</div>')
+
+    if "premiere_equipe_a_marquer" in marches:
+        f = marches["premiere_equipe_a_marquer"]
+        panel("Première équipe à marquer",
+              _rows([(home, f["domicile"]), (away, f["exterieur"]), ("Aucun but", f["aucune"])], 1.0))
+
+    if "resultat_mi_temps" in marches:
+        ht = marches["resultat_mi_temps"]
+        pr = marches["mi_temps_prolifique"]
+        bp = marches.get("buts_par_periode", {})
+        note = ""
+        if bp:
+            note = (f'<div class="note">Buts attendus 1<sup>re</sup> / 2<sup>e</sup> période : '
+                    f'{_esc(home)} {bp["dom_1ere"]:.2f} / {bp["dom_2eme"]:.2f}, '
+                    f'{_esc(away)} {bp["ext_1ere"]:.2f} / {bp["ext_2eme"]:.2f}. '
+                    f'Dans ce championnat, {100*bp["part_1ere_ligue"]:.0f} % des buts tombent avant la pause.</div>')
+        panel("Mi-temps",
+              '<h3>Résultat à la mi-temps</h3>'
+              + _rows([(home, ht["1"]), ("Nul", ht["X"]), (away, ht["2"])], 1.0)
+              + '<h3>Période la plus prolifique</h3>'
+              + _rows([("1re mi-temps", pr["1ere"]), ("Égalité", pr["egalite"]),
+                       ("2e mi-temps", pr["2eme"])], 1.0)
+              + '<h3>Buts par période</h3>'
+              + _two_sides_table(marches["buts_1ere_mt"], marches["buts_2eme_mt"],
+                                 "1re MT", "2e MT")
+              + _rows([("Un but dans chaque mi-temps", marches.get("but_chaque_mt", 0))], 1.0)
+              + note)
+
+    if "mi_temps_fin" in marches:
+        t = marches["mi_temps_fin"]
+        lib = {"1": home, "X": "Nul", "2": away}
+        head = "".join(f"<th>{_esc(lib[c])}</th>" for c in "1X2")
+        body = "".join(
+            f'<tr><td class="lab">{_esc(lib[r])}</td>'
+            + "".join(f'<td class="num">{_pct(t[r][c])}<br><span class="role">{_fo(t[r][c])}</span></td>'
+                      for c in "1X2")
+            + "</tr>" for r in "1X2")
+        panel("Mi-temps / fin de match",
+              f'<table><thead><tr><th>MT ↓ &nbsp; FM →</th>{head}</tr></thead><tbody>{body}</tbody></table>'
+              '<div class="note">Lignes : résultat à la mi-temps ; colonnes : résultat final. '
+              'La somme de chaque colonne est exactement le 1X2 du modèle.</div>')
+
+    if "corners" in marches:
+        c = marches["corners"]
+        att = c["attendus"]
+        panel("Corners",
+              f'<div class="note">Attendus : {_esc(home)} {att["domicile"]:.1f}, '
+              f'{_esc(away)} {att["exterieur"]:.1f}, total {att["total"]:.1f}.</div>'
+              + _ou_table(c["total"])
+              + '<h3>Par équipe</h3>'
+              + _two_sides_table(c["domicile"], c["exterieur"], home, away))
+
+    if "cartons" in marches:
+        c = marches["cartons"]
+        att = c["attendus"]
+        arb = c.get("arbitre")
+        note_arb = ""
+        if arb:
+            f = arb["facteur_cartons"]
+            tendance = "plus sévère" if f > 1.03 else ("plus clément" if f < 0.97 else "dans la moyenne")
+            note_arb = (f'<div class="note">Arbitre : <b>{_esc(arb["nom"])}</b>, {tendance} que la moyenne '
+                        f'({f:.2f} × sur {arb["matchs"]} matchs, moyenne {arb["moyenne_ligue"]:.1f} jaunes/match). '
+                        f'Facteur appliqué aux deux équipes.</div>')
+        rouge = marches.get("carton_rouge")
+        bloc_rouge = ""
+        if rouge:
+            bloc_rouge = ('<h3>Carton rouge</h3>'
+                          + _rows([("Au moins un dans le match", rouge["match"]),
+                                   (home, rouge["domicile"]), (away, rouge["exterieur"])], 1.0))
+        panel("Cartons jaunes",
+              f'<div class="note">Attendus : {_esc(home)} {att["domicile"]:.1f}, '
+              f'{_esc(away)} {att["exterieur"]:.1f}, total {att["total"]:.1f}.</div>'
+              + _ou_table(c["total"])
+              + '<h3>Par équipe</h3>'
+              + _two_sides_table(c["domicile"], c["exterieur"], home, away)
+              + bloc_rouge + note_arb)
 
     if "ecart_par_tranche" in marches:
         panel("Écart de victoire",
