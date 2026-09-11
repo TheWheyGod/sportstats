@@ -301,6 +301,28 @@ def cmd_predict(args) -> int:
     return 0
 
 
+def _date_paris(dt) -> str:
+    """
+    dd/mm/yyyy en heure de Paris a partir d'un horodatage UTC.
+
+    Les coups d'envoi sont stockes en UTC pour les calculs de direct, mais la
+    journee est groupee et affichee en heure locale : un match argentin a
+    00:30 UTC appartient au meme jour pour un lecteur parisien (02:30), pas
+    a la veille.
+    """
+    if dt is None or pd.isna(dt):
+        return ""
+    try:
+        from datetime import timezone
+        from zoneinfo import ZoneInfo
+        d = pd.Timestamp(dt).to_pydatetime()
+        if d.tzinfo is None:
+            d = d.replace(tzinfo=timezone.utc)
+        return d.astimezone(ZoneInfo("Europe/Paris")).strftime("%d/%m/%Y")
+    except Exception:
+        return pd.Timestamp(dt).strftime("%d/%m/%Y")
+
+
 def cmd_journee(args) -> int:
     """
     Vue journee : tous les matchs a venir, plusieurs sports, une seule page.

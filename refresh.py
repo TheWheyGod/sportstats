@@ -55,10 +55,20 @@ def _charger_env_local() -> None:
         if not ligne or ligne.startswith("#") or "=" not in ligne:
             continue
         k, v = ligne.split("=", 1)
-        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+        # Le .env PRIME sur l'environnement. Cas reel : une variable
+        # ODDS_API_KEY=ta_cle_ici trainait dans le registre utilisateur
+        # (un placeholder pose par `setx` en suivant un exemple), et un
+        # setdefault la laissait gagner sur la vraie cle du .env. Resultat :
+        # 401 sur l'API et une journee amputee, sans autre message.
+        os.environ[k.strip()] = v.strip().strip('"').strip("'")
 
 
 def _verifier_cles() -> None:
+    suspectes = [k for k in REQUISES
+                 if os.environ.get(k, "").lower() in ("ta_cle_ici", "ta_cle", "xxx", "changeme")]
+    if suspectes:
+        print(f"[!] placeholder au lieu d'une vraie cle : {', '.join(suspectes)}", flush=True)
+        sys.exit(2)
     manquantes = [k for k in REQUISES if not os.environ.get(k)]
     if manquantes:
         print(f"[!] variables manquantes : {', '.join(manquantes)}", flush=True)
@@ -75,8 +85,17 @@ def run(*args) -> int:
                        encoding="utf-8", errors="replace")
     tail = "\n".join((r.stdout or "").strip().splitlines()[-6:])
     print(tail, flush=True)
-    if r.returncode not in (0, 1):
-        print((r.stderr or "")[-800:], flush=True)
+    # Toute sortie d'erreur est affichee, quel que soit le code retour.
+    # Traiter le code 1 comme "normal" a masque un NameError pendant deux
+    # cycles complets : la journee sortait amputee de tout le football sans
+    # la moindre trace. Un code 1 legitime ("aucun match a venir") n'ecrit
+    # rien sur stderr, donc l'afficher ne genere aucun bruit dans ce cas.
+    err = (r.stderr or "").strip()
+    if err:
+        print("--- stderr ---", flush=True)
+        print(err[-1500:], flush=True)
+    if "Traceback" in err:
+        print(f"[!] ECHEC de la sous-commande (code {r.returncode})", flush=True)
     return r.returncode
 
 
