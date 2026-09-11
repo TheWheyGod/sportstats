@@ -92,10 +92,11 @@ body{
 .bars{display:flex; height:52px; border-radius:2px; overflow:hidden; border:1px solid var(--line)}
 .bar{
   display:flex; flex-direction:column; justify-content:center; align-items:center;
-  color:#fff; font-size:12px; min-width:0; padding:0 6px;
+  color:#fff; font-size:12px; min-width:0; padding:0 6px; overflow:hidden;
 }
+.bar.mini span,.bar.nano b{display:none}
 .bar b{font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:500}
-.bar span{opacity:.82; font-size:11px; white-space:nowrap}
+.bar span{opacity:.82; font-size:11px; white-space:nowrap; max-width:100%; overflow:hidden; text-overflow:ellipsis}
 .bar.h{background:var(--home)} .bar.d{background:var(--draw)} .bar.a{background:var(--away)}
 
 /* ---------- grille de panneaux ---------- */
@@ -290,9 +291,15 @@ def _bars(marches: dict, home: str, away: str, cls: str = "bars") -> str:
     classe = {"1": "h", "X": "d", "2": "a"}
     seg = []
     for k, p in tri.items():
+        # Un segment etroit ne peut pas porter son texte : a moins de 10 %
+        # on retire le libelle, a moins de 5 % le pourcentage aussi. Sinon
+        # "2.0%" du nul au rugby debordait sur les segments voisins. Le
+        # detail reste lisible au survol et dans les marches.
+        taille = " mini" if p < 0.10 else ""
+        taille = " mini nano" if p < 0.05 else taille
         seg.append(
-            f'<div class="bar {classe.get(k, "a" if k not in classe else classe[k])}" '
-            f'style="flex:{max(p,0.02)}">'
+            f'<div class="bar {classe.get(k, "a" if k not in classe else classe[k])}{taille}" '
+            f'style="flex:{max(p,0.02)}" title="{_esc(lib.get(k,k))} {_pct(p)}">'
             f"<b>{_pct(p)}</b><span>{_esc(lib.get(k,k))} · {_fo(p)}</span></div>"
         )
     return f'<div class="{cls}">{chr(10).join(seg)}</div>'
@@ -490,10 +497,16 @@ _CSS_SLATE = """
 .mwhen{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); line-height:1.4}
 .mwhen b{display:block; color:var(--ink-2); font-weight:500; font-size:11px;
          letter-spacing:.08em; text-transform:uppercase}
-.mteams{font-family:"Instrument Serif",Georgia,serif; font-size:22px; line-height:1.2; min-width:0}
+/* Grille 3 colonnes : chaque equipe a sa colonne, et son nombre de buts
+   attendus tombe juste dessous. En ligne simple, "0.99" se retrouvait sous
+   la fin du nom de l'equipe a domicile : illisible sans legende. */
+.mteams{display:grid; grid-template-columns:auto auto minmax(0,1fr); align-items:end;
+        font-family:"Instrument Serif",Georgia,serif; font-size:22px; line-height:1.2; min-width:0}
 .mteams .h{color:var(--home)} .mteams .a{color:var(--away)}
-.mteams .sep{color:var(--ink-3); font-size:15px; padding:0 6px}
-.mscore{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); margin-top:3px}
+.mteams .sep{color:var(--ink-3); font-size:15px; padding:0 8px 2px; text-align:center}
+.mteams .xg,.mteams .xl{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3);
+                        margin-top:3px; line-height:1.3}
+.mteams .xl{font-size:10px; text-align:center; white-space:nowrap; padding:0 8px}
 .mbars{display:flex; height:34px; border-radius:2px; overflow:hidden}
 .mbars .bar b{font-size:13px} .mbars .bar span{font-size:10px}
 .mkeys{display:flex; flex-wrap:wrap; gap:6px 18px; padding:0 18px 12px;
@@ -592,6 +605,10 @@ def build_slate_report(
         xg = marches.get("buts_attendus") or marches.get("points_attendus") or {}
         xh, xa = xg.get("domicile", 0), xg.get("exterieur", 0)
         unite = UNITES.get(sport, "points")
+        # Sous chaque nom, l'esperance de l'equipe ; la legende au centre.
+        # Rien quand le sport n'a pas d'esperance par camp (tennis).
+        xg_row = (f'<span class="xg">{xh:.2f}</span><span class="xl">{unite} attendus</span>'
+                  f'<span class="xg">{xa:.2f}</span>') if xg else ""
 
         # deux marches cles, choisis selon le sport
         keys = []
@@ -688,8 +705,7 @@ def build_slate_report(
   <div class="mhead">
     <div class="mwhen"><b>{_esc(sport)}</b>{_esc(libelle_date)}{f'<b class="h">{heure_txt}</b>' if heure_txt else ''}<br>{_esc(m.get('competition',''))}</div>
     <div>
-      <div class="mteams"><span class="h">{_esc(home)}</span><span class="sep">—</span><span class="a">{_esc(away)}</span></div>
-      <div class="mscore">{xh:.2f} – {xa:.2f} {unite} attendus</div>
+      <div class="mteams"><span class="h">{_esc(home)}</span><span class="sep">—</span><span class="a">{_esc(away)}</span>{xg_row}</div>
     </div>
     {_bars(marches, home, away, "mbars")}
   </div>
