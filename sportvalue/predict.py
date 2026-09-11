@@ -64,7 +64,8 @@ def _ou_block(sd: ScoreDistribution, lignes, label="total") -> list[dict]:
 # FOOTBALL
 # --------------------------------------------------------------------------
 def football_markets(sd: ScoreDistribution, scorers: pd.DataFrame | None = None,
-                     absences: list | None = None, extra: dict | None = None) -> dict:
+                     absences: list | None = None, extra: dict | None = None,
+                     assists: pd.DataFrame | None = None) -> dict:
     """
     1X2, doubles chances, buts, BTTS, scores exacts, totaux par equipe,
     et buteurs si un effectif est fourni.
@@ -109,6 +110,15 @@ def football_markets(sd: ScoreDistribution, scorers: pd.DataFrame | None = None,
                 d[c] = d[c].round(4)
         out["buteurs"] = d.to_dict("records")
         out["aucun_buteur"] = round(float(scorers["p_aucun_buteur"].iloc[0]), 4)
+    if assists is not None and not assists.empty:
+        # meme modele que les buteurs, applique aux passes decisives :
+        # p_marque y signifie "au moins une passe decisive"
+        cols = ["joueur", "equipe_cote", "poste", "lambda_joueur", "p_marque"]
+        d = assists[[c for c in cols if c in assists.columns]].copy()
+        d = d.rename(columns={"p_marque": "p_passe"})
+        for c in ("lambda_joueur", "p_passe"):
+            d[c] = d[c].round(4)
+        out["passeurs"] = d.to_dict("records")
     if absences:
         out["absences"] = absences
     if extra:

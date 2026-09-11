@@ -1,6 +1,8 @@
 """Interface en ligne de commande."""
 from __future__ import annotations
 
+import os
+
 import argparse
 import sys
 from datetime import datetime, timedelta
@@ -382,11 +384,84 @@ def cmd_journee(args) -> int:
             print("   Rien a predire. Utilise --matchs pour fournir tes propres rencontres.")
             return 1
 
-        squads = None
+        squads, squads_fdo, absents_api = None, {}, {}
         if args.buteurs:
             from .data import fpl
+            from .data import fdo as FDO
             print("\n   Chargement des statistiques joueurs (FPL, Premier League)")
             squads = fpl.load_players()
+            cle_fdo = args.cle_fdo or os.environ.get("FOOTBALL_DATA_ORG_KEY", "")
+            if cle_fdo:
+                print("   Statistiques joueurs football-data.org (buts, passes, penaltys)")
+                try:
+                    squads_fdo = FDO.build_squads([c for c in codes if c in FDO.FDO_CODES], cle_fdo)
+                except Exception as e:
+                    print(f"   [!] football-data.org indisponible : {e}")
+            else:
+                print("   [i] FOOTBALL_DATA_ORG_KEY absente : buteurs limites a la Premier League")
+            # Les absences servent aussi a ecarter les buteurs forfaits. Elles
+            # sont relues plus bas pour l'affichage ; l'appel est en cache.
+            if args.absences and args.cle_football:
+                from .data import injuries as INJ
+                try:
+                    dates_iso = sorted({d.strftime("%Y-%m-%d") for d in a_venir["date"]})
+                    absents_api = INJ.by_team(INJ.fetch_injuries(dates_iso, args.cle_football,
+                                                                 leagues=list(INJ.LEAGUE_IDS)))
+                except Exception as e:
+                    print(f"   [i] absences indisponibles pour les buteurs : {e}")
+
+        _absents_cache = {}
+
+        def _absents(equipe_hist: str, connues: set) -> list:
+            """Absences API-Football d'une equipe nommee a la maniere de l'historique."""
+            if not absents_api:
+                return []
+            k = id(connues)
+            if k not in _absents_cache:
+                m = {}
+                for eq, lst in absents_api.items():
+                    r = INJ.resolve_team(eq, connues)
+                    if r:
+                        m.setdefault(r, []).extend(lst)
+                _absents_cache[k] = m
+            return _absents_cache[k].get(equipe_hist, [])
+
+        def _effectifs(code: str, h: str, a: str, connues: set):
+            """Effectifs des deux equipes : FPL pour la Premier League, sinon football-data.org."""
+            if squads is not None and code == "E0":
+                noms_fpl = set(squads["equipe"])
+
+                def nom_fpl(x):
+                    for k, v in P.FPL_TO_FOOTBALLDATA.items():
+                        if v == x and k in noms_fpl:
+                            return k
+                    return fx.resolve_team(x, noms_fpl) or x
+                sh, sa = fpl.team_squad(squads, nom_fpl(h)), fpl.team_squad(squads, nom_fpl(a))
+                if not sh.empty and not sa.empty:
+                    return sh, sa, fpl.estimate_minutes(sh), fpl.estimate_minutes(sa)
+            d = squads_fdo.get(code)
+            if d is not None:
+                sh, sa = FDO.team_squad(d, h), FDO.team_squad(d, a)
+                if not sh.empty and not sa.empty:
+                    return (FDO.apply_absences(sh, _absents(h, connues)),
+                            FDO.apply_absences(sa, _absents(a, connues)), None, None)
+            return None
+
+        def _passeurs(sh, sa, sd, mh, ma):
+            """Passes decisives : meme repartition que les buts, priors de poste dedies."""
+            from .models.scorers import PRIORS_PASSES_FOOT, PART_BUTS_ASSISTES
+            ph, pa_ = sh.copy(), sa.copy()
+            for d_ in (ph, pa_):
+                src = "passes" if "passes" in d_.columns else "passes_d"
+                if src not in d_.columns:
+                    return None
+                d_["buts_hors_penalty"] = pd.to_numeric(d_[src], errors="coerce").fillna(0.0)
+                d_["xg_hors_penalty"] = d_["xa"] if "xa" in d_.columns else None
+                d_["tireur_penalty"] = 0
+            am = ScorerModel(PRIORS_PASSES_FOOT, k_shrink=args.k_shrink,
+                             own_goal_share=0.0, penalty_rate=0.0)
+            return am.predict_match(ph, pa_, sd.expected_home * PART_BUTS_ASSISTES,
+                                    sd.expected_away * PART_BUTS_ASSISTES, mh, ma)
 
         for code in codes:
             sous = a_venir[a_venir["league_code"].str.upper() == code]
@@ -425,16 +500,13 @@ def cmd_journee(args) -> int:
                     print(f"   [!] {r.home} - {r.away} : '{inconnu}' absent de l'historique, ignore")
                     continue
                 sd = model.predict(h, a)
-                sc = None
-                if squads is not None and code == "E0":
-                    inv = {v: k for k, v in P.FPL_TO_FOOTBALLDATA.items()}
-                    from .data import fpl
-                    sh = fpl.team_squad(squads, inv.get(h, h))
-                    sa = fpl.team_squad(squads, inv.get(a, a))
-                    if not sh.empty and not sa.empty:
-                        sm = ScorerModel(PRIORS_FOOT, k_shrink=args.k_shrink)
-                        sc = sm.predict_match(sh, sa, sd.expected_home, sd.expected_away,
-                                              fpl.estimate_minutes(sh), fpl.estimate_minutes(sa))
+                sc, passeurs = None, None
+                eff = _effectifs(code, h, a, connues) if args.buteurs else None
+                if eff is not None:
+                    sh, sa, mh, ma = eff
+                    sm = ScorerModel(PRIORS_FOOT, k_shrink=args.k_shrink)
+                    sc = sm.predict_match(sh, sa, sd.expected_home, sd.expected_away, mh, ma)
+                    passeurs = _passeurs(sh, sa, sd, mh, ma)
                 arbitre = getattr(r, "referee", "") or None
                 statiques = extras.counts(h, a, arbitre)      # corners, cartons
                 periodes = extras.periods(h, a, sd)            # mi-temps, 1er but
@@ -443,7 +515,8 @@ def cmd_journee(args) -> int:
                     "date": _date_paris(r.date),
                     "coup_envoi": r.date.to_pydatetime() if hasattr(r.date, "to_pydatetime") else r.date,
                     "home": h, "away": a, "arbitre": arbitre,
-                    "marches": P.football_markets(sd, sc, extra={**periodes, **statiques}),
+                    "marches": P.football_markets(sd, sc, extra={**periodes, **statiques},
+                                                  assists=passeurs),
                     "sd": sd, "scorers": sc,
                     # Conserves a part : le direct regenere les marches a partir
                     # du score, et les corners/cartons (independants du score)
@@ -1406,6 +1479,8 @@ def build_parser() -> argparse.ArgumentParser:
     jo.add_argument("--absences", action="store_true",
                     help="ajouter les blessures et suspensions (API-Football). "
                          "Plan gratuit : fenetre de +/- 1 jour autour d'aujourd'hui.")
+    jo.add_argument("--cle-fdo", dest="cle_fdo", default=None,
+                    help="jeton football-data.org (sinon FOOTBALL_DATA_ORG_KEY) : buteurs et passeurs hors PL")
     jo.add_argument("--cle-football", dest="cle_football", default=None,
                     help="cle API-Football (sinon API_FOOTBALL_KEY)")
     jo.add_argument("--depuis", type=int, default=2022)

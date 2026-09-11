@@ -45,6 +45,13 @@ def _fetch() -> dict:
     return get_cache().get_json(URL, _TTL, loader)
 
 
+def _flt(v):
+    try:
+        return float(v) if v is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
 def load_players() -> pd.DataFrame:
     """
     Retourne un DataFrame au format attendu par ScorerModel :
@@ -83,6 +90,7 @@ def load_players() -> pd.DataFrame:
                 "buts_hors_penalty": max(buts - pen_marques, 0.0),
                 "xg_hors_penalty": xg,   # xG FPL exclut deja les penaltys non tires
                 "passes_d": float(e.get("assists", 0) or 0),
+                "xa": _flt(e.get("expected_assists")),
                 "tireur_penalty": 1 if pen_order == 1 else 0,
                 "titularisations": float(e.get("starts", 0) or 0),
                 "matchs_equipe": journees_jouees or None,

@@ -32,12 +32,13 @@ Git te demandera de te connecter à GitHub (navigateur ou jeton). Le dépôt ne 
 ## 3. Renseigner les clés en secrets
 
 Dans le dépôt : **Settings → Secrets and variables → Actions → New repository secret**.
-Deux secrets, noms exacts :
+Trois secrets, noms exacts :
 
 | Nom | Valeur |
 |---|---|
 | `ODDS_API_KEY` | ta clé The Odds API |
 | `API_FOOTBALL_KEY` | ta clé API-Football |
+| `FOOTBALL_DATA_ORG_KEY` | ton jeton football-data.org (buteurs et passeurs hors Premier League) |
 
 C'est le seul endroit où elles doivent vivre côté GitHub.
 

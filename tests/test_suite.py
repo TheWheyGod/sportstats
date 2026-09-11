@@ -514,6 +514,22 @@ def test_football_extra():
 
 
 # ==========================================================================
+def test_fdo():
+    """Rapprochement de noms de joueurs et prise en compte des absences."""
+    from sportvalue.data.fdo import name_key, apply_absences
+    print("\n[football-data.org]")
+    check(name_key("Kylian Mbappé") == name_key("K. Mbappe") == "mbappe", "cle de nom : accents et initiales")
+    check(name_key("Pierre-Emerick Aubameyang") == "aubameyang", "cle de nom : prenom compose")
+    sq = pd.DataFrame({"joueur": ["Esteban Lepaul", "Breel Embolo", "Autres joueurs"],
+                       "cle_nom": ["lepaul", "embolo", "joueurs"],
+                       "minutes_attendues": [90.0, 60.0, 360.0]})
+    out = apply_absences(sq, [{"joueur": "E. Lepaul", "poids": 1.0}, {"joueur": "B. Embolo", "poids": 0.5}])
+    check(out.loc[0, "minutes_attendues"] == 0.0, "forfait : minutes attendues a zero")
+    check(abs(out.loc[1, "minutes_attendues"] - 30.0) < 1e-9, "incertain : minutes reduites de moitie")
+    check(out.loc[2, "minutes_attendues"] == 360.0, "joueur non signale : inchange")
+
+
+# ==========================================================================
 def main() -> int:
     print("=" * 70)
     print("SUITE DE TESTS sportvalue")
@@ -521,7 +537,7 @@ def main() -> int:
     for fn in [test_oddsmath, test_settlement, test_scoredist, test_kelly,
                test_calib, test_metrics, test_football_model, test_tennis,
                test_linear_and_rugby, test_predict_markets, test_scorers,
-               test_football_extra, test_arjel, test_scanner]:
+               test_football_extra, test_fdo, test_arjel, test_scanner]:
         fn()
     print("\n" + "=" * 70)
     if FAILS:

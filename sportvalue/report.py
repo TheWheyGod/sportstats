@@ -23,6 +23,7 @@ import html
 from datetime import datetime, timezone
 
 import numpy as np
+import pandas as pd
 
 __all__ = ["build_report", "write_report"]
 
@@ -286,11 +287,16 @@ def _matrix_panel(sd, home: str, away: str, maxg: int = 6) -> str:
 def _scorers_panel(scorers, home: str, away: str) -> str:
     if scorers is None or len(scorers) == 0:
         return ""
+    if "poste" in scorers.columns:
+        scorers = pd.concat([scorers[scorers["poste"] != "collectif"],
+                             scorers[scorers["poste"] == "collectif"]])
     d = scorers.head(18)
     lignes = []
     for r in d.itertuples(index=False):
         cote = "h" if r.equipe_cote == "domicile" else "a"
         poste = getattr(r, "poste", "")
+        if poste == "collectif":
+            poste = "reste de l'effectif"
         prem = getattr(r, "p_premier_buteur", None)
         extra = f" · 1er {100*prem:.1f}%" if prem is not None else ""
         lignes.append(
@@ -310,6 +316,36 @@ def _scorers_panel(scorers, home: str, away: str) -> str:
         f'<div class="panel wide"><h2>Buteurs — probabilité de marquer</h2>'
         f'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 26px">'
         f'{"".join(lignes)}</div>{note}</div>'
+    )
+
+
+def _assists_panel(passeurs: list, home: str, away: str) -> str:
+    """Passes decisives : meme presentation que les buteurs."""
+    if not passeurs:
+        return ""
+    # la ligne collective "reste de l'effectif" ferme la liste, quel que soit
+    # son rang : un pot commun en tete d'un classement de passeurs ne se lit pas
+    ordre = ([r for r in passeurs if r.get("poste") != "collectif"]
+             + [r for r in passeurs if r.get("poste") == "collectif"])
+    lignes = []
+    for r in ordre[:18]:
+        cote = "h" if r.get("equipe_cote") == "domicile" else "a"
+        poste = r.get("poste", "")
+        if poste == "collectif":
+            poste = "reste de l'effectif"
+        p = r.get("p_passe", 0.0)
+        lignes.append(
+            f'<div class="scorer"><div class="nm"><span class="dot {cote}"></span>'
+            f'{_esc(r.get("joueur", ""))} <span class="role">{_esc(poste)}</span></div>'
+            f'<div class="pct">{_pct(p)}</div><div class="fo">{_fo(p)}</div></div>'
+        )
+    return (
+        "<div class=\"panel wide\"><h2>Passeurs — probabilité d'au moins une passe décisive</h2>"
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 26px">'
+        f'{"".join(lignes)}</div>'
+        '<div class="note">Environ 72 % des buts sont assistés : les espérances de passes '
+        "somment à 72 % des buts attendus de l'équipe. Hors Premier League, la source ne liste "
+        'que les joueurs ayant déjà marqué : un pur créateur sans but est sous-estimé.</div></div>'
     )
 
 
@@ -507,6 +543,8 @@ def _panels(home: str, away: str, marches: dict, sd=None, scorers=None,
         s = _scorers_panel(scorers, home, away)
         if s:
             panels.append(s)
+    if marches.get("passeurs"):
+        panels.append(_assists_panel(marches["passeurs"], home, away))
 
     absents = marches.get("absences")
     if absents:
@@ -745,7 +783,7 @@ def build_slate_report(
         if "scores_exacts" in marches and marches["scores_exacts"]:
             s0 = marches["scores_exacts"][0]
             keys.append((f"Score {s0['score']}", s0["p"]))
-        buteurs = marches.get("buteurs")
+        buteurs = [b for b in (marches.get("buteurs") or []) if b.get("poste") != "collectif"]
         if buteurs:
             b0 = buteurs[0]
             keys.append((f"{b0['joueur']} marque", b0["p_marque"]))

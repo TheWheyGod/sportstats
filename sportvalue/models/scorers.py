@@ -37,7 +37,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-__all__ = ["ScorerModel", "PRIORS_FOOT", "PRIORS_RUGBY", "PRIORS_BASKET"]
+__all__ = ["ScorerModel", "PRIORS_FOOT", "PRIORS_PASSES_FOOT", "PART_BUTS_ASSISTES",
+           "PRIORS_RUGBY", "PRIORS_BASKET"]
 
 # Priors de taux de marquage par 90 minutes, par poste.
 PRIORS_FOOT = {
@@ -46,7 +47,24 @@ PRIORS_FOOT = {
     "defenseur": 0.045,
     "gardien": 0.001,
     "inconnu": 0.12,
+    # ligne collective "reste de l'equipe" (joueurs jamais listes par la
+    # source : defenseurs, remplacants) -- taux d'un defenseur
+    "collectif": 0.045,
 }
+
+# Passes decisives par 90 minutes, par poste. Les createurs sont au milieu
+# et sur les ailes ; un defenseur lateral en fournit plus qu'il ne marque.
+PRIORS_PASSES_FOOT = {
+    "attaquant": 0.15,
+    "milieu": 0.14,
+    "defenseur": 0.06,
+    "gardien": 0.002,
+    "inconnu": 0.10,
+    "collectif": 0.07,
+}
+# Part des buts qui recoivent une passe decisive (le reste : penaltys, csc,
+# actions individuelles, coups francs directs).
+PART_BUTS_ASSISTES = 0.72
 
 # Essais par 80 minutes, par poste (rugby a XV).
 PRIORS_RUGBY = {

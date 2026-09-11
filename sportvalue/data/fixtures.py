@@ -266,6 +266,7 @@ ALIAS = {
     "olympique lyonnais": "Lyon",
     "atletico madrid": "Ath Madrid",
     "athletic bilbao": "Ath Bilbao",
+    "athletic club": "Ath Bilbao",
     "ca osasuna": "Osasuna",
     "rayo vallecano": "Vallecano",
     "real sociedad": "Sociedad",
