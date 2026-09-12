@@ -20,6 +20,7 @@ Deux choix de fond :
 from __future__ import annotations
 
 import html
+import json
 from datetime import datetime, timezone
 
 import numpy as np
@@ -643,6 +644,7 @@ _CSS_SLATE = """
 .count{font-size:12px; color:var(--ink-3); font-family:"IBM Plex Mono",monospace}
 .chip .n{font-family:"IBM Plex Mono",monospace; font-size:11px; opacity:.6; margin-left:3px}
 .tri{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--ink-3)}
+#comp{max-width:min(100%,320px)}
 .tri select{
   font:400 12.5px "IBM Plex Sans",sans-serif; padding:7px 9px; color:var(--ink);
   background:var(--panel); border:1px solid var(--line); border-radius:3px;
@@ -862,7 +864,7 @@ def build_slate_report(
         net = max(tri.values()) if tri else 0.0
 
         cartes.append(f"""
-<article class="match" data-sport="{_esc(sport)}" data-q="{_esc(cherche)}" data-ts="{ts}" data-net="{net:.4f}" data-day="{str(ts)[:8]}">
+<article class="match" data-sport="{_esc(sport)}" data-comp="{_esc(m.get('competition',''))}" data-q="{_esc(cherche)}" data-ts="{ts}" data-net="{net:.4f}" data-day="{str(ts)[:8]}">
   <div class="mhead">
     <div class="mwhen"><b>{_esc(sport)}</b>{_esc(libelle_date)}{f'<b class="h">{heure_txt}</b>' if heure_txt else ''}<br>{_esc(m.get('competition',''))}</div>
     <div>
@@ -890,10 +892,42 @@ def build_slate_report(
         )
     chips = "".join(onglets)
 
+    # Competitions par sport, pour le second filtre. Les options sont
+    # reconstruites en JS a chaque changement de sport : un <select> ne sait
+    # pas cacher une option sur tous les navigateurs mobiles.
+    comps = {}
+    for m in matchs:
+        k = (m.get("sport", "football"), m.get("competition", ""))
+        comps[k] = comps.get(k, 0) + 1
+    comps_json = json.dumps(
+        [{"sport": sp, "nom": nom, "n": n} for (sp, nom), n in sorted(comps.items())],
+        ensure_ascii=False)
+
     js = """
 (function(){
   var chips=[].slice.call(document.querySelectorAll('.chip[data-f]'));
   var q=document.getElementById('q'), tri=document.getElementById('tri');
+  var comp=document.getElementById('comp');
+  var COMPS=__COMPS__;
+  function sportActif(){
+    var a=chips.filter(function(c){return c.getAttribute('aria-pressed')==='true'})[0];
+    return a?a.dataset.f:'';
+  }
+  // Options du filtre competition : celles du sport choisi, avec effectifs.
+  function remplirComps(){
+    var f=sportActif(), courant=comp.value;
+    comp.innerHTML='';
+    var o=document.createElement('option'); o.value=''; o.textContent='Toutes les compétitions';
+    comp.appendChild(o);
+    COMPS.forEach(function(c){
+      if(f!==''&&c.sport!==f) return;
+      var x=document.createElement('option'); x.value=c.nom;
+      x.textContent=(f===''?c.sport+' · ':'')+c.nom+' ('+c.n+')';
+      comp.appendChild(x);
+    });
+    comp.value=courant;
+    if(comp.value!==courant) comp.value='';
+  }
   var slate=document.querySelector('.slate');
   var cards=[].slice.call(document.querySelectorAll('.match'));
   var cnt=document.getElementById('cnt'), vide=document.getElementById('vide');
@@ -931,11 +965,11 @@ def build_slate_report(
     });
   }
   function apply(){
-    var actif=chips.filter(function(c){return c.getAttribute('aria-pressed')==='true'})[0];
-    var f=actif?actif.dataset.f:'';
+    var f=sportActif(), k=comp.value||'';
     var t=(q.value||'').trim().toLowerCase(); var n=0;
     cards.forEach(function(c){
-      var ok=(f===''||c.dataset.sport===f)&&(t===''||c.dataset.q.indexOf(t)>-1);
+      var ok=(f===''||c.dataset.sport===f)&&(k===''||c.dataset.comp===k)
+             &&(t===''||c.dataset.q.indexOf(t)>-1);
       c.hidden=!ok; if(ok)n++;
     });
     cnt.textContent=n+' match'+(n>1?'s':'');
@@ -955,8 +989,9 @@ def build_slate_report(
   }
   chips.forEach(function(c){c.addEventListener('click',function(){
     chips.forEach(function(o){o.setAttribute('aria-pressed','false');});
-    c.setAttribute('aria-pressed','true'); apply();
+    c.setAttribute('aria-pressed','true'); remplirComps(); apply();
   });});
+  comp.addEventListener('change', apply);
   // Refermer depuis le BAS du panneau : une fois les marches deplies, le
   // resume qui sert d'interrupteur est souvent sorti de l'ecran, et rien
   // n'indique comment refermer.
@@ -969,15 +1004,16 @@ def build_slate_report(
   });
   q.addEventListener('input', apply);
   tri.addEventListener('change', trier);
-  trier(); apply();
+  remplirComps(); trier(); apply();
 })();
-"""
+""".replace("__COMPS__", comps_json)
     corps = f"""
 <div class="wrap">
   <div class="eyebrow">{_esc(titre)}</div>
   <div class="filters">
     {chips}
-    <input id="q" type="search" placeholder="Filtrer par équipe ou compétition…" aria-label="Filtrer">
+    <label class="tri"><select id="comp" aria-label="Filtrer par compétition"></select></label>
+    <input id="q" type="search" placeholder="Filtrer par équipe…" aria-label="Filtrer">
     <label class="tri"><span>Trier</span>
       <select id="tri" aria-label="Trier les matchs">
         <option value="date">par heure de match</option>
