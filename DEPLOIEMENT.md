@@ -58,7 +58,7 @@ Ensuite tout est automatique :
 | job | quand (heure de Paris, été) | coût |
 |---|---|---|
 | `complet` | chaque matin 7h30 | 1 crédit Odds API + 4 requêtes API-Football |
-| `live` | toutes les heures de 11h à 23h | 0 quand rien ne se joue ; ~1 par compétition en cours |
+| `live` | toutes les 30 min de 11h à 0h30 | football : 2 requêtes API-Football, 0 crédit ; NRL : 1 crédit Odds API si match en cours |
 
 Le live s'arrête seul sous 25 crédits Odds API pour préserver le cycle du matin.
 

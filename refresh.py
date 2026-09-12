@@ -202,6 +202,11 @@ def complet() -> None:
         "--html", str(HTML), "--ajouter", "--titre", TITRE)
     if SLATE.exists():
         DATE_JOURNEE.write_text(_aujourdhui(), encoding="utf-8")
+        # Un cycle complet lance en journee (cron en retard, lancement manuel)
+        # sortait une page sans le moindre score alors que des matchs etaient
+        # en cours : le passage live est integre, il ne coute que deux
+        # requetes API-Football.
+        run("live", "--html", str(HTML), "--titre", TITRE, "--leagues", "top5,F2")
     fragment()
 
 

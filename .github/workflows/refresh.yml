@@ -3,8 +3,9 @@
 # Deux jobs, deux cadences, un seul budget d'API a respecter :
 #   - "journee" : chaque matin, calendrier 48 h + modeles + absences.
 #                 1 credit The Odds API (NRL) + 4 requetes API-Football.
-#   - "live"    : toutes les heures en journee, scores des matchs en cours.
-#                 0 credit quand rien ne se joue ; s'arrete seul sous 25 credits.
+#   - "live"    : toutes les 30 minutes en journee, scores des matchs en
+#                 cours. Football : 2 requetes API-Football, 0 credit Odds API.
+#                 Rugby (NRL) : 1 credit Odds API par passage avec match en cours.
 #
 # Les heures du cron sont en UTC (GitHub ne connait pas Europe/Paris) :
 # 05:30 UTC = 07:30 a Paris en ete, 06:30 en hiver. Decalage d'une heure au
@@ -24,7 +25,7 @@ on:
   schedule:
     - cron: "30 5 * * *"          # journee complete, 07:30 Paris (ete)
     - cron: "15 7 * * *"           # secours : refait la journee si celle du matin a saute
-    - cron: "5 9-21 * * *"         # live, toutes les heures 11h-23h Paris (ete)
+    - cron: "5,35 9-22 * * *"      # live, toutes les 30 min de 11h a 00h35 Paris (ete)
   workflow_dispatch:
     inputs:
       mode:
