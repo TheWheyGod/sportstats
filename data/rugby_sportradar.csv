@@ -1,0 +1,819 @@
+competition,saison,sport_event_id,date,equipe,joueur_id,joueur,maillot,titulaire,minutes,essais
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2785105,"Kaddouri, Alexandre",1,1,44.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:960134,"Bourgarit, Pierre",2,1,44.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2854425,"Sorin, Karl",3,1,40.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2855647,"Kante Samba, Charles",4,1,40.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2856281,"Adelaide, Thomas",5,1,40.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2174488,"McFarland, Theo",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2273271,"Jegou, Oscar",7,1,78.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:1325424,"Alldritt, Gregory",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2111942,"Le Garrec, Nolan",9,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:994075,"Hastoy, Antoine",10,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:762692,"Leyds, Dillyn",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2822089,"Daunivucu, Simeli",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:517048,"Seuteni, UJ",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:504460,"Nowell, Jack",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2084169,"Niniashvili, Davit",15,1,78.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:535510,"Latu, Tolu",16,0,36.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2506903,"Penverne, Louis",17,0,36.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:1694125,"Boudehent, Paul",18,0,40.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2712788,"Timo, Andy",19,0,2.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2943733,"Tuifua, Samuel",20,0,12.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2273265,"Haddad, Matthias",21,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:3254198,"Elissalde, Sacha",22,0,2.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Rochelais,sr:player:2273303,"Kuntelia, Aleksandre",23,0,40.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:765328,"Neti, Rodrigue",1,1,60.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:767768,"Marchand, Julien",2,1,59.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2507891,"Mallez, Paul",3,1,61.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:1887358,"Flament, Thibaud",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2070241,"Meafou, Emmanuel",5,1,58.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:511830,"Cros, Francois",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2855749,"Martin Bonnard, Romeo",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:960436,"Roumat, Alexandre",8,1,73.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:768562,"Dupont, Antoine",9,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:1146768,"N'tamack, Romain",10,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:1611832,"Lebel, Matthis",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2103932,"Menoncello, Tommaso",12,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:1068550,"Barassi, Pierre-Louis",13,1,24.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2316479,"Capuozzo, Ange",14,1,73.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:548996,"Ramos, Thomas",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:955152,"Mauvaka, Peato",16,0,21.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2855717,"Bertrand, Benjamin",17,0,20.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2507881,"Brennan, Joshua",18,0,22.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2507931,"N'tamack, Theo",19,0,7.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:2855779,"Gourgues, Kalvin",21,0,56.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875714,2026-09-06,Stade Toulousain,sr:player:1146740,"Colombe, Georges-Henri",23,0,19.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2855843,"Pkhakadze, Lasha",1,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2179880,"Barlot, Gaëtan",2,1,52.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1664057,"Falatea, Sipili",3,1,42.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:854086,"Moon, Alexander",4,1,61.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:535080,"Cazeaux, Cyril",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2287447,"Bochaton, Pierre",6,1,61.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1146796,"Woki, Cameron",7,1,80.0,2
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1097808,"Willis, Tom",8,1,80.0,2
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:766072,"Lucu, Maxime",9,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1146762,"Jalibert, Mathieu",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2287445,"Bielle-Biarrey, Louis",11,1,80.0,2
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1694153,Yoram Falatea-Moefana,12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2739751,"Depoortere, Nicolas",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:801908,"Penaud, Damian",14,1,23.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:940670,"Buros, Romain",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:1672297,"Lamothe, Maxime",16,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2387411,"Perchaud, Matis",17,0,57.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2855557,"Taufa, Toma",18,0,38.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:990645,"Palu, Boris",19,0,19.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Union Bordeaux Begles,sr:player:2855607,"Ibsaiene, Elyjah",21,0,19.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1261728,"Gogichashvili, Guram",1,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2502197,"Tarrit, Janick",2,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1645924,"Bamba, Demba",3,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:531048,"Hill, Jonny",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:512028,"Lainault, Thomas",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2855143,"Manyarara, Shingirai",6,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1989657,"Uru, Seru",7,1,47.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2273165,"Baudonne, Maxime",8,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:464296,"Machenaud, Maxime",9,1,55.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1326336,"Gibert, Antoine",10,1,55.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2273197,"Spring, Max",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1003503,"Manu, Joseph",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2507885,"Costes, Paul",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2287887,"Ravutaumada, Selestino",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:518156,"James, Sam",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2650769,"Escobar, Diego",16,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:1146764,"Kolingar, Hassane",17,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:764350,"Sanconnie, Fabien",18,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:475106,"Taofifenua, Romain",19,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2650763,"Martins, Nicolas",20,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:2855151,"Latrasse, Antoine",21,0,25.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875710,2026-09-05,Racing 92,sr:player:528444,"Tuisova, Josua",22,0,25.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2854511,"Bordelai, Andy",1,1,68.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2854515,"Martin, Lucas",2,1,68.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:952348,"Setiano, Emerick",3,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1146760,"Geraci, Kilian",4,1,72.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1261718,"Paulos Adler, Lucas Martin",5,1,48.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1664053,"Fischer, Alexandre",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2273125,"Uhila, Matthieu",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1244670,"Bruni, Rodrigo",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2506761,"Coly, Leo",9,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:528676,"du Preez, Robert James",10,1,68.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1114885,"Tambwe, Michael",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1693859,"Mori, Federico",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2490951,"Maqala, Sireli",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2854721,"Leveque, Tom",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2854739,"Orabe, Yohan",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2286861,"Cramont, Guillaume",16,0,12.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:1981427,"Cormenier, Swan",17,0,12.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2854681,"Capilla, Esteban",20,0,32.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2744987,"Martocq, Guillaume",22,0,12.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,Aviron Bayonne,sr:player:2888057,"Alainuuese, Komiti Junior",18,0,8.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2856277,"Ametlla, Leo",1,1,54.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:1326328,"Baubigny, Teddy",2,1,54.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:504796,"Sinckler, Kyle",3,1,54.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:1326496,"Rebbadj, Swan",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:765976,"Cancoriet, Judicael",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2710378,"Abadie, Esteban",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:511702,"Ollivon, Charles",7,1,52.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:951070,"Mercer, Zach",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:512038,"Serin, Baptiste",9,1,59.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2274681,"Garcia, Matéo",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2854673,"Ferte, Mathis",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:511834,"Fickou, Gael",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:1672121,"Smaili, Mathieu",13,1,52.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2184616,"Jaminet, Melvyn",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2710388,"Rebbadj, Rayan",14,1,80.0,2
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2856265,"Damond, Pierre",16,0,26.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2856263,"Jean Christophe, Samuel",17,0,26.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:2856289,"Quere Karaba, Joe",19,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:768552,"Jones, Huw",20,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:944702,"White, Ben",21,0,21.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875708,2026-09-05,RC Toulonnais,sr:player:470564,"Slimani, Rabah",23,0,26.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1000379,"Arata, Santiago",9,1,58.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1981431,"Baget, Remy",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2543271,"Chabouni, Theo",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:497384,"Collier, William",3,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1326246,"Delaporte, Baptiste",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2855967,"Durand, Teddy",2,1,52.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2106140,"Gontinéac, Taylor",13,1,52.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:765872,"Goodhue, Jack",12,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2501209,"Guerois, Lois",1,1,47.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2111402,"Le Brun, Louis",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1692593,"Maravat, Gauthier",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2856453,"Ringuet, Kyllian",7,1,54.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:435148,"Vanverberghe, Florent",5,1,63.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2855553,"Vargas, Adam",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:504508,"Watson, Hamish",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:511740,"Babillot, Mathieu",18,0,26.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:513500,"Cocagi, Adrea",22,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1604776,"Corato, Nicolas",23,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2274035,"Fernandez, Jérémy",20,0,22.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:2854947,"Papali'i, Abraham",19,0,17.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:971171,"Walcker, Quentin",17,0,33.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Castres Olympique,sr:player:1977189,"Zarantonello, Loris",16,0,28.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2856541,"Augry, Simon",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:1374941,"Boudehent, Pierre",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:1970743,"Bouthier, Anthony",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:529940,"Cherry, David",2,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2121658,"De Benedittis, Wayan",1,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:1244668,"Gorrissen, Francisco",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:463372,"Kalamafoni, Sione",8,1,34.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:1687729,"Lafage, Maxime",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:848451,"Medrano, Santiago",3,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:514014,"Ruru, Michael",9,1,51.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2855435,"Surano, Paul",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2855381,"Desjeux, Matteo",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:1043805,"Stevenson, Ben",22,0,29.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:762920,"Alemanno, Matias",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2274683,"Hulleu, Nathanaël",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:2856297,"Nuu, Raymond",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:3253790,"Lashagashili, Ioane",20,0,29.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875712,2026-09-05,Rugby Club Vannes,sr:player:529070,"Mafileo, Sione",23,0,17.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2278669,"Rey, Jerome",1,1,55.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:1743311,"Marchand, Guillaume",2,1,55.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2694110,"Aptsiauri, Irakli",3,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2501481,"William, Théo",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2142320,"Guillard, M",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:3086716,"Deliance, Antoine",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:1261734,"Saghinadze, Beka",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2855319,"Shvangiradze, Beka",8,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:824514,"Cassang, Charlie",9,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:1687777,"Berdeu, Leo",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:766254,"Ioane, Monty",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:973365,"Millet, Theo",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2301807,"Masi, Iosefo",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:1694133,"Dumortier, Ethan",14,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2855919,"Lorre, Gabin",15,1,80.0,2
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:535082,"Chat, Camille",16,0,25.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2273187,"Moukoro, Thomas",17,0,25.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2785425,"Meliande, Martin",21,0,0.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Lyon Ou,sr:player:2278667,"Parisien, Alfred",22,0,0.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2821811,"Akhaladze, Giorgi",1,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2854465,"Massa, Barnabe",2,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2505781,"Dzmanashvili, Giorgi",3,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2854489,"Lanen, Thibaud",4,1,57.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:1059079,"Swain, Darcy",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2273013,"Tixeront, Killian",6,1,50.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:1001517,"Kremer, Marcos",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:3156514,"Vermeulen, Louis",8,1,57.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2272977,"Jauneau, Baptiste",9,1,65.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:1649422,"Plummer, Harry",10,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:3204374,"Brosset, Yanis",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2822087,"Darricarrère, Léon",12,1,77.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2855945,"Loaloa, Alivereti",13,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:973325,"Delguy, Bautista",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:511644,"Hamdaoui, Kylan",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:952326,"Fourcade, Etienne",16,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2854445,"Lotrian, Sacha",17,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:1863866,"Ratuva, Tevita",18,0,23.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2855901,"Noah, Kevin",19,0,23.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:1694143,"Germain, Baptiste",20,0,15.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2285591,"Lam, AJ",21,0,3.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2141724,"Hemery, Anthime",22,0,30.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875716,2026-09-05,Asm Clermont Auvergne,sr:player:2854453,"Montagne, Regis",23,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2333695,"Erdocio, Baptiste",1,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2855163,"Akrab, Lyam",2,1,57.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2178298,"Japaridze, Luka",3,1,57.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:497082,"Beard, Adam",4,1,44.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2273075,"Duguid, Tyler",5,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:512794,"Camara, Yacouba",6,1,67.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2342047,"Masibaka, Alex",8,1,17.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2107894,"Bécognée, Alexandre",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:504904,"Price, Ali",9,1,63.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:762254,"Miotti, Hugo Domingo",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2106492,"Taofifénua, Donovan",11,1,12.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2890751,"Piccardo, Justo",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2855199,"Cadot, Auguste",13,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2142254,"Delibes, D",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:858184,"Banks, Thomas",15,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:914690,"Uelese, Jordan",16,0,23.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2856351,"Welsch, Valentin",17,0,63.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:952350,"Verhaeghe, Florian",18,0,36.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:511824,"Chalureau, Bastien",19,0,13.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:2855193,"Bernadet, Alexis",20,0,17.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Montpellier Herault Rugby,sr:player:1326142,"Haouas, Mohamed",23,0,0.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:534782,"Kaulashvili, Lekso",1,1,51.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1970755,"Delhommel, Youri",2,1,51.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1146766,"Laclayat, Thomas",3,1,58.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:511800,"Jolmes, Thomas",4,1,51.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:952346,"Pesenti, Baptiste",5,1,58.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:535478,"Gorgadze, Beka",6,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:2854833,"Credoz, Loic",7,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:528440,"Isa, Facundo",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1261722,"Garcia, Gonzalo Jesus",9,1,61.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:943334,"Simmonds, Joe",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:2854895,"Grandidier Nkanang, Aaron",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1436582,"Manu, Tumua",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:2488603,"Gailleton, Emilien",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:2251675,"Marta, Rodrigo",14,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1002801,"Maddocks, Jack",15,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:990647,"Rey, Lucas",16,0,29.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:3109938,"Etcheberre, Alexandre",17,0,29.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:960434,"Capelli, Mickael",19,0,22.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:1559308,"Grondona, Santiago",20,0,29.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:530374,"Daubagna, Thibault",21,0,19.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875718,2026-09-05,Section Paloise,sr:player:3253758,"Adam, Joseph",23,0,22.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2488625,"Abramishvili, Sergo",1,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:500750,"Alo-Emile, Paul",3,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2184614,"Azagoh, Pierre Henri",5,1,62.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2275645,"Barre, Léo",15,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1651285,"Carbonel, Louis",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1647106,"Chapuis, Ryan",7,1,72.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:765974,"Etien, Lester",11,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:511958,"Gabrillagues, Paul",4,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1558876,"Halaifonua, Tanginoa",6,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:488222,"Kerr-Barlow, Tawera",9,1,60.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1695205,"McLean, Rufus",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2757035,"Nene, Noah",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:952994,"Nicotera, Giacomo",2,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1559314,"Tanga, Yoan",8,1,60.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1002887,"Ward, Jeremy Charles",13,1,49.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2856437,"Bue, Thomas",17,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1687753,"Duguivalu, Alivereti",22,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1694147,"Hirigoyen, Mathieu",19,0,8.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2740641,"Huguet, Pierre",18,0,18.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:765284,"Melikidze, Giorgi",23,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2856593,"Motassi Dibongue, Thibaut Robert",20,0,20.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:2333697,"Peyresblanques, Lucas",16,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,Stade Francais Paris,sr:player:1692599,"Vili, Tani",21,0,20.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2857883,"Aucagne, Antoine",15,1,61.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:501256,"Ceccarelli, Pietro",3,1,74.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2273251,"Della Schiava, Noé",6,1,58.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2251673,"Madeira, José",7,1,39.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:1260220,"Ennor, Braydon",13,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:766068,"Forletta, Enzo",1,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:3064413,"Forner, Theo",11,1,80.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:1693855,"Garbisi, Paolo",10,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:512822,"Gray, Jonny",4,1,67.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:492496,"Hall, James",9,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2740155,"Le Corvec, Matto",8,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2275615,"Montgaillard, Victor",2,1,49.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2710386,"Rabut, Maelan",12,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:1137945,"Reece, Sevu",14,1,80.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2141726,"Warion, Adrien",5,1,67.0,1
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2794687,"Amituanai, Bradley",23,0,6.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2181758,"Buliruarua, Eneriko",22,0,19.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:1692429,"Devaux, Bruce",17,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:1256808,"Malolo, Sama",16,0,31.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:2763651,"Tuilagi, Posolo",18,0,13.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:526914,"van Tonder, Jaco",20,0,22.0,0
+Top 14,Top 14 26/27,sr:sport_event:72875722,2026-09-05,USA Perpignan,sr:player:535102,"Yato, Peceli",19,0,13.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:765328,"Neti, Rodrigue",1,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:955152,"Mauvaka, Peato",2,1,51.0,2
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2855621,"Merkler Perez, Joel",3,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2507881,"Brennan, Joshua",4,1,38.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2070241,"Meafou, Emmanuel",5,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:511830,"Cros, Francois",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:860628,"Willis, Jack",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:960436,"Roumat, Alexandre",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:768562,"Dupont, Antoine",9,1,65.0,1
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:1146768,"N'tamack, Romain",10,1,76.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:1611832,"Lebel, Matthis",11,1,55.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2012195,"Chocobares, Santiago",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:1068550,"Barassi, Pierre-Louis",13,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:511728,"Thomas, Teddy",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:848313,"Kinghorn, Blair",15,1,71.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:1611818,"Ainuu, David",16,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:767768,"Marchand, Julien",21,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2507939,"Verge, Clement",23,0,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:1887358,"Flament, Thibaud",18,0,42.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2507889,"Graou, Paul",20,0,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:2855779,"Gourgues, Kalvin",19,0,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:548996,"Ramos, Thomas",22,0,25.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Stade Toulousain,sr:player:784305,"Aldegheri, Dorian",17,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2333695,"Erdocio, Baptiste",1,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:914690,"Uelese, Jordan",2,1,57.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:1326142,"Haouas, Mohamed",3,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:952350,"Verhaeghe, Florian",4,1,72.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2273075,"Duguid, Tyler",5,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2273107,"Nouchi, Lenni",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2107894,"Bécognée, Alexandre",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:500306,"Vunipola, Viliami",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:504904,"Price, Ali",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:762254,"Miotti, Hugo Domingo",10,1,58.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2106492,"Taofifénua, Donovan",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2855199,"Cadot, Auguste",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:1338068,"Vincent, Arthur",13,1,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:858184,"Banks, Thomas",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:952338,"N'Gandebe, Gabriel",14,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:506948,"Tolofua, Christopher",23,0,0.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:766068,"Forletta, Enzo",19,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2506761,"Coly, Leo",17,0,22.0,1
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:2890751,"Piccardo, Justo",22,0,65.0,1
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:1146744,"Darmon, Thomas",18,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:511878,"Hounkpatin, Wilfrid",20,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72255568,2026-06-27,Montpellier Herault Rugby,sr:player:497082,"Beard, Adam",18,0,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2333695,"Erdocio, Baptiste",1,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:914690,"Uelese, Jordan",2,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:1326142,"Haouas, Mohamed",3,1,58.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:952350,"Verhaeghe, Florian",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2273075,"Duguid, Tyler",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2273107,"Nouchi, Lenni",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2107894,"Bécognée, Alexandre",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:418688,"Vunipola, Viliami",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:504904,"Price, Ali",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:762254,"Miotti, Hugo Domingo",10,1,60.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2106492,"Taofifénua, Donovan",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2855199,"Cadot, Auguste",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:1338068,"Vincent, Arthur",13,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:952338,"N'Gandebe, Gabriel",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:858184,"Banks, Thomas",15,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:506948,"Tolofua, Christopher",16,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:766068,"Forletta, Enzo",17,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2506761,"Coly, Leo",20,0,20.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:2890751,"Piccardo, Justo",21,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Montpellier Herault Rugby,sr:player:511878,"Hounkpatin, Wilfrid",23,0,22.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2825033,"Iscaro, Jack",1,1,51.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:952994,"Nicotera, Giacomo",2,1,55.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:500750,"Alo-Emile, Paul",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:511958,"Gabrillagues, Paul",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:952346,"Pesenti, Baptiste",5,1,50.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:766806,"Briatte, Romain",7,1,55.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1559314,"Tanga, Yoan",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:488222,"Kerr-Barlow, Tawera",9,1,56.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1651285,"Carbonel, Louis",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:530998,"Marchant, Joe",11,1,70.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2757035,"Nene, Noah",12,1,53.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1002887,"Ward, Jeremy Charles",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2712772,"Dakuwaqa, Peniasi",14,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2275645,"Barre, Léo",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1558876,"Halaifonua, Tanginoa",6,1,35.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2333697,"Peyresblanques, Lucas",16,0,25.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:815696,"Paiva, Thierry",17,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2184614,"Azagoh, Pierre Henri",18,0,30.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1694147,"Hirigoyen, Mathieu",19,0,25.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1692599,"Vili, Tani",21,0,27.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1972841,"Ezeala, Samuel",22,0,10.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:1647100,"Alo-Emile, Moses",23,0,45.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106792,2026-06-20,Stade Francais Paris,sr:player:2856593,"Motassi Dibongue, Thibaut Robert",20,0,24.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:765328,"Neti, Rodrigue",1,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:955152,"Mauvaka, Peato",2,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2855621,"Merkler Perez, Joel",3,1,53.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2507881,"Brennan, Joshua",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2070241,"Meafou, Emmanuel",5,1,53.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:511830,"Cros, Francois",6,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:860628,"Willis, Jack",7,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:960436,"Roumat, Alexandre",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:768562,"Dupont, Antoine",9,1,51.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2507931,"N'tamack, Theo",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:1611832,"Lebel, Matthis",11,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2012195,"Chocobares, Santiago",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:1068550,"Barassi, Pierre-Louis",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:511728,"Thomas, Teddy",14,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:848313,"Kinghorn, Blair",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:1887358,"Flament, Thibaud",19,0,27.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:2507889,"Graou, Paul",20,0,29.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Stade Toulousain,sr:player:784305,"Aldegheri, Dorian",23,0,27.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:1261728,"Gogichashvili, Guram",1,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:2502197,"Tarrit, Janick",2,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:1645924,"Bamba, Demba",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:531048,"Hill, Jonny",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:475106,"Taofifenua, Romain",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:2273165,"Baudonne, Maxime",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:2855143,"Manyarara, Shingirai",7,1,16.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:2854685,"Carbonneau, Leo",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:1326336,"Gibert, Antoine",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:2273197,"Spring, Max",11,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:1003503,"Manu, Joseph",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:518156,"James, Sam",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:503626,"Hughes, Nathan",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:528444,"Tuisova, Josua",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:511834,"Fickou, Gael",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:72106790,2026-06-19,Racing 92,sr:player:1559612,"Tagitagivalu, Lekima",18,0,64.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1647100,"Alo-Emile, Moses",1,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:952994,"Nicotera, Giacomo",2,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:500750,"Alo-Emile, Paul",3,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:511958,"Gabrillagues, Paul",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:2184614,"Azagoh, Pierre Henri",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1558876,"Halaifonua, Tanginoa",6,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:766806,"Briatte, Romain",7,1,80.0,3
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1559314,"Tanga, Yoan",8,1,69.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:488222,"Kerr-Barlow, Tawera",9,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1651285,"Carbonel, Louis",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:530998,"Marchant, Joe",11,1,80.0,2
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:2757035,"Nene, Noah",12,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1002887,"Ward, Jeremy Charles",13,1,69.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:2712772,"Dakuwaqa, Peniasi",14,1,78.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:2275645,"Barre, Léo",15,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1694147,"Hirigoyen, Mathieu",19,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:511996,"Abadie, Paul",20,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1692599,"Vili, Tani",21,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:1972841,"Ezeala, Samuel",22,0,11.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:765284,"Melikidze, Giorgi",23,0,8.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Francais Paris,sr:player:2825033,"Iscaro, Jack",17,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2712788,"Timo, Andy",19,0,32.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:517048,"Seuteni, UJ",21,0,26.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2506903,"Penverne, Louis",17,0,30.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1694151,"Lavault, Thomas",18,0,50.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2273303,"Kuntelia, Aleksandre",23,0,70.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:960134,"Bourgarit, Pierre",16,0,30.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:533316,"Botia, Levani",20,0,30.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1325424,"Alldritt, Gregory",8,1,69.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1694125,"Boudehent, Paul",6,1,48.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:765976,"Cancoriet, Judicael",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1687727,"Favre, Jules",12,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:994075,"Hastoy, Antoine",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2273271,"Jegou, Oscar",7,1,50.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2855647,"Kante Samba, Charles",4,1,30.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2856571,"Lagivala, Semi",13,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:535510,"Latu, Tolu",2,1,50.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2111942,"Le Garrec, Nolan",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:2084169,"Niniashvili, Davit",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:504460,"Nowell, Jack",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1079536,"Sclavi, Joel",3,1,10.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:1970261,"Wardi, Reda",1,1,50.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965354,2026-06-14,Stade Rochelais,sr:player:589894,"West, Ihaia",15,1,54.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2855123,"Julien, Lino",1,1,44.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2703794,"Latterade, Romain",2,1,49.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:507010,"Francis, Tom",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1086468,"Tarazona, Andres Zafra",4,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2108878,"Youyoutte,, Yannick",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2854771,"Harrison, Taimana",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2854757,"Gambini, Charly",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1261738,"Jalagonia, Tornike",8,1,35.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1070178,"Coville, Arthur",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2302339,"Muntz, Caleb",10,1,75.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2854797,"Drouet, Leo",11,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:762510,"Finau, Kaveinga",12,1,63.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:2274157,"Lapegue, Adrien",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:3050573,"Portela Morais Vareiro, Manuel",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1872372,"Pifeleti, Kapeli",16,0,31.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:797264,"Vernet, Thomas",17,0,36.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1002821,"Rodda, Izack",18,0,31.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1496819,"Tuisue, Albert",20,0,45.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1672255,"Lucas, Pierre",22,0,17.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,Provence Rugby,sr:player:1083084,"Bituniyata, Setareki",13,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:512426,"Tetrashvili, Giorgi",1,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:1256808,"Malolo, Sama",2,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:489986,"Brookes, Kieran",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:785177,"Tanguy, Mathieu",4,1,27.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:512822,"Gray, Jonny",5,1,53.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2288667,"Hicks, Max",6,1,66.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:526914,"van Tonder, Jaco",7,1,40.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2092946,"Oviedo, Joaquín",8,1,62.0,3
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:492496,"Hall, James",9,1,63.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:468982,"Urdapilleta, Benjamin",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:3064413,"Forner, Theo",11,1,18.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:762932,"De la Fuente, Jeronimo",12,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:1687753,"Duguivalu, Alivereti",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2855415,"Joseph, Jefferson Lee",14,1,37.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:516924,"Allan, Tommaso",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2201848,"Ruiz, Ignacio",16,0,43.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:1692429,"Devaux, Bruce",17,0,62.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:535102,"Yato, Peceli",18,0,53.0,1
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2763651,"Tuilagi, Posolo",19,0,27.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:2740155,"Le Corvec, Matto",20,0,40.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:512056,"Ecochard, Tom",21,0,17.0,0
+Top 14,Top 14 25/26,sr:sport_event:71971978,2026-06-14,USA Perpignan,sr:player:1432419,"Petaia, Jordan",22,0,14.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:534782,"Kaulashvili, Lekso",1,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:762918,"Montoya, Julian",2,1,52.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:1146766,"Laclayat, Thomas",3,1,18.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2822085,"Auradou, Hugo",4,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2854723,"Maximin, Jimi",5,1,52.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:503296,"Whitelock, Luke",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:1694159,"Zegueur, Sacha",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:535478,"Gorgadze, Beka",8,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:498918,"Robson, Daniel",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:943334,"Simmonds, Joe",10,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2854895,"Grandidier Nkanang, Aaron",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2854871,"Brau Boire, Fabien",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2488603,"Gailleton, Emilien",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2854867,"Arfeuil, Gregoire",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:2822083,"Attissogbé, Théo",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:990647,"Rey, Lucas",16,0,28.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:960434,"Capelli, Mickael",19,0,28.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Section Paloise,sr:player:763128,"Tokolahi, Siate",23,0,62.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:1261728,"Gogichashvili, Guram",1,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2502197,"Tarrit, Janick",2,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:1645924,"Bamba, Demba",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:512028,"Lainault, Thomas",4,1,44.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:475106,"Taofifenua, Romain",5,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2273165,"Baudonne, Maxime",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:531048,"Hill, Jonny",7,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2855143,"Manyarara, Shingirai",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2854685,"Carbonneau, Leo",9,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:1326336,"Gibert, Antoine",10,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2273197,"Spring, Max",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:1003503,"Manu, Joseph",12,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2287883,"Habosi, Vinaya",13,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2854585,"Hulleu, Wilfried",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:518156,"James, Sam",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:1559612,"Tagitagivalu, Lekima",18,0,36.0,0
+Top 14,Top 14 25/26,sr:sport_event:71965352,2026-06-13,Racing 92,sr:player:2856405,"Seunes, Ugo",20,0,15.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1981427,"Cormenier, Swan",1,1,64.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2854515,"Martin, Lucas",2,1,56.0,2
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2250715,"Tagi, Luke",3,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:533452,"Johnston, Ewan",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:854086,"Moon, Alexander",5,1,64.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1664053,"Fischer, Alexandre",6,1,57.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:511646,"Iturria, Arthur",7,1,72.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2854681,"Capilla, Esteban",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:464296,"Machenaud, Maxime",9,1,46.0,1
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2274161,"Segonds, Joris",10,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1694157,"Tiberghien, Cheikh",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:492618,"Tuilagi, Etuale Manusamoa",12,1,60.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2740643,"Arnaud, Erbinartegaray",13,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2740637,"Spring, Tom",14,1,80.0,2
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2854739,"Orabe, Yohan",15,1,80.0,1
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:952348,"Setiano, Emerick",17,0,0.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1261718,"Paulos Adler, Lucas Martin",18,0,16.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:2854663,"Traversier, Noa",19,0,23.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1694143,"Germain, Baptiste",20,0,34.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:1693859,"Mori, Federico",21,0,20.0,1
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,Aviron Bayonne,sr:player:512048,"Cotet, Pascal",23,0,24.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2876397,"Boyer Gallardo, Lorencio",1,1,47.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:1256808,"Malolo, Sama",2,1,47.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2275605,"Fakatika, Akato",3,1,72.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2141726,"Warion, Adrien",4,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2763651,"Tuilagi, Posolo",5,1,72.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:3207196,"Taty, Simon",6,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2740155,"Le Corvec, Matto",7,1,66.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2855411,"Velarte, Lucas",8,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:1001593,"Aprasidze, Gela",9,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:762284,"McIntyre, Jake",10,1,61.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:3207198,"Sol, Simon",11,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:3171672,"Mascarenc, Diego",12,1,55.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2181758,"Buliruarua, Eneriko",13,1,65.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2275587,"Duboit, Lucas",14,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:1970811,"Tedder, Tristan",15,1,80.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2945475,"Lotrian, Mathys",16,0,33.0,1
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2275643,"Roelofse, Nemo",17,0,33.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:765258,"Sobela, Patrick",19,0,14.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2888043,"Kretchmann, Gabin",21,0,19.0,0
+Top 14,Top 14 25/26,sr:sport_event:62109432,2026-06-06,USA Perpignan,sr:player:2901521,"Poulet, Job",22,0,25.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3050665,"Koteureu, Julien",1,1,48.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2854963,"Jouvin, Pierre",2,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3234868,"Audoire, Nail",3,1,48.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855001,"Bonnet, Matthieu",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2650785,"Eissmann, Javier",5,1,48.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855023,"Fineanganofo, Tomasi",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3234870,"Bozic, Damien",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855743,"Tolofua, Sialevailea",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855037,"Bellot, Dorian",9,1,66.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3005153,"Richardis, Lucien",10,1,52.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:1558618,"Etcheverry, Iban",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:1095686,"Muscarditz, Peyo",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2533571,"Cummins, Oliver",13,1,66.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855047,"Martins, Lucas",14,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855041,"Jean, Mathias",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2275605,"Fakatika, Akato",17,0,28.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:762380,"Madigan, John",18,0,32.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3234874,"Reggiardo, Valentino",20,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2854789,"Soulan, Jules",21,0,28.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:2855045,"Garrigues, Clement",22,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,SU Agen,sr:player:3050457,"Galvan, Gael",23,0,32.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854409,"Gauthier, Zack",1,1,66.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:930510,"Soury, Bastien",2,1,66.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854441,"Pertaia, Giorgi",3,1,66.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2050971,"Warner, Fergus Lee",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:1244698,"Leindekar, Manuel",5,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2915877,"Thompson, Josh",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2855841,"Pauta, Otunuku",8,1,75.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:1687795,"Berruyer, Antonin",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2333693,"Barnabé, Couilloud",9,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854531,"Navizet, Mael",10,1,53.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2712778,"Megdoud, Nadir",11,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:1068540,"Sawailau, Edward Dratai",12,1,57.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854553,"Fusier, Romain",13,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854533,"Trouilloud, Hugo",14,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2855771,"Alary, Thomas",15,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2856273,"Toevalu, Jeremy Paul",16,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:1694135,"Eglaine, Eli",17,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854537,"Davies, Samuel",21,0,27.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:512010,"Heriteau, Julien",22,0,23.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876252,2026-09-11,FC Grenoble Rugby,sr:player:2854415,"Lavoine, Theo",23,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:512048,"Cotet, Pascal",3,1,47.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2855123,"Julien, Lino",1,1,47.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2703794,"Latterade, Romain",2,1,48.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1002821,"Rodda, Izack",5,1,67.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2108878,"Youyoutte,, Yannick",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:766274,"Cazenave, Joris",9,1,63.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854757,"Gambini, Charly",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1261738,"Jalagonia, Tornike",8,1,63.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854541,"Trouilloud, Roman",10,1,80.0,2
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2601837,"Waqa, Etonia",6,1,80.0,2
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854797,"Drouet, Leo",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2274157,"Lapegue, Adrien",14,1,13.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854801,"Lenoir, Baptiste",13,1,77.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2855897,"Masiwini, Sireli",12,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854795,"Tui, Sione Feofa'aki",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2501207,"Azar, Aurelien",23,0,33.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1070178,"Coville, Arthur",20,0,17.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1672255,"Lucas, Pierre",22,0,67.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1687897,"Martel, Thibaut",19,0,17.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:1872372,"Pifeleti, Kapeli",16,0,32.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2855491,"Pontanier, Andrea",17,0,33.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2855729,"Portat, Raphael",18,0,13.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,Provence Rugby,sr:player:2854787,"Salles, Thomas",21,0,3.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:549006,"Belzons, Paul",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2856557,"Biscay, Imanol",9,1,59.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3240140,"Chauvet, Tom",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2111384,"Clavieres, Clément",15,1,67.0,2
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3240152,"Gomez, Théo",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2759953,"Hannoun, Victor",11,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2855645,"Huchet, Simon",5,1,72.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:1262460,"Jooste, Daniel",2,1,62.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3240120,"Maga, Morgan",4,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2854807,"Navizet, Hugo",13,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3240160,"Pipy, Gabin",14,1,46.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2856443,"Pomponio, Facundo",3,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2855693,"Richer, Edouard",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:797264,"Vernet, Thomas",1,1,65.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3240136,"Bévia, Théo",20,0,21.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2665339,"Crețu, Thomas",19,0,0.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:3050539,"Goyenech, Hugo",21,0,13.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2856487,"Lalanne, Matteo",23,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2855219,"Rouvelet, Titoan",22,0,34.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2855711,"Varenne, Loic",17,0,15.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2855165,"Veyrier, Jules",16,0,18.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2854649,"Lavergne, Loan",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876240,2026-09-11,RC Narbonne,sr:player:2856229,"Descoux, Louis",18,0,8.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:1994585,"Azariashvili, Luka",3,1,48.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855817,"Benoy, Gillian",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855851,"Canaleta, Thomas",6,1,40.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855949,"Courtaud, Pierre",14,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:529230,"Eru, Shahn",5,1,42.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:1001597,"Goginava, Luka",1,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:762070,"Koen, Sias",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855611,"Laharrague, Joseph",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:507226,"Malie, Charly",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2732960,"Martin, Mackenzie",7,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2856323,"Mechentel, Barnabe",11,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:1672651,"Plazy, Nicolas",13,1,78.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2901521,"Poulet, Job",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855819,"Dodson, Cameron",18,0,38.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855803,"El Maslouhi, Yahnis",17,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2854709,"Galletier, Guillaume",21,0,2.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855797,"Lockwood, Yanis",16,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:3235370,"Mafileo, Maka",23,0,40.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855839,"Payrastre, Antoine",19,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855087,"Verdu, Martin",20,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:530972,"Bau, Adrien",9,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,AS Beziers Herault,sr:player:2855631,"Sutidze, Nikolozi",2,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:3049073,"Arnold, Yan",1,1,59.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2884795,"Bousquet, Jules",9,1,64.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:3238220,"Calmon, Guillem",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:3238222,"Cellier, Anselme",15,1,27.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:511872,"Derrieux, Rudy",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2879367,"Ikahehegi, Aselo",3,1,23.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2501447,"Kane, Ahmed Tidiane",4,1,52.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:446888,"Kleynhans, Philippus Petrus",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855915,"Koroinawai, Jioji",13,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:1007665,"Reynolds, Shaun",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855923,"Rocher, Gabin",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2854549,"Tshimanga, Ebenezer",14,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855873,"Vallee, Camille",7,1,54.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2854507,"Viljoen, Johan Cilliers",2,1,38.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855895,"Bastide, Hugues",20,0,26.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:504036,"Botha, Arno",18,0,28.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2272981,"Kiteau, Henzo",23,0,21.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:3171606,"Lanen, Remy",19,0,17.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855789,"Pepin, Bastien",16,0,42.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855903,"Tarel, Simon",21,0,16.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2087755,"Turner, Liam",22,0,53.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:2855791,"Ungiadze, Luka",17,0,57.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876244,2026-09-11,Uson Nevers,sr:player:511648,"Jedrasiak, Paul",5,1,63.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:1002835,"Abdaladze, Vakhtang",1,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:498490,"Cooney, John",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:1086460,"Cros, Geoffrey",14,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:1561458,"Da Silva, Lucas",2,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2854657,"Gue, Sasha",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:1059733,"Judge, Christian",3,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2250617,"Luc, Aymeric",15,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2334095,"Masse, Gatien",13,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:506352,"Mikautadze, Konstantine",5,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2854687,"Noon, Lewis",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2856397,"Oudard, Lucas",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2822111,"Peysson, Yann",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2703796,"Ricard, Alexandre",4,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2854701,"Shvelidze, Georges",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,AC Brive,sr:player:2854675,"Sidobre, Maxime",9,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855291,"Asquini, Flavio",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:1096110,"Berenguel, Bastien",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855253,"Ciancio, Nicolas",3,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855093,"Idjellidaine, Theo",9,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:1629822,"Kpoku, Joel Awanka",5,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:3240608,"Labadie, Enzo",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855255,"Martinez, Jules",1,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:1559316,"Martinez, Clement",2,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:867780,"Olmstead, Evan",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855281,"Vignolles, Arthur",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:3240264,"Goutard, Boris",15,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855061,"Nalaga, Inoke",14,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:1970267,"Lafond, Baptiste",13,1,19.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:764352,"Septar, Atila",12,1,19.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2856329,"Patilla, Pablo",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:762242,"Ezcurra, Bautista",22,0,61.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876248,2026-09-11,Nissa Rugby,sr:player:2855427,"Ortolan, Massimo",21,0,61.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:765948,"Drean, Thibaud",1,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:1094148,"Leatigaga, Nephi",3,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854855,"Loiret, Etienne",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854849,"Nacika, Ratu Josaia",5,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:510278,"Barrere, Jean Baptiste",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854831,"Barrere, Louis",2,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854879,"Aletti, Arnaud",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854883,"Ausset, Paul Arnaud",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854905,"Ravier, Paul",9,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:816198,"Seguy, Romuald",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:955666,"Oltmann, Maxime",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854935,"Puntous, Benjamin",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854939,"Daguerre, Bastien",13,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2855763,"Ben Alla, Naim",14,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,US Dax,sr:player:2854925,"Duprat, Theo",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855813,"Trauth, Marco Miguel",1,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2740175,"Idoumi, Sacha",2,1,80.0,2
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855511,"Milasinovich, Gareth",3,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855733,"Descube, Hugo",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:516920,"Tauleigne, Marco",5,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855527,"Bruchet, Axel",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2064893,"Moore-Aiono, Izaiha",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855539,"Vachon, Matthieu",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855543,"Lhusero, Thomas",9,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:1994543,"Moura, Joris",10,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:1994581,"Randle, Calum",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:530558,"Marrou, Louis",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2274033,"Dupont, Joris",13,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:3174310,"Marsan, Paul",14,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876250,2026-09-11,Valence Romans Drome,sr:player:2855547,"Martin, Adrien",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:768144,"Abraham, Antoine",1,1,63.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:762316,"Kaitu'u, Feleti",2,1,53.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2273017,"Arroyo, Yannick",3,1,49.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2856371,"Bloemen, Koen",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:1672265,"Roussel, Alban",5,1,78.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2855991,"Picault, Wandrille",6,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2111392,"Hermet, Hugo",7,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:990643,"Godener, Loic",8,1,53.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:764970,"Lobzhanidze, Vasil",9,1,66.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2500443,"Matkava, Luka",10,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:765966,"Qadiri, Karim",11,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2312527,"Coombes Fabling, Liam",12,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:3183226,"Joly, Francois",13,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2856331,"Morland, Louis",14,1,75.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2855313,"Auradou, Paul",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2855975,"Ratajczak, Julien",16,0,27.0,3
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2855971,"Di Pietro, Remi",17,0,17.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:765926,"Phoenix, Battye Damon",18,0,2.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:3050833,"Guilly, Cyriac",20,0,27.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2855285,"Solinas, Jules",21,0,14.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2650779,"Ayarza, Iñaki",22,0,5.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,US Oyonnax,sr:player:2058363,"Abel, Charlie",23,0,31.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856349,"Mtchedlidze, Irakli",1,1,59.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2650597,"Nioradze, Luka",2,1,60.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:765124,"Kartvelishvili, Giorgi",3,1,74.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:3234912,"Ganiasvili, Guga",4,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:3234910,"Le Roux, Stephan",5,1,23.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856383,"Masterson, Eoghan Gerard",6,1,74.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856393,"Cambon, Theo",7,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2854859,"Tauiliili Pelesasa, Paulo",8,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2757037,"Labarbe, Kleo",9,1,54.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:3053357,"Brune, Noe",10,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2854891,"Carol, Thomas",11,1,80.0,1
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:1261746,"Abzhandadze, Tedo",15,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856427,"Yabaki, Simeli Gordon",14,1,61.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:3234922,"Azais, Nthan",12,1,74.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856425,"Bastard, Hugo",13,1,80.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856339,"Khonelidze, Basa",16,0,20.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856347,"Jean-Jacques, Gymael",17,0,5.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856361,"Slamani, Mehdi",18,0,6.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856399,"Delort, Lucas",19,0,57.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856401,"Hadinegoro, Boris",20,0,26.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856343,"Talalua, Karsen",21,0,6.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:2856423,"Pieters, Ronald",22,0,19.0,0
+Pro D2,Pro D2 26/27,sr:sport_event:72876254,2026-09-11,Stade Aurillacois,sr:player:982879,"De Clercq, Jean-Baptiste",23,0,6.0,0

@@ -673,14 +673,23 @@ def cmd_journee(args) -> int:
         # Wikipedia (une quinzaine de joueurs, soit ~1 par club) + une ligne
         # collective par club pour tout le reste de l'effectif.
         title("MARQUEURS D'ESSAIS")
-        joueurs = RF.load_try_scorers(comp_tpl, args.saison_courante)
-        if not joueurs.empty:
-            joueurs["equipe"] = joueurs["club"].map(lambda c: RF.resolve_team(c, connues))
-            inconnus = sorted(set(joueurs.loc[joueurs["equipe"].isna(), "club"]))
-            if inconnus:
-                print(f"   [i] clubs non apparies : {inconnus}")
-            joueurs = joueurs.dropna(subset=["equipe"])
-        joueurs = pd.concat([joueurs, RF.lignes_collectives(sorted(connues))], ignore_index=True)
+        # Feuilles de match Sportradar (tous les joueurs, minutes exactes)
+        # quand le stock en contient, + meilleurs marqueurs Wikipedia.
+        from .data import sportradar as SRD
+        wiki = RF.load_try_scorers(comp_tpl, args.saison_courante)
+        try:
+            srd = SRD.season_squads(comp_nom, args.saison_courante)
+        except Exception as e:
+            print(f"   [i] stock Sportradar illisible : {e}")
+            srd = pd.DataFrame()
+        if not srd.empty:
+            print(f"   Sportradar : {len(srd)} joueurs vus en match, {srd['club'].nunique()} clubs")
+        joueurs = RF.fusionner_effectifs(srd, wiki, connues)
+        # clubs dont la feuille de match est connue : il ne manque que le banc
+        couverts = set(srd["club"].map(lambda c: RF.resolve_team(c, connues))) if not srd.empty else set()
+        n_reste = {e: (3 if e in couverts else RF._RESTE_JOUEURS_XV) for e in connues}
+        joueurs = pd.concat([joueurs, RF.lignes_collectives(sorted(connues), n_reste)],
+                            ignore_index=True)
         sm = ScorerModel(PRIORS_RUGBY, k_shrink=args.k_shrink, full_match_minutes=80.0,
                          own_goal_share=0.0, penalty_rate=0.0)
 
@@ -976,6 +985,27 @@ def cmd_europe(args) -> int:
     if args.ouvrir:
         import webbrowser
         webbrowser.open("file:///" + chemin.replace("\\", "/"))
+    return 0
+
+
+def cmd_collecte_rugby(args) -> int:
+    """
+    Recolte les feuilles de match et chronologies Sportradar (Top 14, Pro D2)
+    dans data/rugby_sportradar.csv, dans la limite d'un budget de requetes.
+    """
+    from .data import sportradar as SRD
+
+    if not SRD.cle(args.cle_sportradar):
+        print("SPORTRADAR_KEY absente : collecte ignoree.")
+        return 0
+    title("COLLECTE SPORTRADAR")
+    reste = int(args.budget)
+    for comp in SRD.COMPETITIONS:
+        if reste < 4:
+            break
+        part = reste // 2 if comp == "Top 14" else reste
+        reste -= SRD.collect(comp, budget=part, api_key=args.cle_sportradar)
+    print(f"   budget restant : {reste}")
     return 0
 
 
@@ -1671,6 +1701,12 @@ def build_parser() -> argparse.ArgumentParser:
     lv = sub.add_parser("live", help="rafraichit une journee avec les scores en cours")
     lv.add_argument("--html", default="journee.html")
     lv.add_argument("--titre", default="Journée")
+    cr = sub.add_parser("collecte-rugby", help="feuilles de match Sportradar (Top 14, Pro D2) -> data/")
+    cr.add_argument("--budget", type=int, default=60, help="requetes maximum pour ce passage")
+    cr.add_argument("--cle-sportradar", dest="cle_sportradar", default=None,
+                    help="cle Sportradar (sinon SPORTRADAR_KEY)")
+    cr.set_defaults(func=cmd_collecte_rugby)
+
     lv.add_argument("--cle", default=None, help="cle The Odds API (rugby)")
     lv.add_argument("--cle-football", dest="cle_football", default=None,
                     help="cle API-Football (sinon API_FOOTBALL_KEY) : live de tout le football")

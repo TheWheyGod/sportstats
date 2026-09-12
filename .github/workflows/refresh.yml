@@ -101,6 +101,7 @@ jobs:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           FOOTBALL_DATA_ORG_KEY: ${{ secrets.FOOTBALL_DATA_ORG_KEY }}
           HIGHLIGHTLY_KEY: ${{ secrets.HIGHLIGHTLY_KEY }}
+          SPORTRADAR_KEY: ${{ secrets.SPORTRADAR_KEY }}
           PYTHONIOENCODING: utf-8
         run: python refresh.py ${{ steps.ctx.outputs.mode }}
 
@@ -121,9 +122,14 @@ jobs:
           git config user.name "sportvalue-bot"
           git config user.email "bot@users.noreply.github.com"
           cp docs/index.html /tmp/index.html
+          [ -f data/rugby_sportradar.csv ] && cp data/rugby_sportradar.csv /tmp/rugby_sportradar.csv
           git fetch origin main
           git reset --hard origin/main
           cp /tmp/index.html docs/index.html
+          if [ -f /tmp/rugby_sportradar.csv ]; then
+            mkdir -p data && cp /tmp/rugby_sportradar.csv data/rugby_sportradar.csv
+            git add data/rugby_sportradar.csv
+          fi
           git add docs/index.html
           # Rien a commiter = rien n'a change (typiquement : aucun match en cours).
           git diff --cached --quiet && echo "page inchangee" && exit 0

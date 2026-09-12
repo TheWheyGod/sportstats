@@ -293,6 +293,12 @@ ALIAS = {
     "montpellier": "Montpellier HR", "mhr": "Montpellier HR",
     "stade francais": "Stade français", "stade français": "Stade français",
     "stade français paris": "Stade français", "stade francais paris": "Stade français",
+    # noms Sportradar
+    "asm clermont auvergne": "ASM Clermont", "rc toulonnais": "RC Toulon",
+    "lyon ou": "Lyon OU", "rugby club vannes": "RC Vannes",
+    "aviron bayonne": "Aviron bayonnais", "montpellier herault rugby": "Montpellier HR",
+    "union bordeaux begles": "Union Bordeaux Bègles", "stade toulousain": "Stade toulousain",
+    "stade francais": "Stade français",
     # Pro D2 : noms courts des tableaux par journee et noms Highlightly ->
     # libelles des tableaux croises (historique)
     "agen": "SU Agen", "su agen": "SU Agen",
@@ -435,11 +441,70 @@ def load_try_scorers(competition: str, saison_courante: str, verbose: bool = Tru
     return agg.drop(columns=["poids"])
 
 
-def lignes_collectives(equipes, journee_hint: int = 0) -> pd.DataFrame:
-    """Une ligne 'Autres joueurs' par club : le reste de l'effectif au prior."""
+def lignes_collectives(equipes, n_joueurs=None) -> pd.DataFrame:
+    """
+    Une ligne 'Autres joueurs' par club : le reste de l'effectif au prior.
+    `n_joueurs` : dict club -> nombre de joueurs non listes a representer
+    (13 quand seuls les meilleurs marqueurs sont connus, 3 quand la feuille
+    de match complete est connue et qu'il ne manque que des remplacants).
+    """
+    n_joueurs = n_joueurs or {}
     return pd.DataFrame([{
         "joueur": "Autres joueurs", "club": e, "equipe": e, "poste": "collectif",
         "buts_hors_penalty": 0.0, "minutes": 0.0,
-        "minutes_attendues": 80.0 * _RESTE_JOUEURS_XV,
+        "minutes_attendues": 80.0 * n_joueurs.get(e, _RESTE_JOUEURS_XV),
         "saison_seule_passee": False, "tireur_penalty": 0,
     } for e in equipes])
+
+
+def _cle_joueur(nom: str) -> str:
+    """'Louis Bielle-Biarrey' / 'Bielle-Biarrey, Louis' -> 'l bielle-biarrey'."""
+    import unicodedata
+    n = str(nom or "")
+    if "," in n:
+        n = " ".join(reversed([x.strip() for x in n.split(",", 1)]))
+    n = unicodedata.normalize("NFKD", n).encode("ascii", "ignore").decode().lower()
+    parts = n.split()
+    return f"{parts[0][0]} {parts[-1]}" if parts else ""
+
+
+def fusionner_effectifs(sportradar: pd.DataFrame, wikipedia: pd.DataFrame,
+                        connues, verbose: bool = True) -> pd.DataFrame:
+    """
+    Effectifs = feuilles de match Sportradar (tous les joueurs ayant joue,
+    minutes exactes) enrichies des meilleurs marqueurs Wikipedia (essais et
+    minutes de la saison passee, tant que la collecte Sportradar de cette
+    saison-la n'est pas complete). Un joueur present des deux cotes fusionne ;
+    un joueur Wikipedia inconnu de Sportradar est ajoute tel quel.
+    Renvoie les lignes avec la colonne `equipe` (libelle Wikipedia).
+    """
+    sr = sportradar.copy() if sportradar is not None else pd.DataFrame()
+    wk = wikipedia.copy() if wikipedia is not None else pd.DataFrame()
+    for d in (sr, wk):
+        if not d.empty:
+            d["equipe"] = d["club"].map(lambda c: resolve_team(c, connues))
+            inconnus = sorted(set(d.loc[d["equipe"].isna(), "club"]))
+            if inconnus and verbose:
+                print(f"   [i] clubs non apparies : {inconnus}")
+            d.dropna(subset=["equipe"], inplace=True)
+            d["cle"] = d["joueur"].map(_cle_joueur)
+    if sr.empty:
+        return wk.drop(columns=["cle"], errors="ignore")
+    if wk.empty:
+        return sr.drop(columns=["cle"], errors="ignore")
+    idx = {(r.equipe, r.cle): i for i, r in sr.iterrows()}
+    ajouts = []
+    for _, r in wk.iterrows():
+        i = idx.get((r["equipe"], r["cle"]))
+        if i is None:
+            ajouts.append(r)
+            continue
+        # les essais et minutes Wikipedia sont ceux de la saison passee
+        # (ponderes) + saison en cours ; Sportradar a deja la saison en cours
+        # avec exactitude : on n'ajoute que la part "saison passee" si le
+        # stock Sportradar ne la contient pas encore pour ce joueur
+        if not bool(sr.at[i, "saison_seule_passee"]) and sr.at[i, "minutes"] < 400:
+            sr.at[i, "buts_hors_penalty"] += float(r["buts_hors_penalty"])
+            sr.at[i, "minutes"] += float(r["minutes"])
+    out = pd.concat([sr, pd.DataFrame(ajouts)], ignore_index=True) if ajouts else sr
+    return out.drop(columns=["cle"], errors="ignore")

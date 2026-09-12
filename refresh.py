@@ -50,6 +50,7 @@ REQUISES = ("ODDS_API_KEY", "API_FOOTBALL_KEY")
 OPTIONNELLES = {
     "FOOTBALL_DATA_ORG_KEY": "buteurs et passeurs limites a la Premier League",
     "HIGHLIGHTLY_KEY": "Top 14 / Pro D2 sans heure exacte ni direct",
+    "SPORTRADAR_KEY": "pas de nouvelles feuilles de match rugby (stock existant conserve)",
 }
 
 
@@ -195,6 +196,9 @@ def complet() -> None:
     for f in (SLATE, HTML):
         if f.exists():
             f.unlink()
+    # Feuilles de match Sportradar : 60 requetes par jour au plus, le stock
+    # grossit d'un jour a l'autre (commite avec la page).
+    run("collecte-rugby", "--budget", "60")
     # Rugby d'abord : Top 14 et Pro D2 ne coutent rien, la NRL 1 credit.
     for sport in ("nrl", "top14", "prod2"):
         run("journee", "--sport", sport, "--html", str(HTML), "--ajouter",
