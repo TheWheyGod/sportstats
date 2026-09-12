@@ -658,12 +658,16 @@ _CSS_SLATE = """
 .mwhen{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); line-height:1.4}
 .mwhen b{display:block; color:var(--ink-2); font-weight:500; font-size:11px;
          letter-spacing:.08em; text-transform:uppercase}
-/* Grille 3 colonnes : chaque equipe a sa colonne, et son nombre de buts
-   attendus tombe juste dessous. En ligne simple, "0.99" se retrouvait sous
-   la fin du nom de l'equipe a domicile : illisible sans legende. */
-.mteams{display:grid; grid-template-columns:auto auto minmax(0,1fr); align-items:end;
-        font-family:"Instrument Serif",Georgia,serif; font-size:22px; line-height:1.2; min-width:0}
-.mteams .h{color:var(--home)} .mteams .a{color:var(--away)}
+/* Tableau d'affichage : deux colonnes EGALES autour du tiret, nom a domicile
+   cale a droite, nom exterieur cale a gauche, chaque nombre de buts attendus
+   sous son equipe. Avec une premiere colonne "auto", un nom long a domicile
+   (Cronulla Sutherland Sharks) prenait toute la place et poussait
+   "North Queensland Cowboys" sur trois lignes, sous les barres. */
+.mteams{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:end;
+        font-family:"Instrument Serif",Georgia,serif; font-size:22px; line-height:1.15; min-width:0}
+.mteams .h,.mteams .a{overflow-wrap:anywhere; text-wrap:balance}
+.mteams .h,.mteams .xh{color:var(--home); text-align:right; justify-self:end}
+.mteams .a,.mteams .xa{color:var(--away); text-align:left; justify-self:start}
 .mteams .sep{color:var(--ink-3); font-size:15px; padding:0 8px 2px; text-align:center}
 .mteams .xg,.mteams .xl{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3);
                         margin-top:3px; line-height:1.3}
@@ -768,8 +772,8 @@ def build_slate_report(
         unite = UNITES.get(sport, "points")
         # Sous chaque nom, l'esperance de l'equipe ; la legende au centre.
         # Rien quand le sport n'a pas d'esperance par camp (tennis).
-        xg_row = (f'<span class="xg">{xh:.2f}</span><span class="xl">{unite} attendus</span>'
-                  f'<span class="xg">{xa:.2f}</span>') if xg else ""
+        xg_row = (f'<span class="xg xh">{xh:.2f}</span><span class="xl">{unite} attendus</span>'
+                  f'<span class="xg xa">{xa:.2f}</span>') if xg else ""
 
         # deux marches cles, choisis selon le sport
         keys = []
