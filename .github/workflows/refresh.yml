@@ -12,12 +12,18 @@
 # heure de Paris (TZ ci-dessous) : les dates "aujourd'hui / demain" et
 # l'horodatage "genere le" sont les memes que sur le PC.
 #
+# GitHub ne garantit pas l'heure d'un cron : retards de deux heures observes,
+# et parfois pas de run du tout. D'ou le cron de secours de 07:15 UTC, et
+# surtout la regle dans refresh.py : tout passage "live" qui trouve une
+# journee datee d'hier refait le cycle complet a sa place.
+#
 # La page produite est commitee dans docs/ et servie par GitHub Pages.
 name: refresh
 
 on:
   schedule:
     - cron: "30 5 * * *"          # journee complete, 07:30 Paris (ete)
+    - cron: "15 7 * * *"           # secours : refait la journee si celle du matin a saute
     - cron: "5 9-21 * * *"         # live, toutes les heures 11h-23h Paris (ete)
   workflow_dispatch:
     inputs:
@@ -82,7 +88,9 @@ jobs:
       - name: Restaurer la journee
         uses: actions/cache/restore@v4
         with:
-          path: journee.slate
+          path: |
+            journee.slate
+            journee.date
           key: slate-${{ github.run_id }}
           restore-keys: slate-
 
@@ -98,7 +106,9 @@ jobs:
         if: always()
         uses: actions/cache/save@v4
         with:
-          path: journee.slate
+          path: |
+            journee.slate
+            journee.date
           key: slate-${{ github.run_id }}
 
       # La page est reposee sur l'etat COURANT de main : si un commit est

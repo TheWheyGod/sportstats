@@ -1072,6 +1072,23 @@ def cmd_live(args) -> int:
               f"~{round(mins)}e min -> probabilites recalculees")
 
     print(f"\n{n_live} match(s) recalcule(s), {n_fin} termine(s)")
+
+    # Les matchs de la veille sortent de la page au premier passage du jour,
+    # sans attendre le cycle complet du matin (que GitHub peut retarder de
+    # plusieurs heures). Un match encore en cours apres minuit reste.
+    from zoneinfo import ZoneInfo
+    auj = datetime.now(ZoneInfo("Europe/Paris")).strftime("%Y%m%d")
+
+    def _cle_jour(m):
+        d = str(m.get("date", ""))
+        return f"{d[6:]}{d[3:5]}{d[:2]}" if len(d) == 10 else "99999999"
+
+    avant = len(slate)
+    slate = [m for m in slate
+             if _cle_jour(m) >= auj or (m.get("live") or {}).get("statut") == "en_cours"]
+    if len(slate) != avant:
+        print(f"   {avant - len(slate)} match(s) de la veille retire(s) de la page")
+
     sidecar.write_bytes(pickle.dumps(slate))
     chemin = write_slate(args.html, slate, titre=args.titre)
     print(f"   Rapport : {chemin}")

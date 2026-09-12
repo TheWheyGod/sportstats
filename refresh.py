@@ -35,6 +35,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 HTML = ROOT / "journee.html"
 SLATE = ROOT / "journee.slate"
+# Date (Paris) du dernier cycle complet. Transite par le cache d'Actions avec
+# la journee : c'est elle qui dit si la journee affichee est celle du jour.
+DATE_JOURNEE = ROOT / "journee.date"
 FRAGMENT = ROOT / "artifact.html"
 TITRE = "Football mondial + rugby"
 
@@ -172,6 +175,18 @@ def fragment() -> None:
           f"{len(frag)/1024:.0f} Ko -> {FRAGMENT.name}", flush=True)
 
 
+def _aujourdhui() -> str:
+    from zoneinfo import ZoneInfo
+    return datetime.now(ZoneInfo("Europe/Paris")).strftime("%Y-%m-%d")
+
+
+def journee_perimee() -> bool:
+    """Vrai si aucun cycle complet n'a tourne aujourd'hui (heure de Paris)."""
+    if not SLATE.exists() or not DATE_JOURNEE.exists():
+        return True
+    return DATE_JOURNEE.read_text(encoding="utf-8").strip() != _aujourdhui()
+
+
 def complet() -> None:
     print(f"=== CYCLE COMPLET {datetime.now():%d/%m %H:%M} ===", flush=True)
     for f in (SLATE, HTML):
@@ -185,13 +200,19 @@ def complet() -> None:
     run("journee", "--sport", "football", "--leagues", "tout",
         "--source", "apifootball", "--buteurs", "--absences",
         "--html", str(HTML), "--ajouter", "--titre", TITRE)
+    if SLATE.exists():
+        DATE_JOURNEE.write_text(_aujourdhui(), encoding="utf-8")
     fragment()
 
 
 def live() -> None:
     print(f"=== LIVE {datetime.now():%d/%m %H:%M} ===", flush=True)
-    if not SLATE.exists():
-        print("pas de journee : lancer d'abord `refresh.py complet`", flush=True)
+    # GitHub retarde ou saute parfois le cron du matin de plusieurs heures.
+    # Le premier passage de la journee, quel qu'il soit, fait alors le cycle
+    # complet a sa place : la page ne reste jamais sur la veille.
+    if journee_perimee():
+        print("journee absente ou datee d'hier : cycle complet a la place du live", flush=True)
+        complet()
         return
     # Football : API-Football, tous les championnats, 2 requetes. Rugby :
     # The Odds API, NRL seulement (--leagues borne le cout en credits).
