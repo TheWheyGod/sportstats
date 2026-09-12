@@ -635,6 +635,21 @@ def cmd_journee(args) -> int:
         print("\nMODELE " + str(model.base.params_summary()))
         comp = "Top 14" if sport == "top14" else "Pro D2"
 
+        # Marqueurs d'essais : les meilleurs marqueurs du championnat selon
+        # Wikipedia (une quinzaine de joueurs, soit ~1 par club) + une ligne
+        # collective par club pour tout le reste de l'effectif.
+        title("MARQUEURS D'ESSAIS")
+        joueurs = RF.load_try_scorers(comp_tpl, args.saison_courante)
+        if not joueurs.empty:
+            joueurs["equipe"] = joueurs["club"].map(lambda c: RF.resolve_team(c, connues))
+            inconnus = sorted(set(joueurs.loc[joueurs["equipe"].isna(), "club"]))
+            if inconnus:
+                print(f"   [i] clubs non apparies : {inconnus}")
+            joueurs = joueurs.dropna(subset=["equipe"])
+        joueurs = pd.concat([joueurs, RF.lignes_collectives(sorted(connues))], ignore_index=True)
+        sm = ScorerModel(PRIORS_RUGBY, k_shrink=args.k_shrink, full_match_minutes=80.0,
+                         own_goal_share=0.0, penalty_rate=0.0)
+
         for r in a_venir.itertuples(index=False):
             h = RF.resolve_team(r.home, connues)
             a = RF.resolve_team(r.away, connues)
@@ -648,7 +663,15 @@ def cmd_journee(args) -> int:
                 from datetime import datetime as _dt, timedelta as _td
                 ctx["weather"] = wx.venue_weather(h, _dt.now() + _td(days=args.dans_jours))
             sd = model.predict(h, a, context=ctx)
-            marches = P.rugby_markets(sd)
+            ts = None
+            sh, sa = joueurs[joueurs["equipe"] == h], joueurs[joueurs["equipe"] == a]
+            connus = int((sh["poste"] != "collectif").sum() + (sa["poste"] != "collectif").sum())
+            # Sans le moindre joueur connu, le marche se reduirait a deux
+            # lignes collectives : on ne l'affiche pas.
+            if connus and not sh.empty and not sa.empty and hasattr(sd, "expected_tries"):
+                th, ta = sd.expected_tries
+                ts = sm.predict_match(sh, sa, th, ta)
+            marches = P.rugby_markets(sd, ts)
             # Une journee s'etale sur deux jours et Wikipedia ne donne pas la
             # date match par match : on transporte la PLAGE plutot que
             # d'affirmer un jour precis pour chaque rencontre.
@@ -658,7 +681,7 @@ def cmd_journee(args) -> int:
                           "date_fin": fin.strftime("%d/%m/%Y")
                                       if fin is not None and pd.notna(fin) else "",
                           "home": h, "away": a, "marches": marches,
-                          "sd": sd, "scorers": None})
+                          "sd": sd, "scorers": ts})
             v = marches["vainqueur"]
             print(f"   {h} - {a}   1 {100*v['1']:.0f}%  2 {100*v['2']:.0f}%   "
                   f"[{sd.expected_home:.0f}-{sd.expected_away:.0f}] "

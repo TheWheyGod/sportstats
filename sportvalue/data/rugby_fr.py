@@ -292,6 +292,7 @@ ALIAS = {
     "bayonne": "Aviron bayonnais", "aviron bayonnais": "Aviron bayonnais",
     "montpellier": "Montpellier HR", "mhr": "Montpellier HR",
     "stade francais": "Stade français", "stade français": "Stade français",
+    "stade français paris": "Stade français", "stade francais paris": "Stade français",
     "paris": "Stade français", "montauban": "US Montauban",
 }
 
@@ -309,3 +310,117 @@ def resolve_team(nom: str, connues) -> str | None:
     if len(cands) == 1:
         return cands.pop()
     return None
+
+
+# --------------------------------------------------------------------------
+# Marqueurs d'essais (tables "Meilleurs marqueurs" des pages de saison)
+# --------------------------------------------------------------------------
+# Poste Wikipedia (francais, parfois compose "Ailier, arriere") -> prior.
+_POSTES_FR = [
+    ("ailier", "ailier"), ("arrière", "arriere"), ("arriere", "arriere"),
+    ("centre", "centre"), ("troisième ligne", "troisieme_ligne"),
+    ("troisieme ligne", "troisieme_ligne"), ("numéro 8", "troisieme_ligne"),
+    ("demi de mêlée", "demi_de_melee"), ("demi de melee", "demi_de_melee"),
+    ("demi d'ouverture", "ouverture"), ("ouverture", "ouverture"),
+    ("deuxième ligne", "deuxieme_ligne"), ("deuxieme ligne", "deuxieme_ligne"),
+    ("pilier", "premiere_ligne"), ("talonneur", "premiere_ligne"),
+]
+_RESTE_JOUEURS_XV = 13       # joueurs d'un XV + banc jamais listes, en moyenne
+_DECAY_PREV = 0.6
+# Les joueurs listes sont les stars du championnat : ils changent moins de
+# club que la moyenne, et Wikipedia n'offre aucun effectif pour verifier.
+_PRESENCE_PREV = 0.8
+
+
+def _poste_fr(texte: str) -> str:
+    t = str(texte or "").lower()
+    for cle, poste in _POSTES_FR:
+        if cle in t:
+            return poste
+    return "inconnu"
+
+
+def _table_marqueurs(html: str):
+    """La table 'Meilleurs marqueurs d'essais' : Joueur, Club, Poste, Essais, MJ, TJ."""
+    try:
+        tables = pd.read_html(io.StringIO(html))
+    except ValueError:
+        return None
+    for t in tables:
+        cols = [str(c).strip().lower() for c in t.columns]
+        if "essais" in cols and "joueur" in cols and "club" in cols and "points" not in cols:
+            t = t.copy()
+            t.columns = cols
+            return t
+    return None
+
+
+def load_try_scorers(competition: str, saison_courante: str, verbose: bool = True) -> pd.DataFrame:
+    """
+    Meilleurs marqueurs d'essais, saison en cours + saison passee, au format
+    ScorerModel : joueur, equipe (nom Wikipedia du club), poste, minutes,
+    buts_hors_penalty (= essais), minutes_attendues, saison_seule_passee.
+
+    COUVERTURE VOLONTAIREMENT ASSUMEE COMME FAIBLE : Wikipedia ne liste que
+    les 10 a 15 meilleurs marqueurs du championnat, soit environ un joueur
+    par club. Tous les autres sont regroupes par une ligne collective par
+    club, ajoutee par l'appelant (voir cli), pour que la somme des esperances
+    reste celle de l'equipe.
+    """
+    debut = int(str(saison_courante)[:4])
+    frames = []
+    for annee, poids, presence in ((debut, 1.0, 1.0), (debut - 1, _DECAY_PREV, _PRESENCE_PREV)):
+        saison = f"{annee}-{annee + 1}"
+        titre = competition.format(saison=saison)
+        try:
+            t = _table_marqueurs(_page_html(titre))
+        except Exception as e:
+            if verbose:
+                print(f"   [!] marqueurs {saison} : {type(e).__name__}")
+            continue
+        if t is None or t.empty:
+            if verbose:
+                print(f"   [i] marqueurs {saison} : table introuvable")
+            continue
+        for r in t.itertuples(index=False):
+            d = r._asdict()
+            try:
+                essais = float(d.get("essais") or 0)
+                mj = float(d.get("mj") or 0)
+                tj = float(d.get("tj") or (mj * 60.0))
+            except (TypeError, ValueError):
+                continue
+            if not d.get("joueur") or mj <= 0:
+                continue
+            frames.append({
+                "joueur": str(d["joueur"]).strip(), "club": str(d.get("club") or "").strip(),
+                "poste": _poste_fr(d.get("poste")), "essais": essais * poids,
+                "minutes": tj * poids, "min_par_match": min(tj / mj, 80.0) * presence,
+                "saison": saison, "poids": poids,
+            })
+        if verbose:
+            print(f"   marqueurs {saison} : {len(t)} joueurs listes")
+    if not frames:
+        return pd.DataFrame()
+    d = pd.DataFrame(frames)
+    # un joueur present les deux saisons : cumul, club et minutes attendues
+    # de la saison la plus recente
+    d = d.sort_values("poids", ascending=False)
+    agg = d.groupby("joueur", sort=False).agg(
+        club=("club", "first"), poste=("poste", "first"),
+        buts_hors_penalty=("essais", "sum"), minutes=("minutes", "sum"),
+        minutes_attendues=("min_par_match", "first"), poids=("poids", "max"),
+    ).reset_index()
+    agg["saison_seule_passee"] = agg["poids"] < 1.0
+    agg["tireur_penalty"] = 0
+    return agg.drop(columns=["poids"])
+
+
+def lignes_collectives(equipes, journee_hint: int = 0) -> pd.DataFrame:
+    """Une ligne 'Autres joueurs' par club : le reste de l'effectif au prior."""
+    return pd.DataFrame([{
+        "joueur": "Autres joueurs", "club": e, "equipe": e, "poste": "collectif",
+        "buts_hors_penalty": 0.0, "minutes": 0.0,
+        "minutes_attendues": 80.0 * _RESTE_JOUEURS_XV,
+        "saison_seule_passee": False, "tireur_penalty": 0,
+    } for e in equipes])

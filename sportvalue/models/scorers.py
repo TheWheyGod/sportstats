@@ -77,6 +77,10 @@ PRIORS_RUGBY = {
     "deuxieme_ligne": 0.10,
     "premiere_ligne": 0.09,
     "inconnu": 0.18,
+    # ligne collective "reste de l'equipe" : les joueurs jamais listes sont
+    # par construction les moins prolifiques (les meilleurs marqueurs sont
+    # listes), donc sous la moyenne d'un joueur de champ (~0,18)
+    "collectif": 0.12,
 }
 
 # Points par 36 minutes (basket) -- utilise comme taux, pas comme comptage.

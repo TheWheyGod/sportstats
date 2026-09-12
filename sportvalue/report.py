@@ -350,6 +350,42 @@ def _assists_panel(passeurs: list, home: str, away: str) -> str:
     )
 
 
+def _tries_panel(marqueurs: list, p_au_moins_un=None) -> str:
+    """Marqueurs d'essais : au moins un essai, deux ou plus, premier essai."""
+    if not marqueurs:
+        return ""
+    ordre = ([r for r in marqueurs if r.get("poste") != "collectif"]
+             + [r for r in marqueurs if r.get("poste") == "collectif"])
+    lignes = []
+    for r in ordre[:18]:
+        cote = "h" if r.get("equipe_cote") == "domicile" else "a"
+        poste = str(r.get("poste", "")).replace("_", " ")
+        if poste == "collectif":
+            poste = "reste de l'effectif"
+        p = r.get("p_marque", 0.0)
+        p2 = r.get("p_2plus")
+        p1 = r.get("p_premier_buteur")
+        detail = " · ".join(x for x in (
+            f"2+ {100*p2:.1f}%" if p2 is not None else "",
+            f"1er {100*p1:.1f}%" if p1 is not None else "") if x)
+        lignes.append(
+            f'<div class="scorer"><div class="nm"><span class="dot {cote}"></span>'
+            f'{_esc(r.get("joueur", ""))} <span class="role">{_esc(poste)}{" · " + detail if detail else ""}</span></div>'
+            f'<div class="pct">{_pct(p)}</div><div class="fo">{_fo(p)}</div></div>'
+        )
+    note = ""
+    if p_au_moins_un is not None:
+        note = f"Au moins un essai dans le match : <b>{_pct(p_au_moins_un)}</b>. "
+    return (
+        "<div class=\"panel wide\"><h2>Marqueurs d'essais — probabilité de marquer au moins un essai</h2>"
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 26px">'
+        f'{"".join(lignes)}</div>'
+        f'<div class="note">{note}La somme des espérances individuelles égale les essais attendus de '
+        "l'équipe. Top 14 et Pro D2 : seuls les meilleurs marqueurs du championnat sont connus "
+        "(Wikipedia) ; « Autres joueurs » porte tout le reste de l'effectif.</div></div>"
+    )
+
+
 def _bars(marches: dict, home: str, away: str, cls: str = "bars") -> str:
     """Barres de vainqueur, largeur proportionnelle a la probabilite."""
     tri = marches.get("1x2") or marches.get("vainqueur") or marches.get("moneyline") or {}
@@ -545,12 +581,14 @@ def _panels(home: str, away: str, marches: dict, sd=None, scorers=None,
 
     if sd is not None and sport == "football":
         panels.append(_matrix_panel(sd, home, away))
-    if scorers is not None:
+    if scorers is not None and sport == "football":
         s = _scorers_panel(scorers, home, away)
         if s:
             panels.append(s)
     if marches.get("passeurs"):
         panels.append(_assists_panel(marches["passeurs"], home, away))
+    if marches.get("marqueurs_essais"):
+        panels.append(_tries_panel(marches["marqueurs_essais"], marches.get("premier_essai_marque")))
 
     absents = marches.get("absences")
     if absents:

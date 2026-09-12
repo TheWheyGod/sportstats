@@ -178,9 +178,10 @@ def rugby_markets(sd: ScoreDistribution, try_scorers: pd.DataFrame | None = None
         ]
         out["premier_essai_marque"] = round(1.0 - float(np.sum(t.w[(t.h == 0) & (t.a == 0)])), 4)
     if try_scorers is not None and not try_scorers.empty:
-        cols = ["joueur", "equipe_cote", "poste", "lambda_joueur", "p_marque", "p_2plus"]
+        cols = ["joueur", "equipe_cote", "poste", "lambda_joueur", "p_marque", "p_2plus",
+                "p_premier_buteur"]
         d = try_scorers[[c for c in cols if c in try_scorers.columns]].copy()
-        for c in ("lambda_joueur", "p_marque", "p_2plus"):
+        for c in ("lambda_joueur", "p_marque", "p_2plus", "p_premier_buteur"):
             if c in d.columns:
                 d[c] = d[c].round(4)
         out["marqueurs_essais"] = d.to_dict("records")
