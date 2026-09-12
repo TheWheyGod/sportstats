@@ -293,6 +293,25 @@ ALIAS = {
     "montpellier": "Montpellier HR", "mhr": "Montpellier HR",
     "stade francais": "Stade français", "stade français": "Stade français",
     "stade français paris": "Stade français", "stade francais paris": "Stade français",
+    # Pro D2 : noms courts des tableaux par journee et noms Highlightly ->
+    # libelles des tableaux croises (historique)
+    "agen": "SU Agen", "su agen": "SU Agen",
+    "aurillac": "Stade aurillacois", "stade aurillacois": "Stade aurillacois",
+    "biarritz": "Biarritz olympique", "biarritz olympique": "Biarritz olympique",
+    "brive": "CA Brive", "ca brive": "CA Brive",
+    "béziers": "AS Béziers", "beziers": "AS Béziers", "as béziers": "AS Béziers",
+    "colomiers": "Colomiers Rugby", "colomiers rugby": "Colomiers Rugby",
+    "dax": "US Dax", "us dax": "US Dax",
+    "grenoble": "FC Grenoble", "fc grenoble": "FC Grenoble", "grenoble fc": "FC Grenoble",
+    "nevers": "USON Nevers", "uson nevers": "USON Nevers",
+    "us oyonnax": "Oyonnax Rugby", "oyonnax rugby": "Oyonnax Rugby",
+    "angouleme": "Soyaux Angoulême XV", "angoulême": "Soyaux Angoulême XV",
+    "soyaux angoulême": "Soyaux Angoulême XV", "soyaux angouleme": "Soyaux Angoulême XV",
+    "valence romans": "Valence Romans DR", "valence romans dr": "Valence Romans DR",
+    "provence": "Provence Rugby", "carcassonne": "US Carcassonne",
+    "mont-de-marsan": "Stade montois", "mont de marsan": "Stade montois",
+    "nissa": "Nice", "stade niçois": "Nice", "stade nicois": "Nice", "nice": "Nice",
+    "narbonne": "Narbonne", "rc narbonne": "Narbonne",
     "paris": "Stade français", "montauban": "US Montauban",
 }
 

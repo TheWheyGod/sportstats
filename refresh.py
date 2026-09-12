@@ -47,7 +47,10 @@ TITRE = "Football mondial + rugby"
 # en local, par les variables d'environnement ou un fichier .env non suivi.
 REQUISES = ("ODDS_API_KEY", "API_FOOTBALL_KEY")
 # Optionnelle : sans elle, buteurs et passeurs restent limites a la Premier League.
-OPTIONNELLES = ("FOOTBALL_DATA_ORG_KEY",)
+OPTIONNELLES = {
+    "FOOTBALL_DATA_ORG_KEY": "buteurs et passeurs limites a la Premier League",
+    "HIGHLIGHTLY_KEY": "Top 14 / Pro D2 sans heure exacte ni direct",
+}
 
 
 def _charger_env_local() -> None:
@@ -74,9 +77,9 @@ def _verifier_cles() -> None:
     if suspectes:
         print(f"[!] placeholder au lieu d'une vraie cle : {', '.join(suspectes)}", flush=True)
         sys.exit(2)
-    for k in OPTIONNELLES:
+    for k, effet in OPTIONNELLES.items():
         if not os.environ.get(k):
-            print(f"[i] {k} absente : buteurs et passeurs limites a la Premier League", flush=True)
+            print(f"[i] {k} absente : {effet}", flush=True)
     manquantes = [k for k in REQUISES if not os.environ.get(k)]
     if manquantes:
         print(f"[!] variables manquantes : {', '.join(manquantes)}", flush=True)

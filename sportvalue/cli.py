@@ -582,8 +582,10 @@ def cmd_journee(args) -> int:
         # Historique reel via les tableaux croises de Wikipedia. Le calendrier,
         # lui, n'a aucune source libre : il se fournit en CSV.
         from .data import rugby_fr as RF
+        from .data import highlightly as HL
 
         comp_tpl = RF.TOP14 if sport == "top14" else RF.PROD2
+        comp_nom = "Top 14" if sport == "top14" else "Pro D2"
         title("HISTORIQUE " + sport.upper())
         saisons = tuple(x.strip() for x in args.saisons.split(",") if x.strip())
         hist = (RF.load_top14(saisons) if sport == "top14" else RF.load_prod2(saisons))
@@ -599,7 +601,39 @@ def cmd_journee(args) -> int:
             return 1
         connues = set(hist["home"]) | set(hist["away"])
 
-        if not args.matchs and not a_venir_wiki.empty:
+        # Calendrier precis (heure de coup d'envoi) via Highlightly quand la
+        # cle existe ; sinon la plage de deux jours par journee de Wikipedia.
+        a_venir_hl = pd.DataFrame()
+        if not args.matchs and HL.cle():
+            try:
+                fx_hl = HL.rugby_fixtures(comp_nom, int(str(args.saison_courante)[:4]))
+            except Exception as e:
+                print(f"   [i] calendrier Highlightly indisponible : {e}")
+                fx_hl = pd.DataFrame()
+            if not fx_hl.empty:
+                now = pd.Timestamp.utcnow().tz_localize(None)
+                fen = fx_hl[(fx_hl["statut"] == "a_venir")
+                            & (fx_hl["date"] >= now - pd.Timedelta(hours=3))
+                            & (fx_hl["date"] <= now + pd.Timedelta(days=7))].copy()
+                if not fen.empty:
+                    fen["home_r"] = fen["home"].map(lambda x: RF.resolve_team(x, connues))
+                    fen["away_r"] = fen["away"].map(lambda x: RF.resolve_team(x, connues))
+                    manq = fen[fen["home_r"].isna() | fen["away_r"].isna()]
+                    for r in manq.itertuples(index=False):
+                        print(f"   [!] Highlightly : '{r.home if pd.isna(r.home_r) else r.away}' inconnu")
+                    fen = fen.dropna(subset=["home_r", "away_r"])
+                    a_venir_hl = pd.DataFrame({
+                        "home": fen["home_r"].values, "away": fen["away_r"].values,
+                        "coup_envoi": fen["date"].values,
+                        # date d'affichage : jour de Paris du coup d'envoi
+                        "date": [pd.to_datetime(_date_paris(d), format="%d/%m/%Y") for d in fen["date"]],
+                        "journee": fen["journee"].values,
+                    })
+                    title(f"CALENDRIER — {len(a_venir_hl)} match(s) sous 7 jours (Highlightly)")
+
+        if not a_venir_hl.empty:
+            a_venir = a_venir_hl
+        elif not args.matchs and not a_venir_wiki.empty:
             # On ecarte d'abord les journees DEJA DISPUTEES, puis on prend la
             # premiere restante. Se contenter du plus petit numero de journee
             # non renseignee ne suffit pas : Wikipedia met les scores a jour
@@ -676,10 +710,15 @@ def cmd_journee(args) -> int:
             # date match par match : on transporte la PLAGE plutot que
             # d'affirmer un jour precis pour chaque rencontre.
             fin = getattr(r, "date_fin", None)
+            ke = getattr(r, "coup_envoi", None)
             slate.append({"sport": "rugby", "competition": comp,
                           "date": r.date.strftime("%d/%m/%Y") if pd.notna(r.date) else "",
                           "date_fin": fin.strftime("%d/%m/%Y")
                                       if fin is not None and pd.notna(fin) else "",
+                          # heure exacte quand Highlightly l'a donnee : affichee,
+                          # et indispensable au direct
+                          "coup_envoi": (pd.Timestamp(ke).to_pydatetime()
+                                         if ke is not None and pd.notna(ke) else None),
                           "home": h, "away": a, "marches": marches,
                           "sd": sd, "scorers": ts})
             v = marches["vainqueur"]
@@ -1009,12 +1048,46 @@ def cmd_live(args) -> int:
         except Exception as e:
             print(f"   Live football indisponible : {e}")
 
+    # RUGBY Top 14 / Pro D2 : Highlightly, une requete par competition et par
+    # jour de match, uniquement quand un coup d'envoi est passe depuis moins
+    # de deux heures et demie (quota : 100 requetes par jour).
+    from .data import highlightly as HL
+    if HL.cle():
+        from datetime import timedelta as _td2
+        from zoneinfo import ZoneInfo as _ZI
+        for comp in HL.RUGBY_LEAGUES:
+            cand = [m for m in slate if m.get("competition") == comp and m.get("coup_envoi")]
+            actifs = []
+            for m in cand:
+                ke = m["coup_envoi"]
+                if ke.tzinfo is None:
+                    ke = ke.replace(tzinfo=timezone.utc)
+                if ke <= maintenant <= ke + _td2(minutes=150) or args.tout:
+                    actifs.append(m)
+            if not actifs:
+                continue
+            jour = actifs[0]["coup_envoi"].replace(tzinfo=timezone.utc).astimezone(_ZI("Europe/Paris")).strftime("%Y-%m-%d")
+            equipes_c = {m["home"] for m in cand} | {m["away"] for m in cand}
+            try:
+                from .data.rugby_fr import resolve_team as _rt
+                n = 0
+                for v in HL.rugby_scores(comp, jour):
+                    rh, ra = _rt(v["home"], equipes_c), _rt(v["away"], equipes_c)
+                    if rh and ra:
+                        index[(rh.lower(), ra.lower())] = {**v, "maj": maintenant}
+                        n += 1
+                print(f"   Highlightly {comp} : {n} match(s) rapproche(s)")
+            except Exception as e:
+                print(f"   Highlightly {comp} indisponible : {e}")
+
     cles = set()
     for m in slate:
         comp = m.get("competition")
         ke = m.get("coup_envoi")
         if m.get("sport") == "football" and cle_foot:
             continue                      # deja couvert ci-dessus
+        if comp in HL.RUGBY_LEAGUES and HL.cle():
+            continue                      # idem, via Highlightly
         if comp not in SC.SPORT_KEYS_SCORES or ke is None:
             continue
         if autorisees is not None and comp not in autorisees:
