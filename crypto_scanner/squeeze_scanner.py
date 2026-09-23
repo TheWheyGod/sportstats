@@ -168,17 +168,17 @@ def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     return out
 
 
-def classify(row: pd.Series, recent_release: bool, p: Params) -> str:
-    if recent_release and row["close"] > row["prev_box_high"]:
-        return "CASSURE ↑"
-    if recent_release and row["close"] < row["prev_box_low"]:
-        return "CASSURE ↓"
-    if row["score"] >= p.score_threshold and row["sq_level"] >= 2:
-        near_edge = min(row["dist_up_atr"], row["dist_dn_atr"]) <= p.edge_atr
-        if near_edge and row["pre_exp_count"] >= 1:
-            return "IMMINENT"
-        return "COMPRESSION"
-    return "-"
+def status_series(f: pd.DataFrame, p: Params) -> pd.Series:
+    """Statut à chaque bougie (vectorisé, causal : n'utilise que le passé)."""
+    released = ((f["sq_level"].shift() >= 2) & (f["sq_level"] < 2)).rolling(2).max().astype(bool)
+    strong = (f["score"] >= p.score_threshold) & (f["sq_level"] >= 2)
+    near_edge = np.minimum(f["dist_up_atr"], f["dist_dn_atr"]) <= p.edge_atr
+    return pd.Series(np.select(
+        [released & (f["close"] > f["prev_box_high"]),
+         released & (f["close"] < f["prev_box_low"]),
+         strong & near_edge & (f["pre_exp_count"] >= 1),
+         strong],
+        ["CASSURE ↑", "CASSURE ↓", "IMMINENT", "COMPRESSION"], default="-"), index=f.index)
 
 
 def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
@@ -187,14 +187,13 @@ def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
     if len(f) < p.rank_window or not np.isfinite(f["score"].iloc[-1]):
         return None
     last = f.iloc[-1]
-    released = bool(((f["sq_level"].shift() >= 2) & (f["sq_level"] < 2)).iloc[-2:].any())
     return {
         "score": last["score"], "bias": last["bias"], "sq_level": int(last["sq_level"]),
         "sq_bars": int(last["sq_bars"]), "bbw_pct": last["bbw_pct"],
         "absorb": int(last["pre_exp_count"]), "rel_vol": last["rel_vol"],
         "close": last["close"], "box_high": last["box_high"], "box_low": last["box_low"],
         "dist_up_atr": last["dist_up_atr"], "dist_dn_atr": last["dist_dn_atr"],
-        "status": classify(last, released, p),
+        "status": status_series(f.iloc[-3:], p).iloc[-1],
     }
 
 

@@ -12,6 +12,8 @@ python squeeze_scanner.py --timeframes 15m 1h 4h --min-volume 500000 --only-sign
 python squeeze_scanner.py --validate --bars 1000               # le score prédit-il vraiment une expansion ?
 python squeeze_scanner.py --loop 60                            # rescan toutes les heures
 python squeeze_scanner.py --synthetic                          # test hors-ligne
+python replay.py --csv NEON_USDT_1d.csv                        # rejoue le scanner sur un historique
+python replay.py --symbol NEON/USDT --exchange bybit --timeframe 1h --bars 2000
 ```
 
 ## Score (0-100, par timeframe, puis combiné avec pondération vers le TF supérieur)
