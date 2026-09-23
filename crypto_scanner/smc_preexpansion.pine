@@ -1,0 +1,261 @@
+//@version=6
+// SMC Pre-Expansion : compression de volatilité (setup 4h/1D) + déclencheur intraday (15m/1h).
+// Portage du scanner Python crypto_scanner/squeeze_scanner.py, même logique bougie par bougie.
+//
+// Utilisation : graphique en 15m ou 1h, "TF du setup" en 4H ou 1D (strictement supérieur).
+//   - Zone orange  : zone de compression gelée du setup (valide "Mémoire du setup" bougies).
+//   - GO ↑ / GO ↓  : DÉCLENCHÉ = clôture hors de la zone sur une bougie d'ignition.
+//   - Petits ronds : ARMÉ = prix collé au bord de la zone, volume qui monte, structure.
+// Non-repaint : le setup utilise uniquement la dernière bougie 4h/1D CLÔTURÉE ; signaux et alertes
+// sont définitifs à la clôture de la bougie du graphique (alertes "Once per bar close").
+// Différence avec la version Python : pas de rang cross-sectionnel (Pine ne voit qu'un actif).
+indicator("SMC Pre-Expansion — Compression & Déclencheur", shorttitle = "SMC PreExp", overlay = true, max_labels_count = 500)
+
+// ───────────────────────────── Paramètres ─────────────────────────────
+grpS = "Setup (TF supérieur)"
+setupTf   = input.timeframe("1D", "TF du setup", group = grpS, tooltip = "Doit être supérieur au TF du graphique (ex. 4H ou 1D pour un graphique 15m/1h)")
+threshold = input.float(65.0, "Seuil de score", minval = 0, maxval = 100, group = grpS)
+longSq    = input.int(20, "Squeeze long (bougies)", minval = 5, group = grpS, tooltip = "Durée du squeeze BB dans KC(1.5) pour COMPRESSION LONGUE")
+setupMem  = input.int(3, "Mémoire du setup (bougies)", minval = 1, group = grpS, tooltip = "Nombre de bougies du setup pendant lesquelles la zone reste valide après la dernière compression")
+rankWin   = input.int(250, "Fenêtre des rangs percentiles", minval = 50, group = grpS)
+
+grpI = "Indicateurs"
+bbLen     = input.int(20, "BB longueur", group = grpI)
+bbMult    = input.float(2.0, "BB multiplicateur", group = grpI)
+kcLen     = input.int(20, "KC longueur", group = grpI)
+volLen    = input.int(20, "SMA volume", group = grpI)
+volMult   = input.float(1.4, "Volume anormal (x SMA)", group = grpI)
+atrLen    = input.int(14, "ATR", group = grpI)
+rangeMult = input.float(0.85, "Petite range (< x ATR)", group = grpI)
+boxLen    = input.int(20, "Box (bougies)", group = grpI)
+absWin    = input.int(10, "Fenêtre d'absorption", group = grpI)
+edgeAtr   = input.float(0.5, "Bord du box (ATR) pour IMMINENT", group = grpI)
+
+grpT = "Déclencheur (TF du graphique)"
+trigRvol = input.float(2.0, "Ignition : volume >= x SMA", group = grpT)
+trigTr   = input.float(1.5, "Ignition : range >= x ATR", group = grpT)
+trigPos  = input.float(0.6, "Ignition : position de clôture dans la bougie", minval = 0.5, maxval = 1.0, group = grpT)
+armAtr   = input.float(0.3, "ARMÉ : distance max au bord (ATR du setup)", group = grpT)
+armRvol  = input.float(1.3, "ARMÉ : volume SMA5 / SMA50 >=", group = grpT)
+
+grpD = "Affichage"
+showZone  = input.bool(true, "Zone de compression", group = grpD)
+showArmed = input.bool(true, "Signaux ARMÉ", group = grpD)
+showTable = input.bool(true, "Tableau de bord", group = grpD)
+tablePos  = input.string("Haut droite", "Position du tableau", options = ["Haut droite", "Bas droite", "Haut gauche", "Bas gauche"], group = grpD)
+
+// ───────────────────────────── Outils ─────────────────────────────
+clamp(float x, float lo, float hi) =>
+    math.max(lo, math.min(hi, x))
+
+tanh(float x) =>
+    float y = clamp(x, -20.0, 20.0)
+    float e = math.exp(2.0 * y)
+    (e - 1.0) / (e + 1.0)
+
+// Squeeze à 3 niveaux : 1 = BB dans KC(2.0), 2 = dans KC(1.5), 3 = dans KC(1.0)
+squeezeLevel() =>
+    float basis = ta.sma(close, bbLen)
+    float dev   = ta.stdev(close, bbLen)
+    float bbUp  = basis + bbMult * dev
+    float bbLo  = basis - bbMult * dev
+    float kcMid = ta.ema(close, kcLen)
+    float kcAtr = ta.atr(kcLen)
+    bool in10 = bbUp < kcMid + 1.0 * kcAtr and bbLo > kcMid - 1.0 * kcAtr
+    bool in15 = bbUp < kcMid + 1.5 * kcAtr and bbLo > kcMid - 1.5 * kcAtr
+    bool in20 = bbUp < kcMid + 2.0 * kcAtr and bbLo > kcMid - 2.0 * kcAtr
+    int lvl = in10 ? 3 : in15 ? 2 : in20 ? 1 : 0
+    [lvl, bbUp, bbLo, basis]
+
+statusText(int s) =>
+    switch s
+        1 => "CASSURE ↑"
+        2 => "CASSURE ↓"
+        3 => "IMMINENT"
+        4 => "ACCUMULATION"
+        5 => "COMPRESSION"
+        6 => "COMPRESSION LONGUE"
+        => "-"
+
+trigText(int t) =>
+    switch t
+        1  => "DÉCLENCHÉ ↑"
+        -1 => "DÉCLENCHÉ ↓"
+        2  => "ARMÉ ↑"
+        -2 => "ARMÉ ↓"
+        => "-"
+
+// ───────────────────────────── Setup (évalué sur le TF du setup) ─────────────────────────────
+setupCalc() =>
+    [lvl, bbUp, bbLo, basis] = squeezeLevel()
+    float tr    = ta.tr(true)
+    float atr   = ta.atr(atrLen)
+    float atrLg = ta.rma(tr, 50)
+    var int sqBars = 0
+    sqBars := lvl >= 2 ? sqBars + 1 : 0
+
+    // Compression relative à l'historique de l'actif (1 = compression maximale)
+    float bbw     = (bbUp - bbLo) / basis
+    float compBbw = 1.0 - ta.percentrank(bbw, rankWin) / 100.0
+    float compAtr = 1.0 - ta.percentrank(ta.rma(tr, 5) / atrLg, rankWin) / 100.0
+    float hh      = ta.highest(high, boxLen)
+    float ll      = ta.lowest(low, boxLen)
+    float compBox = 1.0 - ta.percentrank((hh - ll) / atrLg, rankWin) / 100.0
+
+    // Squeeze pondéré par sa durée ; plancher pour un squeeze long
+    float sqScore = lvl >= 1 ? lvl / 3.0 * math.max(math.min(sqBars / 20.0, 1.0), 0.25) : 0.0
+    bool longSqOn = sqBars >= longSq
+    if longSqOn
+        sqScore := math.max(sqScore, 0.8 + (lvl == 3 ? 0.2 : 0.0))
+
+    // Absorption : bougies volume anormal + petite range, et accumulation étalée
+    float volSma     = ta.sma(volume, volLen)
+    bool  pre        = volume > volSma * volMult and (high - low) < atr * rangeMult and lvl >= 2
+    float preCount   = math.sum(pre ? 1.0 : 0.0, absWin)
+    float relVol     = ta.sma(volume, 5) / ta.sma(volume, 50)
+    float rngRatio   = ta.sma(high - low, 5) / ta.sma(high - low, 50)
+    float accum      = clamp((relVol - 1.0) / 0.5, 0.0, 1.0) * clamp((1.0 - rngRatio) / 0.3, 0.0, 1.0)
+    float absorption = 0.4 * math.min(preCount / 3.0, 1.0) + 0.6 * accum
+
+    float score = 100.0 * (0.30 * compBbw + 0.15 * compAtr + 0.15 * compBox + 0.20 * sqScore + 0.20 * absorption)
+
+    // Biais directionnel (indicatif) : momentum du squeeze, position dans le box, pente OBV
+    float mom      = ta.linreg(close - math.avg(math.avg(hh, ll), ta.sma(close, boxLen)), boxLen, 0)
+    float momBias  = tanh(mom / atr)
+    float momTurn  = math.sign(ta.change(mom))
+    float boxPos   = clamp((close - ll) / (hh - ll), 0.0, 1.0) * 2.0 - 1.0
+    float obvSlope = tanh(ta.change(ta.obv, boxLen) / (ta.sma(volume, boxLen) * boxLen))
+    float bias     = clamp(0.35 * momBias + 0.15 * momTurn + 0.25 * boxPos + 0.25 * obvSlope, -1.0, 1.0)
+
+    // Statut
+    bool released  = (lvl[1] >= 2 and lvl < 2) or (lvl[2] >= 2 and lvl[1] < 2)
+    bool strong    = score >= threshold and lvl >= 2
+    bool nearEdge  = math.min((hh - close) / atr, (close - ll) / atr) <= edgeAtr
+    bool absorbing = preCount >= 1 or accum >= 0.5
+    int status = na(score) ? 0 :
+         released and close > hh[1] ? 1 :
+         released and close < ll[1] ? 2 :
+         (strong or longSqOn) and nearEdge and absorbing ? 3 :
+         longSqOn and absorbing ? 4 :
+         strong ? 5 :
+         longSqOn ? 6 : 0
+
+    // Zone de compression gelée, conservée setupMem bougies après la dernière compression
+    bool comp = status >= 3
+    var float zH = na
+    var float zL = na
+    var float zA = na
+    var int since = 1000000
+    if comp
+        zH := hh
+        zL := ll
+        zA := atr
+        since := 0
+    else
+        since += 1
+        if since >= setupMem
+            zH := na
+            zL := na
+            zA := na
+    bool active = math.sum(comp ? 1.0 : 0.0, setupMem) > 0
+
+    // [1] + lookahead_on : valeurs de la dernière bougie de setup CLÔTURÉE (pas de repaint)
+    [status[1], active[1], zH[1], zL[1], zA[1], score[1], lvl[1], sqBars[1], bias[1], preCount[1], accum[1]]
+
+if timeframe.in_seconds() >= timeframe.in_seconds(setupTf)
+    runtime.error("Le TF du graphique doit être inférieur au TF du setup (" + setupTf + "). Ex. graphique 1h avec setup 1D.")
+
+[sStatus, sActive, sZH, sZL, sZA, sScore, sLvl, sBars, sBias, sPre, sAccum] = request.security(syminfo.tickerid, setupTf, setupCalc(), lookahead = barmerge.lookahead_on)
+
+// ───────────────────────────── Déclencheur (TF du graphique) ─────────────────────────────
+[lvlL, bbUpL, bbLoL, basisL] = squeezeLevel()
+float trL    = ta.tr(true)
+float atrL   = ta.atr(atrLen)
+float rvol   = volume / ta.sma(volume, volLen)
+float rvol5  = ta.sma(volume, 5) / ta.sma(volume, 50)
+float pos    = high != low ? (close - low) / (high - low) : na
+float low5   = ta.lowest(low, 5)
+float high5  = ta.highest(high, 5)
+bool higherLows = low5 > low5[5]
+bool lowerHighs = high5 < high5[5]
+
+bool zoneOk    = sActive and not na(sZH)
+bool ignition  = rvol >= trigRvol and trL >= trigTr * atrL
+bool armedBase = zoneOk and rvol5 >= armRvol and lvlL >= 1
+bool trigUp = zoneOk and ignition and close > sZH and pos >= trigPos
+bool trigDn = zoneOk and ignition and close < sZL and pos <= 1.0 - trigPos
+bool armUp  = armedBase and close <= sZH and sZH - close <= armAtr * sZA and higherLows
+bool armDn  = armedBase and close >= sZL and close - sZL <= armAtr * sZA and lowerHighs
+int trig    = trigUp ? 1 : trigDn ? -1 : armUp ? 2 : armDn ? -2 : 0
+bool newSig = trig != 0 and trig != trig[1]
+
+var int lastSig = 0
+var int lastSigBar = na
+var float lastSigPx = na
+if newSig and barstate.isconfirmed
+    lastSig := trig
+    lastSigBar := bar_index
+    lastSigPx := close
+
+// ───────────────────────────── Affichage ─────────────────────────────
+color upCol   = #00c853
+color dnCol   = #ff1744
+color zoneCol = #ff9800
+
+pZH = plot(showZone and zoneOk ? sZH : na, "Zone haut", color = zoneCol, style = plot.style_linebr, linewidth = 2)
+pZL = plot(showZone and zoneOk ? sZL : na, "Zone bas", color = zoneCol, style = plot.style_linebr, linewidth = 2)
+fill(pZH, pZL, color = color.new(zoneCol, 88), title = "Zone de compression")
+
+plotshape(newSig and trig == 1, title = "DÉCLENCHÉ ↑", style = shape.triangleup, location = location.belowbar, color = upCol, size = size.small, text = "GO ↑", textcolor = upCol)
+plotshape(newSig and trig == -1, title = "DÉCLENCHÉ ↓", style = shape.triangledown, location = location.abovebar, color = dnCol, size = size.small, text = "GO ↓", textcolor = dnCol)
+plotshape(showArmed and newSig and trig == 2, title = "ARMÉ ↑", style = shape.circle, location = location.belowbar, color = color.new(upCol, 40), size = size.tiny)
+plotshape(showArmed and newSig and trig == -2, title = "ARMÉ ↓", style = shape.circle, location = location.abovebar, color = color.new(dnCol, 40), size = size.tiny)
+
+// Sorties numériques (fenêtre de données / Pine Screener)
+plot(sScore, "Score setup", display = display.data_window)
+plot(sStatus, "Code statut setup (1-6)", display = display.data_window)
+plot(sActive ? 1 : 0, "Setup actif (0/1)", display = display.data_window)
+plot(trig, "Code déclencheur (±1 DÉCLENCHÉ, ±2 ARMÉ)", display = display.data_window)
+
+// ───────────────────────────── Tableau de bord ─────────────────────────────
+tPos = switch tablePos
+    "Bas droite"  => position.bottom_right
+    "Haut gauche" => position.top_left
+    "Bas gauche"  => position.bottom_left
+    => position.top_right
+
+var table dash = table.new(tPos, 2, 10, bgcolor = color.new(#131722, 10), border_color = color.new(color.gray, 70), border_width = 1)
+
+row(int i, string k, string v, color c) =>
+    table.cell(dash, 0, i, k, text_color = color.silver, text_size = size.small, text_halign = text.align_left)
+    table.cell(dash, 1, i, v, text_color = c, text_size = size.small, text_halign = text.align_right)
+
+if showTable and barstate.islast
+    color stCol = sStatus == 3 ? upCol : sStatus >= 4 ? zoneCol : sStatus == 1 ? upCol : sStatus == 2 ? dnCol : color.gray
+    string dots = sLvl == 3 ? "●●●" : sLvl == 2 ? "●●" : sLvl == 1 ? "●" : "-"
+    string biasTxt = str.tostring(sBias, "+0.00;-0.00") + (sBias > 0.25 ? " ↑" : sBias < -0.25 ? " ↓" : " neutre")
+    string zoneTxt = zoneOk ? str.tostring(sZL, format.mintick) + " – " + str.tostring(sZH, format.mintick) : "—"
+    string distTxt = zoneOk ? "↑ " + str.tostring((sZH / close - 1) * 100, "0.0") + " % · ↓ " + str.tostring((sZL / close - 1) * 100, "0.0") + " %" : "—"
+    string sigTxt = lastSig == 0 ? "-" : trigText(lastSig) + " · il y a " + str.tostring(bar_index - lastSigBar) + " b · " + str.tostring((close / lastSigPx - 1) * 100, "+0.0;-0.0") + " %"
+    color sigCol = lastSig == 1 or lastSig == 2 ? upCol : lastSig == 0 ? color.gray : dnCol
+    row(0, "SMC Pre-Expansion", "setup " + setupTf, color.white)
+    row(1, "Statut setup", statusText(sStatus), stCol)
+    row(2, "Score", str.tostring(sScore, "0.0") + " / 100", sScore >= threshold ? upCol : color.white)
+    row(3, "Squeeze", dots + " · " + str.tostring(sBars) + " bougies", sBars >= longSq ? zoneCol : color.white)
+    row(4, "Absorption", "pré-exp " + str.tostring(sPre, "0") + " · accum " + str.tostring(sAccum, "0.00"), sAccum >= 0.5 or sPre >= 1 ? upCol : color.white)
+    row(5, "Biais", biasTxt, sBias > 0.25 ? upCol : sBias < -0.25 ? dnCol : color.white)
+    row(6, "Setup actif", zoneOk ? "OUI" : "non", zoneOk ? zoneCol : color.gray)
+    row(7, "Zone", zoneTxt, zoneOk ? zoneCol : color.gray)
+    row(8, "Distance zone", distTxt, color.white)
+    row(9, "Dernier signal", sigTxt, sigCol)
+
+// ───────────────────────────── Alertes ─────────────────────────────
+alertcondition(newSig and trig == 1, "DÉCLENCHÉ ↑", "{{ticker}} DÉCLENCHÉ ↑ : cassure haussière de la zone de compression ({{interval}}) à {{close}}")
+alertcondition(newSig and trig == -1, "DÉCLENCHÉ ↓", "{{ticker}} DÉCLENCHÉ ↓ : cassure baissière de la zone de compression ({{interval}}) à {{close}}")
+alertcondition(newSig and trig == 2, "ARMÉ ↑", "{{ticker}} ARMÉ ↑ : prix au bord haut de la zone de compression ({{interval}})")
+alertcondition(newSig and trig == -2, "ARMÉ ↓", "{{ticker}} ARMÉ ↓ : prix au bord bas de la zone de compression ({{interval}})")
+alertcondition(sActive and not sActive[1], "Setup actif", "{{ticker}} entre en setup de compression")
+
+// Alerte unique "Any alert() function call" avec message détaillé
+if newSig and barstate.isconfirmed
+    alert(syminfo.ticker + " " + trigText(trig) + " (" + timeframe.period + ") à " + str.tostring(close, format.mintick) + " · setup " + setupTf + " " + statusText(sStatus) + " · score " + str.tostring(sScore, "0") + " · zone " + str.tostring(sZL, format.mintick) + "–" + str.tostring(sZH, format.mintick), alert.freq_once_per_bar_close)

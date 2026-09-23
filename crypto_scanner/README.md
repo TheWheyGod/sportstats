@@ -52,3 +52,18 @@ Deux étages : le **setup** (compression en 4h/1d) sélectionne une watchlist, l
 Le biais (-1 à +1 : momentum du squeeze, position dans le box, pente OBV) est indicatif :
 une compression annonce une expansion de volatilité, pas sa direction.
 Chaque scan est enregistré dans `output/scan_YYYYMMDD_HHMM.csv`.
+
+## Indicateur TradingView (Pine v6)
+
+`smc_preexpansion.pine` reprend la même logique sur un seul graphique : setup 4H/1D via
+`request.security` (dernière bougie clôturée, sans repaint), déclencheur sur le TF du graphique,
+zone de compression, signaux GO/ARMÉ, tableau de bord et alertes.
+
+1. TradingView → Éditeur Pine → coller le fichier → « Ajouter au graphique ».
+2. Graphique en 15m ou 1h, paramètre « TF du setup » en 4H ou 1D.
+3. Alertes : « Any alert() function call » (message détaillé) ou une des alertcondition,
+   fréquence « Once per bar close ».
+
+Différence avec le Python : pas de rang cross-sectionnel (Pine ne voit qu'un actif) et le rang
+percentile exige 250 bougies du TF de setup. Workflow conseillé : le scanner Python sélectionne
+la watchlist, l'indicateur Pine donne le timing et les alertes.
