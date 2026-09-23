@@ -19,8 +19,10 @@ position du close dans le box, pente de l'OBV. Une compression prédit une expan
 volatilité, pas sa direction : le biais est un indice, pas une certitude.
 
 Statut :
-    IMMINENT      score élevé, squeeze actif, absorption présente, prix à < 0.5 ATR d'un bord du box
-    COMPRESSION   score élevé, pas encore de pression sur un bord
+    IMMINENT            compression (score ou squeeze long) + absorption + prix à < 0.5 ATR d'un bord
+    ACCUMULATION        squeeze depuis >= 20 bougies + volume qui monte, range qui se resserre
+    COMPRESSION         score élevé, pas encore de pression sur un bord
+    COMPRESSION LONGUE  squeeze depuis >= 20 bougies, sans absorption visible
     CASSURE ↑/↓   squeeze relâché dans les 2 dernières bougies avec clôture hors du box
 
 Usage :
@@ -66,6 +68,7 @@ class Params:
     box_len: int = 20
     rank_window: int = 250
     absorption_window: int = 10
+    long_squeeze: int = 20          # bougies consécutives en squeeze (BB dans KC 1.5) = compression longue
     score_threshold: float = 65.0
     edge_atr: float = 0.5
 
@@ -126,6 +129,7 @@ def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
         level = level.where(~inside, i)
     out["sq_level"] = level
     out["sq_bars"] = consecutive_true(level >= 2)  # durée du squeeze "classique" (KC 1.5)
+    out["sq3_bars"] = consecutive_true(level >= 3)  # durée du squeeze maximal (KC 1.0)
 
     # Composantes de compression (1 = compression maximale)
     bbw = (bb_up - bb_lo) / mid
@@ -135,6 +139,9 @@ def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     hh, ll = h.rolling(p.box_len).max(), l.rolling(p.box_len).min()
     comp_box = 1 - rolling_pct_rank((hh - ll) / atr_long, p.rank_window)
     sq_score = (level / 3) * np.minimum(out["sq_bars"] / 20, 1).clip(lower=0.25) * (level >= 1)
+    # Un squeeze qui dure accumule de l'énergie : plancher à 0.8 (1.0 si le squeeze est au niveau max)
+    long_sq = out["sq_bars"] >= p.long_squeeze
+    sq_score = sq_score.where(~long_sq, np.maximum(sq_score, 0.8 + 0.2 * (level == 3)))
 
     # Absorption : volume anormal sur petite range pendant le squeeze (signal pre-expansion)
     high_vol = v > v.rolling(p.vol_len).mean() * p.vol_mult
@@ -143,8 +150,11 @@ def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     out["pre_exp_count"] = pre_exp.rolling(p.absorption_window).sum()
     rel_vol = v.rolling(5).mean() / v.rolling(50).mean()
     out["rel_vol"] = rel_vol
-    absorption = (0.6 * np.minimum(out["pre_exp_count"] / 3, 1)
-                  + 0.4 * (rel_vol - 1).clip(0, 1))
+    # Accumulation sur plusieurs bougies : volume qui monte pendant que la range se resserre.
+    # Capte l'absorption étalée que le test bougie par bougie rate (gros volume sur une mèche).
+    rng_ratio = (h - l).rolling(5).mean() / (h - l).rolling(50).mean()
+    out["accum"] = ((rel_vol - 1) / 0.5).clip(0, 1) * ((1 - rng_ratio) / 0.3).clip(0, 1)
+    absorption = 0.4 * np.minimum(out["pre_exp_count"] / 3, 1) + 0.6 * out["accum"]
 
     out["score"] = 100 * (0.30 * comp_bbw + 0.15 * comp_atr + 0.15 * comp_box
                           + 0.20 * sq_score + 0.20 * absorption)
@@ -172,13 +182,18 @@ def status_series(f: pd.DataFrame, p: Params) -> pd.Series:
     """Statut à chaque bougie (vectorisé, causal : n'utilise que le passé)."""
     released = ((f["sq_level"].shift() >= 2) & (f["sq_level"] < 2)).rolling(2).max().astype(bool)
     strong = (f["score"] >= p.score_threshold) & (f["sq_level"] >= 2)
+    long_sq = f["sq_bars"] >= p.long_squeeze
     near_edge = np.minimum(f["dist_up_atr"], f["dist_dn_atr"]) <= p.edge_atr
+    absorbing = (f["pre_exp_count"] >= 1) | (f["accum"] >= 0.5)
     return pd.Series(np.select(
         [released & (f["close"] > f["prev_box_high"]),
          released & (f["close"] < f["prev_box_low"]),
-         strong & near_edge & (f["pre_exp_count"] >= 1),
-         strong],
-        ["CASSURE ↑", "CASSURE ↓", "IMMINENT", "COMPRESSION"], default="-"), index=f.index)
+         (strong | long_sq) & near_edge & absorbing,
+         long_sq & absorbing,
+         strong,
+         long_sq],
+        ["CASSURE ↑", "CASSURE ↓", "IMMINENT", "ACCUMULATION", "COMPRESSION", "COMPRESSION LONGUE"],
+        default="-"), index=f.index)
 
 
 def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
@@ -189,7 +204,7 @@ def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
     last = f.iloc[-1]
     return {
         "score": last["score"], "bias": last["bias"], "sq_level": int(last["sq_level"]),
-        "sq_bars": int(last["sq_bars"]), "bbw_pct": last["bbw_pct"],
+        "sq_bars": int(last["sq_bars"]), "bbw": last["bbw"], "accum": last["accum"], "bbw_pct": last["bbw_pct"],
         "absorb": int(last["pre_exp_count"]), "rel_vol": last["rel_vol"],
         "close": last["close"], "box_high": last["box_high"], "box_low": last["box_low"],
         "dist_up_atr": last["dist_up_atr"], "dist_dn_atr": last["dist_dn_atr"],
@@ -313,10 +328,13 @@ def scan(data: dict[tuple[str, str], pd.DataFrame], timeframes: list[str], p: Pa
         if snap:
             per_tf.setdefault(sym, {})[tf] = snap
 
+    per_tf = {s: v for s, v in per_tf.items() if len(v) == len(timeframes)}  # historique complet
+    # Rang cross-sectionnel de la largeur de Bollinger (TF de référence) : un actif comprimé depuis
+    # des mois paraît "normal" face à son propre historique, pas face au reste du marché.
+    xs = pd.Series({s: v[timeframes[-1]]["bbw"] for s, v in per_tf.items()}).rank(pct=True)
+
     rows = []
     for sym, snaps in per_tf.items():
-        if len(snaps) < len(timeframes):
-            continue  # historique insuffisant sur un TF : pas de score combiné fiable
         w = np.array([TF_WEIGHT[tf] for tf in timeframes])
         scores = np.array([snaps[tf]["score"] for tf in timeframes])
         biases = np.array([snaps[tf]["bias"] for tf in timeframes])
@@ -328,7 +346,8 @@ def scan(data: dict[tuple[str, str], pd.DataFrame], timeframes: list[str], p: Pa
         trig_tf = next((tf for tf in reversed(timeframes) if snaps[tf]["status"] != "-"), None)
         status = f"{snaps[trig_tf]['status']} ({trig_tf})" if trig_tf else "-"
         row = {"Symbol": sym,
-               "Score": combined + 5 * (confluence - 1) * (confluence > 1),  # bonus confluence MTF
+               "Score": 0.85 * combined + 15 * (1 - xs[sym])
+                        + 5 * (confluence - 1) * (confluence > 1),  # bonus confluence MTF
                "Confl.": f"{confluence}/{len(timeframes)}",
                "Statut": status,
                "Biais": float((biases * w).sum() / w.sum())}
@@ -336,7 +355,8 @@ def scan(data: dict[tuple[str, str], pd.DataFrame], timeframes: list[str], p: Pa
             row[f"S {tf}"] = snaps[tf]["score"]
         row.update({
             "Sqz": "·" * ref["sq_level"] or "-", "Sqz bars": ref["sq_bars"],
-            "BBW pct": ref["bbw_pct"], "Absorb": ref["absorb"], "RelVol": ref["rel_vol"],
+            "BBW pct": ref["bbw_pct"], "BBW xs": xs[sym] * 100, "Absorb": ref["absorb"],
+            "Accum": ref["accum"], "RelVol": ref["rel_vol"],
             "Prix": ref["close"], "Box haut": ref["box_high"], "Box bas": ref["box_low"],
             "→haut ATR": ref["dist_up_atr"], "→bas ATR": ref["dist_dn_atr"],
         })

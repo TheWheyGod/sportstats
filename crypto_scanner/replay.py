@@ -27,6 +27,8 @@ import pandas as pd
 
 from squeeze_scanner import Params, compute_features, status_series, TF_MINUTES
 
+PRE_SIGNALS = {"IMMINENT", "ACCUMULATION", "COMPRESSION", "COMPRESSION LONGUE"}
+
 
 def load_csv(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
@@ -110,21 +112,22 @@ def main() -> None:
     for t in starts:
         i = f.index.get_loc(t)
         win = f.iloc[max(0, i - args.lead + 1): i + 1]
-        seen = [s for s in ("IMMINENT", "COMPRESSION", "CASSURE ↑", "CASSURE ↓") if (win["status"] == s).any()]
+        seen = [s for s in ("IMMINENT", "ACCUMULATION", "COMPRESSION", "COMPRESSION LONGUE",
+                            "CASSURE ↑", "CASSURE ↓") if (win["status"] == s).any()]
         rows.append({"Scan": fmt_ts(t, intraday), "Close": f.at[t, "close"],
                      "Max futur %": f.at[t, "fwd_max_%"],
                      f"Score (t)": f.at[t, "score"], f"Score max {args.lead}b": win["score"].max(),
                      "Sqz lvl": int(f.at[t, "sq_level"]), "Sqz bars": int(f.at[t, "sq_bars"]),
-                     "BBW pct": f.at[t, "bbw_pct"], "Absorb": int(f.at[t, "pre_exp_count"]),
+                     "BBW pct": f.at[t, "bbw_pct"], "Absorb": int(f.at[t, "pre_exp_count"]), "Accum": f.at[t, "accum"],
                      "Biais": f.at[t, "bias"], "Statut (t)": f.at[t, "status"],
                      f"Statuts {args.lead}b": ", ".join(seen) or "-",
-                     "Détecté": "OUI" if seen and set(seen) & {"IMMINENT", "COMPRESSION"} else "non"})
+                     "Détecté": "OUI" if set(seen) & PRE_SIGNALS else "non"})
     ev = pd.DataFrame(rows)
     print(f"\n--- 1. {len(ev)} explosions et ce que le scanner affichait juste avant ---")
     if len(ev):
         print(ev.round(3).to_string(index=False))
         det = (ev["Détecté"] == "OUI").mean() * 100
-        print(f"\nRappel : {det:.0f} % des explosions précédées d'un statut IMMINENT/COMPRESSION "
+        print(f"\nRappel : {det:.0f} % des explosions précédées d'un statut pré-explosion "
               f"dans les {args.lead} bougies")
 
     # 2) Précision : que se passe-t-il après un statut ?
@@ -139,8 +142,8 @@ def main() -> None:
 
     # 3) Dernières bougies
     print(f"\n--- 3. {args.last} dernières bougies ---")
-    cols = ["open", "high", "low", "close", "score", "sq_level", "sq_bars", "bbw_pct",
-            "pre_exp_count", "rel_vol", "bias", "dist_up_atr", "dist_dn_atr", "status", "fwd_max_%"]
+    cols = ["open", "high", "low", "close", "score", "sq_level", "sq_bars", "sq3_bars", "bbw_pct",
+            "pre_exp_count", "accum", "rel_vol", "bias", "dist_up_atr", "dist_dn_atr", "status", "fwd_max_%"]
     tail = f[cols].tail(args.last).copy()
     tail.index = [fmt_ts(t, intraday) for t in tail.index]
     print(tail.round(4).to_string())
