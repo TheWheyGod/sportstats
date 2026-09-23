@@ -15,6 +15,12 @@ Usage :
     python replay.py --csv NEON_USDT_1d.csv                    # CSV timestamp,open,high,low,close,volume
     python replay.py --symbol NEON/USDT --exchange bybit --timeframe 1h --bars 1500
     python replay.py --csv NEON_USDT_1d.csv --move 50 --horizon 5 --lead 5
+
+Mode déclencheur intraday (--trigger-tf) : la série fournie est en 1h/15m, le setup est
+reconstruit par agrégation vers --setup-tf (4h/1d) et projeté sans look-ahead.
+    python replay.py --symbol NEON/USDT --exchange bybit --timeframe 1h --trigger-tf 1h --setup-tf 1d --bars 6000
+    python replay.py --csv NEON_USDT_1h.csv --trigger-tf 1h --setup-tf 1d --move 30 --horizon 24
+    python replay.py --synthetic 40 --trigger-tf 15m --setup-tf 4h      # contrôle du moteur hors-ligne
 """
 from __future__ import annotations
 
@@ -25,9 +31,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from squeeze_scanner import Params, compute_features, status_series, TF_MINUTES
+from squeeze_scanner import (Params, PRE_SIGNALS, SETUP_COLS, TF_MINUTES, align_setup, compute_features,
+                             resample_ohlcv, setup_frame, status_series, synthetic_data,
+                             trigger_series)
 
-PRE_SIGNALS = {"IMMINENT", "ACCUMULATION", "COMPRESSION", "COMPRESSION LONGUE"}
+PRE_SIGNALS = set(PRE_SIGNALS)
 
 
 def load_csv(path: Path) -> pd.DataFrame:
@@ -70,6 +78,9 @@ def main() -> None:
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--csv", type=Path)
     src.add_argument("--symbol")
+    src.add_argument("--synthetic", type=int, metavar="N", help="N actifs simulés (mode déclencheur)")
+    ap.add_argument("--trigger-tf", choices=list(TF_MINUTES), help="active le mode déclencheur intraday")
+    ap.add_argument("--setup-tf", default="1d", choices=list(TF_MINUTES))
     ap.add_argument("--exchange", default="binance")
     ap.add_argument("--timeframe", default="1h", choices=list(TF_MINUTES))
     ap.add_argument("--bars", type=int, default=1500)
@@ -80,6 +91,11 @@ def main() -> None:
     ap.add_argument("--last", type=int, default=15, help="dernières bougies à afficher")
     ap.add_argument("--until", help="ignorer les bougies après cette date (ex. bougie en cours)")
     args = ap.parse_args()
+
+    if args.trigger_tf:
+        return replay_trigger(args)
+    if args.synthetic:
+        ap.error("--synthetic n'est disponible qu'en mode --trigger-tf")
 
     df = load_csv(args.csv) if args.csv else asyncio.run(
         load_exchange(args.symbol, args.exchange, args.timeframe, args.bars))
@@ -147,6 +163,116 @@ def main() -> None:
     tail = f[cols].tail(args.last).copy()
     tail.index = [fmt_ts(t, intraday) for t in tail.index]
     print(tail.round(4).to_string())
+
+
+# --------------------------------------------------------------------------------------
+# Mode déclencheur intraday
+# --------------------------------------------------------------------------------------
+def trigger_frame(ltf: pd.DataFrame, ltf_tf: str, setup_tf: str, p: Params) -> pd.DataFrame:
+    """Setup reconstruit depuis la série intraday elle-même, puis projeté bougie par bougie."""
+    sf = setup_frame(resample_ohlcv(ltf, setup_tf), p)
+    al = align_setup(sf, setup_tf, ltf.index, ltf_tf, SETUP_COLS)
+    out = ltf.join(al.add_prefix("setup_"))
+    out["trigger"] = trigger_series(ltf, al, p)
+    return out
+
+
+def forward_excursions(f: pd.DataFrame, horizon: int) -> pd.DataFrame:
+    fut_hi = f["high"][::-1].rolling(horizon, min_periods=1).max()[::-1].shift(-1)
+    fut_lo = f["low"][::-1].rolling(horizon, min_periods=1).min()[::-1].shift(-1)
+    f["fwd_max_%"] = (fut_hi / f["close"] - 1) * 100
+    f["fwd_min_%"] = (fut_lo / f["close"] - 1) * 100
+    return f
+
+
+def replay_trigger(args) -> None:
+    p = Params(score_threshold=args.threshold)
+    tf, stf = args.trigger_tf, args.setup_tf
+    if TF_MINUTES[tf] >= TF_MINUTES[stf]:
+        raise SystemExit("--trigger-tf doit être inférieur à --setup-tf")
+
+    if args.synthetic:
+        n_setup = max(args.bars * TF_MINUTES[tf] // TF_MINUTES[stf], 200)
+        syn = synthetic_data([tf, stf], n_setup, n_symbols=args.synthetic, cut=False)
+        series = {k[0]: v for k, v in syn.items() if k[1] == tf}
+    elif args.csv:
+        series = {args.csv.stem: load_csv(args.csv)}
+    else:
+        series = {args.symbol: asyncio.run(load_exchange(args.symbol, args.exchange, tf, args.bars))}
+
+    frames = []
+    for name, ltf in series.items():
+        if args.until:
+            ltf = ltf[ltf.index <= pd.Timestamp(args.until, tz="UTC")]
+        f = forward_excursions(trigger_frame(ltf, tf, stf, p), args.horizon)
+        f["symbol"] = name
+        frames.append(f)
+    allf = pd.concat(frames)
+    valid = allf["setup_score"].notna()
+
+    pd.set_option("display.width", 230)
+    print("=" * 110)
+    print(f" REPLAY DÉCLENCHEUR — {', '.join(list(series)[:3])}{' ...' if len(series) > 3 else ''}"
+          f" — trigger {tf} / setup {stf} — {len(allf)} bougies")
+    print(f" Explosion = plus haut >= +{args.move:.0f} % dans les {args.horizon} bougies {tf} suivantes")
+    print("=" * 110)
+
+    # 1) Chaque explosion haussière : signal avant ou pendant le départ ?
+    rows = []
+    for name, f in allf.groupby("symbol", sort=False):
+        expl = f["fwd_max_%"] >= args.move
+        starts = f.index[expl & ~expl.shift(fill_value=False) & f["setup_score"].notna()]
+        for t in starts:
+            i = f.index.get_loc(t)
+            win = f.iloc[max(0, i - args.lead): i + args.horizon]
+            sig = win[win["trigger"].isin(["ARMÉ ↑", "DÉCLENCHÉ ↑"])]
+            row = {"Actif": name, "Départ": t.strftime("%Y-%m-%d %H:%M"),
+                   "Max %": f.at[t, "fwd_max_%"], "Setup (t)": f.at[t, "setup_status"]}
+            if len(sig):
+                s_t = sig.index[0]
+                j = f.index.get_loc(s_t)
+                peak = f["high"].iloc[j + 1: i + args.horizon + 1].max()
+                row.update({"1er signal": sig.iloc[0]["trigger"], "Signal à": s_t.strftime("%Y-%m-%d %H:%M"),
+                            "Avance (b)": i - j, "Capté %": (peak / f.at[s_t, "close"] - 1) * 100})
+            else:
+                row.update({"1er signal": "-", "Signal à": "-", "Avance (b)": np.nan, "Capté %": np.nan})
+            rows.append(row)
+    ev = pd.DataFrame(rows)
+    print(f"\n--- 1. {len(ev)} explosions haussières : premier signal ↑ de {args.lead} bougies avant "
+          f"à {args.horizon} bougies après le départ ---")
+    if len(ev):
+        show = ev if len(ev) <= 40 else ev.sort_values("Max %", ascending=False).head(40)
+        print(show.round(2).to_string(index=False))
+        hit = ev["1er signal"] != "-"
+        print(f"\nRappel : {hit.mean() * 100:.0f} % des explosions signalées "
+              f"(ARMÉ : {(ev['1er signal'] == 'ARMÉ ↑').mean() * 100:.0f} %, "
+              f"DÉCLENCHÉ : {(ev['1er signal'] == 'DÉCLENCHÉ ↑').mean() * 100:.0f} %) · "
+              f"part du mouvement captée (médiane) : {ev.loc[hit, 'Capté %'].median():.1f} %")
+
+    # 2) Précision : que se passe-t-il après chaque nouveau signal ?
+    new_sig = allf["trigger"].ne(allf.groupby("symbol")["trigger"].shift()) & (allf["trigger"] != "-")
+    sig = allf[new_sig & valid]
+    base = allf.loc[valid]
+    print(f"\n--- 2. Après chaque nouveau signal (horizon {args.horizon} bougies {tf}) ---")
+    tab = sig.groupby("trigger").agg(
+        n=("close", "size"),
+        explosion_pct=("fwd_max_%", lambda x: (x >= args.move).mean() * 100),
+        max_med=("fwd_max_%", "median"), min_med=("fwd_min_%", "median"))
+    tab.loc["(toutes bougies)"] = [len(base), (base["fwd_max_%"] >= args.move).mean() * 100,
+                                   base["fwd_max_%"].median(), base["fwd_min_%"].median()]
+    tab["lift"] = tab["explosion_pct"] / tab.loc["(toutes bougies)", "explosion_pct"]
+    print(tab.round(2).to_string())
+    print("max_med / min_med = excursion favorable / adverse médiane depuis la clôture du signal")
+
+    # 3) Derniers signaux
+    last = allf[new_sig].tail(args.last)
+    if len(last):
+        print(f"\n--- 3. {len(last)} derniers signaux ---")
+        cols = ["symbol", "close", "trigger", "setup_status", "setup_zone_high", "setup_zone_low",
+                "fwd_max_%", "fwd_min_%"]
+        view = last[cols].copy()
+        view.index = view.index.strftime("%Y-%m-%d %H:%M")
+        print(view.round(5).to_string())
 
 
 if __name__ == "__main__":

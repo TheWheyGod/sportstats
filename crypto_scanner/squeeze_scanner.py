@@ -25,8 +25,15 @@ Statut :
     COMPRESSION LONGUE  squeeze depuis >= 20 bougies, sans absorption visible
     CASSURE ↑/↓   squeeze relâché dans les 2 dernières bougies avec clôture hors du box
 
+Déclencheur intraday (15m / 1h, sur la watchlist des actifs en setup uniquement) :
+    ARMÉ ↑/↓      prix à <= 0.3 ATR du bord du box du setup, volume SMA5/SMA50 >= 1.3,
+                  creux montants (sommets descendants), squeeze aussi présent en intraday
+    DÉCLENCHÉ ↑/↓ clôture hors du box du setup sur une bougie d'ignition : volume >= 2 x SMA20,
+                  range >= 1.5 ATR, clôture dans les 40 % extrêmes de la bougie
+Les niveaux du setup sont ceux de la dernière bougie 4h/1d clôturée : aucun look-ahead.
+
 Usage :
-    python squeeze_scanner.py                                   # Binance spot, 1h + 4h
+    python squeeze_scanner.py                                   # Binance spot, setup 4h+1d, trigger 15m+1h
     python squeeze_scanner.py --exchange bybit --market swap    # perps Bybit
     python squeeze_scanner.py --timeframes 15m 1h 4h --top 30 --min-volume 500000
     python squeeze_scanner.py --validate                        # mesure du pouvoir prédictif du score
@@ -53,6 +60,7 @@ TF_WEIGHT = {"5m": 0.5, "15m": 0.7, "1h": 1.0, "4h": 1.5, "1d": 2.0}
 STABLES = {"USDC", "FDUSD", "TUSD", "DAI", "USDP", "BUSD", "EUR", "EURI", "USDE", "PYUSD",
            "USDD", "AEUR", "UST", "USTC", "XUSD", "GBP", "TRY", "BRL", "USD1", "RLUSD"}
 LEVERAGED_SUFFIX = ("UP", "DOWN", "BULL", "BEAR", "3L", "3S", "5L", "5S")
+PRE_SIGNALS = ("IMMINENT", "ACCUMULATION", "COMPRESSION", "COMPRESSION LONGUE")
 
 
 @dataclass
@@ -71,6 +79,14 @@ class Params:
     long_squeeze: int = 20          # bougies consécutives en squeeze (BB dans KC 1.5) = compression longue
     score_threshold: float = 65.0
     edge_atr: float = 0.5
+    # Déclencheur intraday
+    trig_rvol: float = 2.0          # volume de la bougie de cassure >= 2 x SMA20
+    trig_tr: float = 1.5            # range de la bougie de cassure >= 1.5 x ATR14 (bougie d'ignition)
+    trig_close_pos: float = 0.6     # clôture dans les 40 % hauts (bas) de la bougie
+    arm_atr: float = 0.3            # ARMÉ : prix à <= 0.3 ATR (du setup) du bord du box
+    arm_rvol: float = 1.3           # ARMÉ : volume SMA5 / SMA50 >= 1.3
+    trig_lookback: int = 8          # un déclenchement reste affiché pendant 8 bougies intraday
+    setup_memory: int = 3           # le setup reste valide 3 bougies (4h/1d) après sa dernière compression
 
 
 # --------------------------------------------------------------------------------------
@@ -109,6 +125,22 @@ def linreg_last(s: pd.Series, n: int) -> pd.Series:
     return s.rolling(n).apply(f, raw=True)
 
 
+def squeeze_level(df: pd.DataFrame, p: Params, tr: pd.Series | None = None):
+    """Squeeze à 3 niveaux : 1 = BB dans KC(2.0), 2 = dans KC(1.5), 3 = dans KC(1.0)."""
+    c = df["close"]
+    tr = true_range(df) if tr is None else tr
+    mid = c.rolling(p.bb_len).mean()
+    sd = c.rolling(p.bb_len).std(ddof=0)
+    bb_up, bb_lo = mid + p.bb_mult * sd, mid - p.bb_mult * sd
+    kc_mid = c.ewm(span=p.kc_len, adjust=False).mean()
+    kc_atr = rma(tr, p.kc_len)
+    level = pd.Series(0, index=df.index)
+    for i, m in enumerate(p.kc_mults, start=1):
+        inside = (bb_up < kc_mid + m * kc_atr) & (bb_lo > kc_mid - m * kc_atr)
+        level = level.where(~inside, i)
+    return level, bb_up, bb_lo, mid
+
+
 def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     out = df.copy()
     c, h, l, v = out["close"], out["high"], out["low"], out["volume"]
@@ -116,17 +148,7 @@ def compute_features(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     atr = rma(tr, p.atr_len)
     atr_long = rma(tr, 50)
 
-    mid = c.rolling(p.bb_len).mean()
-    sd = c.rolling(p.bb_len).std(ddof=0)
-    bb_up, bb_lo = mid + p.bb_mult * sd, mid - p.bb_mult * sd
-    kc_mid = c.ewm(span=p.kc_len, adjust=False).mean()
-    kc_atr = rma(tr, p.kc_len)
-
-    # Squeeze à 3 niveaux : 1 = BB dans KC(2.0), 2 = dans KC(1.5), 3 = dans KC(1.0)
-    level = pd.Series(0, index=out.index)
-    for i, m in enumerate(p.kc_mults, start=1):
-        inside = (bb_up < kc_mid + m * kc_atr) & (bb_lo > kc_mid - m * kc_atr)
-        level = level.where(~inside, i)
+    level, bb_up, bb_lo, mid = squeeze_level(out, p, tr)
     out["sq_level"] = level
     out["sq_bars"] = consecutive_true(level >= 2)  # durée du squeeze "classique" (KC 1.5)
     out["sq3_bars"] = consecutive_true(level >= 3)  # durée du squeeze maximal (KC 1.0)
@@ -198,8 +220,8 @@ def status_series(f: pd.DataFrame, p: Params) -> pd.Series:
 
 def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
     """Métriques de la dernière bougie clôturée."""
-    f = compute_features(df, p)
-    if len(f) < p.rank_window or not np.isfinite(f["score"].iloc[-1]):
+    f = setup_frame(df, p)
+    if len(f) < p.rank_window // 2 + 50 or not np.isfinite(f["score"].iloc[-1]):
         return None
     last = f.iloc[-1]
     return {
@@ -208,8 +230,125 @@ def snapshot(df: pd.DataFrame, p: Params) -> dict | None:
         "absorb": int(last["pre_exp_count"]), "rel_vol": last["rel_vol"],
         "close": last["close"], "box_high": last["box_high"], "box_low": last["box_low"],
         "dist_up_atr": last["dist_up_atr"], "dist_dn_atr": last["dist_dn_atr"],
-        "status": status_series(f.iloc[-3:], p).iloc[-1],
+        "status": f["status"].iloc[-1], "active": bool(f["active"].iloc[-1]),
     }
+
+
+# --------------------------------------------------------------------------------------
+# Déclencheur intraday (1h / 15m) sur les actifs en setup de compression (4h / 1d)
+# --------------------------------------------------------------------------------------
+def resample_ohlcv(df: pd.DataFrame, tf: str) -> pd.DataFrame:
+    """Agrège un OHLCV vers un TF supérieur (bougies alignées UTC, comme les exchanges)."""
+    return df.resample(f"{TF_MINUTES[tf]}min", label="left", closed="left").agg(
+        {"open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum"}).dropna()
+
+
+def align_setup(setup: pd.DataFrame, setup_tf: str, ltf_index: pd.DatetimeIndex, ltf_tf: str,
+                cols: list[str]) -> pd.DataFrame:
+    """Projette sur chaque bougie intraday les valeurs de la dernière bougie de setup CLÔTURÉE
+    à la clôture de cette bougie intraday (pas de look-ahead : une bougie 1d n'est utilisable
+    qu'après minuit UTC)."""
+    avail = setup[cols].copy()
+    avail.index = avail.index + pd.Timedelta(minutes=TF_MINUTES[setup_tf])
+    left = pd.DataFrame({"t": ltf_index + pd.Timedelta(minutes=TF_MINUTES[ltf_tf])})
+    right = avail.rename_axis("t").reset_index()
+    left["t"] = left["t"].astype(right["t"].dtype)
+    out = pd.merge_asof(left, right, on="t", direction="backward")
+    out.index = ltf_index
+    return out[cols]
+
+
+def trigger_series(ltf: pd.DataFrame, setup_al: pd.DataFrame, p: Params) -> pd.Series:
+    """État du déclencheur à chaque bougie intraday.
+        DÉCLENCHÉ ↑/↓ : setup actif + clôture hors de la zone de compression gelée sur une bougie d'ignition
+                        (volume >= 2 x SMA20, range >= 1.5 ATR, clôture dans le haut/bas de la bougie)
+        ARMÉ ↑/↓      : setup actif + prix collé au bord du box (<= 0.3 ATR du setup) + volume qui
+                        monte + creux montants (sommets descendants) + squeeze aussi en intraday"""
+    c, h, l, v = ltf["close"], ltf["high"], ltf["low"], ltf["volume"]
+    tr = true_range(ltf)
+    atr_l = rma(tr, p.atr_len)
+    rvol = v / v.rolling(p.vol_len).mean()
+    rvol5 = v.rolling(5).mean() / v.rolling(50).mean()
+    pos = (c - l) / (h - l).replace(0, np.nan)
+    ltf_sq = squeeze_level(ltf, p, tr)[0]
+
+    active = setup_al["active"].fillna(False).astype(bool) & setup_al["zone_high"].notna()
+    hi, lo, s_atr = setup_al["zone_high"], setup_al["zone_low"], setup_al["zone_atr"]
+    ignition = (rvol >= p.trig_rvol) & (tr >= p.trig_tr * atr_l)
+    higher_lows = l.rolling(5).min() > l.shift(5).rolling(5).min()
+    lower_highs = h.rolling(5).max() < h.shift(5).rolling(5).max()
+    armed_base = active & (rvol5 >= p.arm_rvol) & (ltf_sq >= 1)
+    return pd.Series(np.select(
+        [active & ignition & (c > hi) & (pos >= p.trig_close_pos),
+         active & ignition & (c < lo) & (pos <= 1 - p.trig_close_pos),
+         armed_base & (c <= hi) & (hi - c <= p.arm_atr * s_atr) & higher_lows,
+         armed_base & (c >= lo) & (c - lo <= p.arm_atr * s_atr) & lower_highs],
+        ["DÉCLENCHÉ ↑", "DÉCLENCHÉ ↓", "ARMÉ ↑", "ARMÉ ↓"], default="-"), index=ltf.index)
+
+
+def setup_frame(df: pd.DataFrame, p: Params) -> pd.DataFrame:
+    """Features du setup + zone de compression GELÉE : le box de la dernière bougie en compression,
+    conservé setup_memory bougies. Sans ce gel, le box glissant s'élargit avec la cassure elle-même
+    et le setup n'est déjà plus "en compression" quand le prix sort."""
+    f = compute_features(df, p)
+    f["status"] = status_series(f, p)
+    comp = f["status"].isin(PRE_SIGNALS)
+    lim = p.setup_memory - 1
+    f["active"] = comp.astype(float).rolling(p.setup_memory, min_periods=1).max().astype(bool)
+    f["zone_high"] = f["box_high"].where(comp).ffill(limit=lim) if lim else f["box_high"].where(comp)
+    f["zone_low"] = f["box_low"].where(comp).ffill(limit=lim) if lim else f["box_low"].where(comp)
+    f["zone_atr"] = f["atr"].where(comp).ffill(limit=lim) if lim else f["atr"].where(comp)
+    return f
+
+
+SETUP_COLS = ["status", "active", "zone_high", "zone_low", "zone_atr", "score"]
+
+
+def trigger_snapshot(setup_f: pd.DataFrame, setup_tf: str, ltf: pd.DataFrame, ltf_tf: str,
+                     p: Params) -> dict:
+    """Dernier état du déclencheur : un DÉCLENCHÉ récent (<= trig_lookback bougies) prime sur ARMÉ."""
+    al = align_setup(setup_f, setup_tf, ltf.index, ltf_tf, SETUP_COLS)
+    trig = trigger_series(ltf, al, p)
+    recent = trig.iloc[-p.trig_lookback:]
+    fired = recent[recent.str.startswith("DÉCLENCHÉ")]
+    if len(fired):
+        t = fired.index[-1]
+        return {"state": fired.iloc[-1], "age": len(recent) - 1 - recent.index.get_loc(t),
+                "move": (ltf["close"].iloc[-1] / ltf.at[t, "close"] - 1) * 100,
+                "level": al.at[t, "zone_high"] if fired.iloc[-1].endswith("↑") else al.at[t, "zone_low"]}
+    if trig.iloc[-1] != "-":
+        side = "zone_high" if trig.iloc[-1].endswith("↑") else "zone_low"
+        return {"state": trig.iloc[-1], "age": 0, "move": 0.0, "level": al[side].iloc[-1]}
+    return {"state": "-", "age": np.nan, "move": np.nan, "level": np.nan}
+
+
+def add_triggers(res: pd.DataFrame, setup_data: dict, trig_data: dict, setup_tfs: list[str],
+                 trigger_tfs: list[str], p: Params) -> pd.DataFrame:
+    """Ajoute l'état du déclencheur intraday. Setup de référence = le TF de setup le plus élevé
+    dont le statut est actif ; déclencheur retenu = DÉCLENCHÉ sur le TF le plus élevé, sinon ARMÉ."""
+    rank = {"DÉCLENCHÉ ↑": 0, "DÉCLENCHÉ ↓": 0, "ARMÉ ↑": 1, "ARMÉ ↓": 1, "-": 9}
+    out = {k: [] for k in ("Trigger", "Trig âge", "Trig Δ%", "Niveau")}
+    for sym in res["Symbol"]:
+        best = {"state": "-", "age": np.nan, "move": np.nan, "level": np.nan, "tf": None}
+        frames = {tf: setup_frame(setup_data[(sym, tf)], p) for tf in setup_tfs
+                  if (sym, tf) in setup_data}
+        s_tf = next((tf for tf in reversed(setup_tfs)
+                     if tf in frames and frames[tf]["active"].iloc[-1]), None)
+        if s_tf:
+            for tf in reversed(trigger_tfs):
+                if (sym, tf) not in trig_data:
+                    continue
+                snap = trigger_snapshot(frames[s_tf], s_tf, trig_data[(sym, tf)], tf, p)
+                if rank[snap["state"]] < rank[best["state"]]:
+                    best = {**snap, "tf": tf}
+        out["Trigger"].append(f"{best['state']} ({best['tf']})" if best["tf"] else "-")
+        out["Trig âge"].append(best["age"])
+        out["Trig Δ%"].append(best["move"])
+        out["Niveau"].append(best["level"])
+    res = res.copy()
+    for k, v in out.items():
+        res.insert(res.columns.get_loc("Biais") + 1 if k == "Trigger" else len(res.columns), k, v)
+    return res
 
 
 # --------------------------------------------------------------------------------------
@@ -273,7 +412,15 @@ async def fetch_all(ex, symbols: list[str], timeframes: list[str], bars: int,
     return data
 
 
-async def fetch_live(args) -> dict[tuple[str, str], pd.DataFrame]:
+def watchlist(res: pd.DataFrame, p: Params, max_n: int) -> list[str]:
+    """Actifs à surveiller en intraday : statut de setup actif ou score proche du seuil."""
+    active = (res["Setup"] != "-") | (res["Score"] >= p.score_threshold - 10)
+    return res.loc[active, "Symbol"].head(max_n).tolist()
+
+
+async def fetch_live(args, p: Params):
+    """Étape 1 : setup (4h/1d) sur tout l'univers. Étape 2 : intraday (1h/15m) sur la watchlist
+    seulement, pour limiter le nombre de requêtes."""
     import ccxt.async_support as ccxt_async
 
     opts = {"enableRateLimit": True}
@@ -283,37 +430,50 @@ async def fetch_live(args) -> dict[tuple[str, str], pd.DataFrame]:
     try:
         symbols = args.symbols or await load_universe(ex, args.market, args.min_volume,
                                                       args.max_symbols)
-        return await fetch_all(ex, symbols, args.timeframes, args.bars, args.concurrency)
+        setup = await fetch_all(ex, symbols, args.timeframes, args.bars, args.concurrency)
+        trig: dict = {}
+        if args.trigger_tfs and setup:
+            res = scan(setup, args.timeframes, p)
+            watch = watchlist(res, p, args.watch_max) if not res.empty else []
+            log.info("Watchlist intraday : %d actifs", len(watch))
+            trig = await fetch_all(ex, watch, args.trigger_tfs, args.trigger_bars, args.concurrency)
+        return setup, trig
     finally:
         await ex.close()
 
 
-def synthetic_data(timeframes: list[str], bars: int, n_symbols: int = 40
+def synthetic_data(timeframes: list[str], bars: int, n_symbols: int = 40, cut: bool = True
                    ) -> dict[tuple[str, str], pd.DataFrame]:
-    """Univers simulé à régimes de volatilité, uniquement pour tester le pipeline hors-ligne."""
+    """Univers simulé, uniquement pour tester le pipeline hors-ligne. Une série 15m par actif
+    (compressions longues avec volume d'accumulation, puis expansions directionnelles) est
+    agrégée vers chaque TF : setup et déclencheur voient donc le même marché."""
+    base_tf = "15m"
+    n = bars * TF_MINUTES[max(timeframes, key=TF_MINUTES.get)] // TF_MINUTES[base_tf]
+    idx = pd.date_range(end=pd.Timestamp.now("UTC").floor("D"), periods=n, freq="15min")
     data = {}
     for k in range(n_symbols):
+        rng = np.random.default_rng(k)
+        sigma = np.empty(n)
+        drift = np.zeros(n)
+        accum = np.zeros(n)
+        i = 0
+        while i < n:
+            calm, burst = rng.integers(300, 2500), rng.integers(40, 400)
+            sigma[i:i + calm] = rng.uniform(0.001, 0.003)
+            accum[max(i, i + calm - 150):i + calm] = 1.0          # accumulation avant l'expansion
+            sigma[i + calm:i + calm + burst] = rng.uniform(0.006, 0.015)
+            drift[i + calm:i + calm + burst] = rng.choice([-1, 1]) * rng.uniform(0.0005, 0.003)
+            i += calm + burst
+        close = 10 * np.exp(np.cumsum(drift + sigma * rng.standard_normal(n)))
+        open_ = np.r_[close[0], close[:-1]]
+        wick = np.abs(rng.standard_normal((2, n))) * sigma * close * 0.5
+        volume = rng.lognormal(10, 0.35, n) * (1 + 1.0 * accum + 2.0 * (sigma > 0.005))
+        base = pd.DataFrame({"open": open_, "high": np.maximum(open_, close) + wick[0],
+                             "low": np.minimum(open_, close) - wick[1], "close": close,
+                             "volume": volume}, index=idx)
         for tf in timeframes:
-            rng = np.random.default_rng(k * 97 + TF_MINUTES[tf])
-            regime = np.empty(bars)
-            i = 0
-            while i < bars:
-                calm, burst = rng.integers(30, 150), rng.integers(10, 60)
-                regime[i:i + calm] = rng.uniform(0.15, 0.5)
-                regime[i + calm:i + calm + burst] = rng.uniform(1.2, 2.5)
-                i += calm + burst
-            sigma = 0.01 * np.sqrt(TF_MINUTES[tf] / 60) * regime
-            close = 10 * np.exp(np.cumsum(sigma * rng.standard_normal(bars)))
-            open_ = np.r_[close[0], close[:-1]]
-            wick = np.abs(rng.standard_normal((2, bars))) * sigma * close * 0.5
-            nxt = np.r_[regime[1:], regime[-1]]
-            volume = rng.lognormal(10, 0.35, bars) * (1 + 1.2 * ((nxt > 1) & (regime < 1)))
-            idx = pd.date_range(end=pd.Timestamp.now("UTC").floor("h"), periods=bars,
-                                freq=f"{TF_MINUTES[tf]}min")
-            data[(f"SIM{k:02d}/USDT", tf)] = pd.DataFrame(
-                {"open": open_, "high": np.maximum(open_, close) + wick[0],
-                 "low": np.minimum(open_, close) - wick[1], "close": close,
-                 "volume": volume}, index=idx)
+            df = base if tf == base_tf else resample_ohlcv(base, tf)
+            data[(f"SIM{k:02d}/USDT", tf)] = df.iloc[-bars:] if cut else df
     return data
 
 
@@ -350,6 +510,7 @@ def scan(data: dict[tuple[str, str], pd.DataFrame], timeframes: list[str], p: Pa
                         + 5 * (confluence - 1) * (confluence > 1),  # bonus confluence MTF
                "Confl.": f"{confluence}/{len(timeframes)}",
                "Statut": status,
+               "Setup": ",".join(tf for tf in timeframes if snaps[tf]["active"]) or "-",
                "Biais": float((biases * w).sum() / w.sum())}
         for tf in timeframes:
             row[f"S {tf}"] = snaps[tf]["score"]
@@ -387,6 +548,22 @@ def print_report(res: pd.DataFrame, top: int, timeframes: list[str], synthetic: 
     print(view.round(2).to_string())
     counts = res["Statut"].str.replace(r" \(.*\)", "", regex=True).value_counts()
     print("\nStatuts :", ", ".join(f"{k} = {v}" for k, v in counts.items() if k != "-") or "aucun")
+    if "Trigger" in res.columns:
+        trig = res[res["Trigger"] != "-"].copy()
+        print("\n--- DÉCLENCHEURS INTRADAY (setup actif + signal 1h/15m) ---")
+        if trig.empty:
+            print("Aucun déclencheur actif.")
+        else:
+            trig["_r"] = trig["Trigger"].str.startswith("ARMÉ").astype(int)
+            trig = trig.sort_values(["_r", "Trig âge", "Score"], ascending=[True, True, False])
+            cols = ["Symbol", "Trigger", "Trig âge", "Trig Δ%", "Niveau", "Statut", "Score",
+                    "Biais", "Prix"]
+            view_t = trig[cols].reset_index(drop=True)
+            view_t.index = view_t.index + 1
+            print(view_t.round(2).to_string())
+        print("DÉCLENCHÉ = clôture intraday hors du box du setup sur bougie d'ignition "
+              "(volume >= 2x, range >= 1.5 ATR) · ARMÉ = prix collé au bord du box, volume qui"
+              " monte, structure dans le sens de la sortie · âge en bougies du TF indiqué")
     print("Lecture : Score 0-100 (≥65 = compression forte) · Sqz ··· = BB dans KC(1.0), squeeze max"
           " · Absorb = bougies volume anormal/petite range sur 10 bougies\n"
           "          →haut/→bas ATR = distance aux bords du box en ATR · le Biais est indicatif,"
@@ -438,10 +615,13 @@ def validate(data: dict[tuple[str, str], pd.DataFrame], p: Params, horizon: int)
 # --------------------------------------------------------------------------------------
 def run_once(args, p: Params) -> None:
     t0 = time.time()
+    trig_data: dict = {}
     if args.synthetic:
-        data = synthetic_data(args.timeframes, args.bars)
+        allsyn = synthetic_data(args.timeframes + args.trigger_tfs, args.bars)
+        data = {k: v for k, v in allsyn.items() if k[1] in args.timeframes}
+        trig_data = {k: v for k, v in allsyn.items() if k[1] in args.trigger_tfs}
     else:
-        data = asyncio.run(fetch_live(args))
+        data, trig_data = asyncio.run(fetch_live(args, p))
     if not data:
         log.error("Aucune donnée récupérée (réseau, exchange, symboles ?). Essayer --synthetic.")
         return
@@ -454,8 +634,12 @@ def run_once(args, p: Params) -> None:
     if res.empty:
         log.error("Aucun actif avec assez d'historique (augmenter --bars).")
         return
+    if args.trigger_tfs:
+        watch = set(watchlist(res, p, args.watch_max))
+        trig_data = {k: v for k, v in trig_data.items() if k[0] in watch}
+        res = add_triggers(res, data, trig_data, args.timeframes, args.trigger_tfs, p)
     if args.only_signals:
-        res = res[res["Statut"] != "-"]
+        res = res[(res["Statut"] != "-") | (res.get("Trigger", "-") != "-")]
     print_report(res, args.top, args.timeframes, args.synthetic)
 
     args.outdir.mkdir(parents=True, exist_ok=True)
@@ -470,8 +654,13 @@ def main() -> None:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     p_.add_argument("--exchange", default="binance", help="id ccxt : binance, bybit, okx, ...")
     p_.add_argument("--market", choices=["spot", "swap"], default="spot")
-    p_.add_argument("--timeframes", nargs="+", default=["1h", "4h"], choices=list(TF_MINUTES),
-                    help="du plus petit au plus grand ; le dernier sert de référence pour le box")
+    p_.add_argument("--timeframes", nargs="+", default=["4h", "1d"], choices=list(TF_MINUTES),
+                    help="TF de setup (compression) ; le plus élevé sert de référence pour le box")
+    p_.add_argument("--trigger-tfs", nargs="*", default=["15m", "1h"], choices=list(TF_MINUTES),
+                    help="TF du déclencheur intraday (vide = désactivé)")
+    p_.add_argument("--trigger-bars", type=int, default=300)
+    p_.add_argument("--watch-max", type=int, default=60,
+                    help="nb max d'actifs surveillés en intraday")
     p_.add_argument("--symbols", nargs="*", help="liste manuelle (sinon tout l'univers USDT)")
     p_.add_argument("--min-volume", type=float, default=2_000_000, help="volume 24h min en USDT")
     p_.add_argument("--max-symbols", type=int, default=300)
@@ -492,9 +681,12 @@ def main() -> None:
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO,
                         format="%(levelname)s %(message)s")
     args.timeframes = sorted(args.timeframes, key=TF_MINUTES.get)
+    args.trigger_tfs = sorted(args.trigger_tfs, key=TF_MINUTES.get)
+    if args.trigger_tfs and TF_MINUTES[args.trigger_tfs[-1]] >= TF_MINUTES[args.timeframes[0]]:
+        p_.error("les TF de déclenchement doivent être inférieurs aux TF de setup")
     p = Params(score_threshold=args.threshold)
-    if args.bars < p.rank_window + 50:
-        p_.error(f"--bars doit être >= {p.rank_window + 50}")
+    if args.bars < p.rank_window // 2 + 50:
+        p_.error(f"--bars doit être >= {p.rank_window // 2 + 50}")
 
     while True:
         run_once(args, p)
