@@ -6,6 +6,10 @@
 //   - Zone orange  : zone de compression gelée du setup (valide "Mémoire du setup" bougies).
 //   - GO ↑ / GO ↓  : DÉCLENCHÉ = clôture hors de la zone sur une bougie d'ignition.
 //   - Petits ronds : ARMÉ = prix collé au bord de la zone, volume qui monte, structure.
+//   - OK           : VALIDÉ = la cassure s'étend de 3 ATR (du setup) hors de la zone.
+//   - ✕ ÉCHEC      : retour dans la zone avant validation ; la base reste suivie et son bord
+//                    s'élargit au plus haut (plus bas) de la fausse cassure.
+//   - Zone pâle    : base prolongée (setup expiré mais prix toujours dans la zone), 45 j max.
 // Non-repaint : le setup utilise uniquement la dernière bougie 4h/1D CLÔTURÉE ; signaux et alertes
 // sont définitifs à la clôture de la bougie du graphique (alertes "Once per bar close").
 // Différence avec la version Python : pas de rang cross-sectionnel (Pine ne voit qu'un actif).
@@ -37,6 +41,12 @@ trigTr   = input.float(1.5, "Ignition : range >= x ATR", group = grpT)
 trigPos  = input.float(0.6, "Ignition : position de clôture dans la bougie", minval = 0.5, maxval = 1.0, group = grpT)
 armAtr   = input.float(0.3, "ARMÉ : distance max au bord (ATR du setup)", group = grpT)
 armRvol  = input.float(1.3, "ARMÉ : volume SMA5 / SMA50 >=", group = grpT)
+
+grpB = "Base & cassure"
+failAtr   = input.float(0.25, "ÉCHEC : clôture de retour dans la zone (ATR du setup)", group = grpB)
+valAtr    = input.float(3.0, "VALIDÉ : extension hors de la zone (ATR du setup)", group = grpB)
+maxDays   = input.int(45, "Base prolongée : durée max sans setup (jours)", minval = 1, group = grpB)
+sigMaxAge = input.int(24, "Signal récent : âge max (bougies)", minval = 1, group = grpB)
 
 grpD = "Affichage"
 showZone  = input.bool(true, "Zone de compression", group = grpD)
@@ -77,12 +87,16 @@ statusText(int s) =>
         6 => "COMPRESSION LONGUE"
         => "-"
 
-trigText(int t) =>
-    switch t
-        1  => "DÉCLENCHÉ ↑"
-        -1 => "DÉCLENCHÉ ↓"
+evtText(int e) =>
+    switch e
+        1  => "GO ↑"
+        -1 => "GO ↓"
         2  => "ARMÉ ↑"
         -2 => "ARMÉ ↓"
+        3  => "ÉCHEC ↑"
+        -3 => "ÉCHEC ↓"
+        4  => "VALIDÉ ↑"
+        -4 => "VALIDÉ ↓"
         => "-"
 
 // ───────────────────────────── Setup (évalué sur le TF du setup) ─────────────────────────────
@@ -178,44 +192,126 @@ float low5   = ta.lowest(low, 5)
 float high5  = ta.highest(high, 5)
 bool higherLows = low5 > low5[5]
 bool lowerHighs = high5 < high5[5]
+bool zoneOk   = sActive and not na(sZH)
+bool ignition = rvol >= trigRvol and trL >= trigTr * atrL
 
-bool zoneOk    = sActive and not na(sZH)
-bool ignition  = rvol >= trigRvol and trL >= trigTr * atrL
-bool armedBase = zoneOk and rvol5 >= armRvol and lvlL >= 1
-bool trigUp = zoneOk and ignition and close > sZH and pos >= trigPos
-bool trigDn = zoneOk and ignition and close < sZL and pos <= 1.0 - trigPos
-bool armUp  = armedBase and close <= sZH and sZH - close <= armAtr * sZA and higherLows
-bool armDn  = armedBase and close >= sZL and close - sZL <= armAtr * sZA and lowerHighs
-int trig    = trigUp ? 1 : trigDn ? -1 : armUp ? 2 : armDn ? -2 : 0
-bool newSig = trig != 0 and trig != trig[1]
+// ───────────────────────────── Suivi de la base : GO → VALIDÉ / ÉCHEC ─────────────────────────────
+// tracking : une base est surveillée (zone du setup, ou zone prolongée après expiration du setup)
+// post     : 1 après un GO ↑, -1 après un GO ↓, 0 sinon (base en attente de cassure)
+var bool  tracking = false
+var float tZH = na
+var float tZL = na
+var float tZA = na
+var float failHi = na
+var float failLo = na
+var int   post = 0
+var float postHi = na
+var float postLo = na
+var int   lastSetupTime = na
 
-var int lastSig = 0
-var int lastSigBar = na
-var float lastSigPx = na
-if newSig and barstate.isconfirmed
-    lastSig := trig
-    lastSigBar := bar_index
-    lastSigPx := close
+// 1) Le setup alimente la zone (sauf pendant une cassure en cours, où elle reste figée)
+if zoneOk
+    lastSetupTime := time
+    if post == 0
+        if not tracking
+            failHi := na
+            failLo := na
+        tracking := true
+        tZH := sZH
+        tZL := sZL
+        tZA := sZA
+
+// Zone effective : élargie au plus haut (plus bas) des fausses cassures précédentes
+float effH = tracking ? math.max(tZH, nz(failHi, tZH)) : na
+float effL = tracking ? math.min(tZL, nz(failLo, tZL)) : na
+
+bool armUp = tracking and post == 0 and rvol5 >= armRvol and lvlL >= 1 and close <= effH and effH - close <= armAtr * tZA and higherLows
+bool armDn = tracking and post == 0 and rvol5 >= armRvol and lvlL >= 1 and close >= effL and close - effL <= armAtr * tZA and lowerHighs
+
+int evt = 0
+// 2) Cassure en cours : validation (extension) ou échec (retour dans la zone)
+if post == 1
+    postHi := math.max(postHi, high)
+    if high >= effH + valAtr * tZA
+        evt := 4
+        post := 0
+        tracking := false
+    else if close < effH - failAtr * tZA
+        evt := 3
+        failHi := postHi
+        post := 0
+else if post == -1
+    postLo := math.min(postLo, low)
+    if low <= effL - valAtr * tZA
+        evt := -4
+        post := 0
+        tracking := false
+    else if close > effL + failAtr * tZA
+        evt := -3
+        failLo := postLo
+        post := 0
+// 3) Base en attente : cassure sur bougie d'ignition, sortie sans signal, expiration
+else if tracking
+    if ignition and close > effH and pos >= trigPos
+        evt := 1
+        post := 1
+        postHi := high
+    else if ignition and close < effL and pos <= 1.0 - trigPos
+        evt := -1
+        post := -1
+        postLo := low
+    else if close > effH + valAtr * tZA or close < effL - valAtr * tZA
+        tracking := false
+    else if not zoneOk and time - lastSetupTime > maxDays * 86400000
+        tracking := false
+
+if evt == 0 and armUp and not armUp[1]
+    evt := 2
+else if evt == 0 and armDn and not armDn[1]
+    evt := -2
+
+// Dernier événement et excursions depuis
+var int   lastEvt = 0
+var int   lastEvtBar = na
+var float lastEvtPx = na
+var float sinceHi = na
+var float sinceLo = na
+if evt != 0
+    lastEvt := evt
+    lastEvtBar := bar_index
+    lastEvtPx := close
+    sinceHi := close
+    sinceLo := close
+else if lastEvt != 0
+    sinceHi := math.max(sinceHi, high)
+    sinceLo := math.min(sinceLo, low)
 
 // ───────────────────────────── Affichage ─────────────────────────────
 color upCol   = #00c853
 color dnCol   = #ff1744
 color zoneCol = #ff9800
+color failCol = #ffab40
 
-pZH = plot(showZone and zoneOk ? sZH : na, "Zone haut", color = zoneCol, style = plot.style_linebr, linewidth = 2)
-pZL = plot(showZone and zoneOk ? sZL : na, "Zone bas", color = zoneCol, style = plot.style_linebr, linewidth = 2)
-fill(pZH, pZL, color = color.new(zoneCol, 88), title = "Zone de compression")
+color zLine = post != 0 ? color.new(zoneCol, 30) : zoneOk ? zoneCol : color.new(zoneCol, 55)
+color zFill = post != 0 ? color.new(zoneCol, 92) : zoneOk ? color.new(zoneCol, 86) : color.new(zoneCol, 94)
+pZH = plot(showZone and tracking ? effH : na, "Zone haut", color = zLine, style = plot.style_linebr, linewidth = 2)
+pZL = plot(showZone and tracking ? effL : na, "Zone bas", color = zLine, style = plot.style_linebr, linewidth = 2)
+fill(pZH, pZL, color = zFill, title = "Zone de compression")
 
-plotshape(newSig and trig == 1, title = "DÉCLENCHÉ ↑", style = shape.triangleup, location = location.belowbar, color = upCol, size = size.small, text = "GO ↑", textcolor = upCol)
-plotshape(newSig and trig == -1, title = "DÉCLENCHÉ ↓", style = shape.triangledown, location = location.abovebar, color = dnCol, size = size.small, text = "GO ↓", textcolor = dnCol)
-plotshape(showArmed and newSig and trig == 2, title = "ARMÉ ↑", style = shape.circle, location = location.belowbar, color = color.new(upCol, 40), size = size.tiny)
-plotshape(showArmed and newSig and trig == -2, title = "ARMÉ ↓", style = shape.circle, location = location.abovebar, color = color.new(dnCol, 40), size = size.tiny)
+plotshape(evt == 1, title = "GO ↑", style = shape.triangleup, location = location.belowbar, color = upCol, size = size.small, text = "GO ↑", textcolor = upCol)
+plotshape(evt == -1, title = "GO ↓", style = shape.triangledown, location = location.abovebar, color = dnCol, size = size.small, text = "GO ↓", textcolor = dnCol)
+plotshape(showArmed and evt == 2, title = "ARMÉ ↑", style = shape.circle, location = location.belowbar, color = color.new(upCol, 40), size = size.tiny)
+plotshape(showArmed and evt == -2, title = "ARMÉ ↓", style = shape.circle, location = location.abovebar, color = color.new(dnCol, 40), size = size.tiny)
+plotshape(evt == 3, title = "ÉCHEC ↑", style = shape.xcross, location = location.abovebar, color = failCol, size = size.small, text = "ÉCHEC", textcolor = failCol)
+plotshape(evt == -3, title = "ÉCHEC ↓", style = shape.xcross, location = location.belowbar, color = failCol, size = size.small, text = "ÉCHEC", textcolor = failCol)
+plotshape(evt == 4, title = "VALIDÉ ↑", style = shape.diamond, location = location.abovebar, color = upCol, size = size.tiny, text = "OK", textcolor = upCol)
+plotshape(evt == -4, title = "VALIDÉ ↓", style = shape.diamond, location = location.belowbar, color = dnCol, size = size.tiny, text = "OK", textcolor = dnCol)
 
 // Sorties numériques (fenêtre de données / Pine Screener)
 plot(sScore, "Score setup", display = display.data_window)
 plot(sStatus, "Code statut setup (1-6)", display = display.data_window)
-plot(sActive ? 1 : 0, "Setup actif (0/1)", display = display.data_window)
-plot(trig, "Code déclencheur (±1 DÉCLENCHÉ, ±2 ARMÉ)", display = display.data_window)
+plot(tracking ? 1 : 0, "Base suivie (0/1)", display = display.data_window)
+plot(evt, "Code événement (±1 GO, ±2 ARMÉ, ±3 ÉCHEC, ±4 VALIDÉ)", display = display.data_window)
 
 // ───────────────────────────── Tableau de bord ─────────────────────────────
 tPos = switch tablePos
@@ -224,38 +320,48 @@ tPos = switch tablePos
     "Bas gauche"  => position.bottom_left
     => position.top_right
 
-var table dash = table.new(tPos, 2, 10, bgcolor = color.new(#131722, 10), border_color = color.new(color.gray, 70), border_width = 1)
+var table dash = table.new(tPos, 2, 11, bgcolor = color.new(#131722, 10), border_color = color.new(color.gray, 70), border_width = 1)
 
 row(int i, string k, string v, color c) =>
     table.cell(dash, 0, i, k, text_color = color.silver, text_size = size.small, text_halign = text.align_left)
     table.cell(dash, 1, i, v, text_color = c, text_size = size.small, text_halign = text.align_right)
 
+evtColor(int e) =>
+    e == 1 or e == 2 or e == 4 ? upCol : e == -1 or e == -2 or e == -4 ? dnCol : e == 3 or e == -3 ? failCol : color.gray
+
 if showTable and barstate.islast
     color stCol = sStatus == 3 ? upCol : sStatus >= 4 ? zoneCol : sStatus == 1 ? upCol : sStatus == 2 ? dnCol : color.gray
     string dots = sLvl == 3 ? "●●●" : sLvl == 2 ? "●●" : sLvl == 1 ? "●" : "-"
     string biasTxt = str.tostring(sBias, "+0.00;-0.00") + (sBias > 0.25 ? " ↑" : sBias < -0.25 ? " ↓" : " neutre")
-    string zoneTxt = zoneOk ? str.tostring(sZL, format.mintick) + " – " + str.tostring(sZH, format.mintick) : "—"
-    string distTxt = zoneOk ? "↑ " + str.tostring((sZH / close - 1) * 100, "0.0") + " % · ↓ " + str.tostring((sZL / close - 1) * 100, "0.0") + " %" : "—"
-    string sigTxt = lastSig == 0 ? "-" : trigText(lastSig) + " · il y a " + str.tostring(bar_index - lastSigBar) + " b · " + str.tostring((close / lastSigPx - 1) * 100, "+0.0;-0.0") + " %"
-    color sigCol = lastSig == 1 or lastSig == 2 ? upCol : lastSig == 0 ? color.gray : dnCol
+    string baseTxt = not tracking ? "-" : post == 1 ? "cassure ↑ en cours" : post == -1 ? "cassure ↓ en cours" : zoneOk ? "setup actif" : "prolongée · " + str.tostring(math.floor((time - lastSetupTime) / 86400000.0)) + " j sans setup"
+    bool widened = tracking and (not na(failHi) or not na(failLo))
+    string zoneTxt = tracking ? str.tostring(effL, format.mintick) + " – " + str.tostring(effH, format.mintick) + (widened ? " (élargie)" : "") : "—"
+    string distTxt = tracking ? "↑ " + str.tostring((effH / close - 1) * 100, "0.0") + " % · ↓ " + str.tostring((effL / close - 1) * 100, "0.0") + " %" : "—"
+    int age = lastEvt == 0 ? 0 : bar_index - lastEvtBar
+    bool fresh = lastEvt != 0 and age <= sigMaxAge
+    string sigTxt = lastEvt == 0 ? "-" : evtText(lastEvt) + " · il y a " + str.tostring(age) + " b" + (fresh ? "" : " (ancien)")
+    string excTxt = lastEvt == 0 ? "-" : "prix " + str.tostring((close / lastEvtPx - 1) * 100, "+0.0;-0.0") + " % · max " + str.tostring((sinceHi / lastEvtPx - 1) * 100, "+0.0;-0.0") + " % · min " + str.tostring((sinceLo / lastEvtPx - 1) * 100, "+0.0;-0.0") + " %"
     row(0, "SMC Pre-Expansion", "setup " + setupTf, color.white)
     row(1, "Statut setup", statusText(sStatus), stCol)
     row(2, "Score", str.tostring(sScore, "0.0") + " / 100", sScore >= threshold ? upCol : color.white)
     row(3, "Squeeze", dots + " · " + str.tostring(sBars) + " bougies", sBars >= longSq ? zoneCol : color.white)
     row(4, "Absorption", "pré-exp " + str.tostring(sPre, "0") + " · accum " + str.tostring(sAccum, "0.00"), sAccum >= 0.5 or sPre >= 1 ? upCol : color.white)
     row(5, "Biais", biasTxt, sBias > 0.25 ? upCol : sBias < -0.25 ? dnCol : color.white)
-    row(6, "Setup actif", zoneOk ? "OUI" : "non", zoneOk ? zoneCol : color.gray)
-    row(7, "Zone", zoneTxt, zoneOk ? zoneCol : color.gray)
+    row(6, "Base", baseTxt, tracking ? zoneCol : color.gray)
+    row(7, "Zone", zoneTxt, tracking ? zoneCol : color.gray)
     row(8, "Distance zone", distTxt, color.white)
-    row(9, "Dernier signal", sigTxt, sigCol)
+    row(9, "Dernier signal", sigTxt, fresh ? evtColor(lastEvt) : color.gray)
+    row(10, "Depuis le signal", excTxt, fresh ? color.white : color.gray)
 
 // ───────────────────────────── Alertes ─────────────────────────────
-alertcondition(newSig and trig == 1, "DÉCLENCHÉ ↑", "{{ticker}} DÉCLENCHÉ ↑ : cassure haussière de la zone de compression ({{interval}}) à {{close}}")
-alertcondition(newSig and trig == -1, "DÉCLENCHÉ ↓", "{{ticker}} DÉCLENCHÉ ↓ : cassure baissière de la zone de compression ({{interval}}) à {{close}}")
-alertcondition(newSig and trig == 2, "ARMÉ ↑", "{{ticker}} ARMÉ ↑ : prix au bord haut de la zone de compression ({{interval}})")
-alertcondition(newSig and trig == -2, "ARMÉ ↓", "{{ticker}} ARMÉ ↓ : prix au bord bas de la zone de compression ({{interval}})")
+alertcondition(evt == 1, "GO ↑", "{{ticker}} GO ↑ : cassure haussière de la zone de compression ({{interval}}) à {{close}}")
+alertcondition(evt == -1, "GO ↓", "{{ticker}} GO ↓ : cassure baissière de la zone de compression ({{interval}}) à {{close}}")
+alertcondition(evt == 2, "ARMÉ ↑", "{{ticker}} ARMÉ ↑ : prix au bord haut de la zone de compression ({{interval}})")
+alertcondition(evt == -2, "ARMÉ ↓", "{{ticker}} ARMÉ ↓ : prix au bord bas de la zone de compression ({{interval}})")
+alertcondition(evt == 3 or evt == -3, "ÉCHEC", "{{ticker}} ÉCHEC de cassure : retour dans la zone ({{interval}}), base toujours suivie")
+alertcondition(evt == 4 or evt == -4, "VALIDÉ", "{{ticker}} cassure VALIDÉE : extension de 3 ATR hors de la zone ({{interval}})")
 alertcondition(sActive and not sActive[1], "Setup actif", "{{ticker}} entre en setup de compression")
 
 // Alerte unique "Any alert() function call" avec message détaillé
-if newSig and barstate.isconfirmed
-    alert(syminfo.ticker + " " + trigText(trig) + " (" + timeframe.period + ") à " + str.tostring(close, format.mintick) + " · setup " + setupTf + " " + statusText(sStatus) + " · score " + str.tostring(sScore, "0") + " · zone " + str.tostring(sZL, format.mintick) + "–" + str.tostring(sZH, format.mintick), alert.freq_once_per_bar_close)
+if evt != 0 and barstate.isconfirmed
+    alert(syminfo.ticker + " " + evtText(evt) + " (" + timeframe.period + ") à " + str.tostring(close, format.mintick) + " · setup " + setupTf + " " + statusText(sStatus) + " · score " + str.tostring(sScore, "0") + " · zone " + str.tostring(effL, format.mintick) + "–" + str.tostring(effH, format.mintick), alert.freq_once_per_bar_close)
