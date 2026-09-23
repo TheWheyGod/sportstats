@@ -21,3 +21,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 journee.date
+
+# Backtest crypto : sorties regenerables
+crypto_backtest/output/
